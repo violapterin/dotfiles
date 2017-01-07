@@ -7,9 +7,9 @@ This note first explains the basic idea of syntax highlighting in Vim, then desc
 
 To facilitate discussion, I now define several terminologies. 
 
-In Vim, plain text, I say, is *parsed* with rules according to its file extension, so that *syntax items*, which are strings that match a certain pre-defined pattern. For instance, `new` is picked out as a c++ keyword that instructs the operating system to find a memory block of a certain size for sake of holding variables, and to report us its address. Vim's syntax files are responsible for parsing. For further information, see `:h syntax`. 
+In Vim, plain text, I say, is *parsed* with rules according to its file extension. Text are then separated as *syntax items*, which are strings that match a certain pre-defined pattern. For instance, `new` is picked out as a c++ keyword that instructs the operating system to find a memory block of a certain size for sake of holding variables, and to report its address. Vim's syntax files are responsible for parsing. For further information, see `:h syntax`. 
 
-Afterwards, several syntax items belong to one of 16 syntax groups, all or which is intended to be colored the same. A function from syntax items to syntax groups is said a *syntax recognition*. For example, in a `.cpp` file the string `new` belongs to the syntax group "Statement". In particular, I say that an item is *trivially recognized*, if it is mapped to the `Normal` group, i.e., being ignored. 
+Afterwards, several syntax items are classified into one of the 16 possible syntax groups, all or which is intended to be colored the same. A function from syntax items to syntax groups is said a *syntax recognition*. For example, in a `.cpp` file the string `new` belongs to the syntax group "Statement". In particular, I say that an item is *trivially recognized*, if it is mapped to the `Normal` group, i.e., being ignored. 
 
 How it is colored, however, depends on the *color scheme*. Following above example, `new` is colored bright yellow in Vim's "default" color scheme, but grass-green in "solarized". For our purpose, all relevant colors may be described in terms of a hex triplet; for example, `#ffff00` stands for yellow. In other words, the set consisting of all hex-triplet-represented color is a universal set. Then, I say, a function from syntax groups to hex triplets is a *color realization*. A realization is specified by a color scheme file with extension `.vim`. 
 
@@ -19,15 +19,15 @@ If opened in a graphical user interface (GUI), for example gVim or MacVim, all h
 
 Meanwhile, in a terminal, I say that each of the 16 syntax group are *assigned* a hex triplet. What follows is split into two cases. 
 
-If `termguicolors` is set true (i.e. with `set termguicolors`), I call this a *pallete assignation*. Then variables `guifg` and `guibg` are used. We set their values to be hex triplets, specifying the assignation. 
+If `termguicolors` is set true (i.e. with `set termguicolors`), I call this a *direct assignation*. Then variables `guifg` and `guibg` are used. We set their values to be hex triplets, specifying the assignation. 
 
-Nevertheless, iTerm2 (and Mac's native Terminal.app in recent years) can only display 256 hex triplets. These 256 numbers, I say, are *valid hex triplets*. A function from hex triplets onto valid triplets now must be applied, which must be identical if restricted to the set of valid triplets. I call such function a *degradation*. A realization, then, is a composition of assignation and degradation. 
+Nevertheless, iTerm2 (as well as Mac's native Terminal.app in recent years) can only display 256 hex triplets. These 256 numbers, I say, are *valid hex triplets*. A function from hex triplets onto valid triplets now must be applied, which must be an identical function when restricted to the set of valid triplets. I call such function satisfying this a *degradation*. A realization, then, is a composition of assignation and degradation. 
 
-But if `termguicolors` is set false (i.e. with `set notermguicolors`), I call this a *direct assignation*. Then variables `ctermfg` and `ctermbg` are used —— in such case, each group are in turn given a nonnegative integer. 
+But if `termguicolors` is set false (i.e. with `set notermguicolors`), I call this a *palette assignation*. Then variables `ctermfg` and `ctermbg` are used —— in such case, each group are in turn given a nonnegative integer. 
 
-At this stage it is further split into two cases, according to whether `t_Co` (number of colors) is 16 or 256. If 16, such number ranges from 0 to 15, and is input to a 16-color ANSI palette. If 256, it ranges from 0 to 255, and is input to the 256-color "xterm" palette. Here, I say, a *palette* is a function from a collection of nonnegative integers to hex triplets. 
+At this stage it is further split into two cases, according to whether `t_Co` (number of colors) is 16 or 256. If 16, such integer ranges from 0 to 15, and is input to a 16-color ANSI palette. If 256, it ranges from 0 to 255, and is input to the 256-color "xterm" palette. Here, I say, a *palette* is a function from a set of nonnegative integers to hex triplets. 
 
-An ANSI palette is specified by the present terminal theme in the preferences, while the "xterm" palette is more or less identical in each terminal emulator, thanks to "xterm" standards. From above, we know in either of 16 or 256 cases, degradation is identical. 
+An ANSI palette is specified by the present terminal theme (open preferences to set it), while the "xterm" palette is more or less identical in each terminal emulator, thanks to "xterm" standards. From above, we observe an important fact that in either of 16 or 256 cases, degradation is identical. 
 
 In conclusion, let me say that a *syntax highlighting* is a tuple comprised of a parsing, a recognition, and a realization. Afterwards the highlighting is displayed as physical color.
 
@@ -49,7 +49,7 @@ With a manager, it is easier to update and remove packages.
 The most easy-to-use manager, I think, is Tim Pope's "Pathogen". 
 To invoke it, include 
 
-    execute pathogen#infect()`
+    execute pathogen#infect()
 
 in `.vimrc` before the `colorscheme` line. 
 
@@ -63,13 +63,13 @@ Several popular schemes I found were, in order of discovery: (listing GitHub rep
 
 Ethan Schoonover's popular scheme "solarized" attempts to realize a collection of painstakingly chosen pastel colors both eye-comforting and readable. The underlying mechanism is unnecessarily complicated, and I did not go to great lengths. But below is how I understand it. 
 
-If under palette assignation, "solarized" requires a suitable ANSI palette to ultimately display correctly. Thus "solarized" relies on the corresponding "Solarized" theme, and hence corresponding palette. Fortunately, the release of iTerm2 include the "Solarized" theme. With any other theme, it is to be realized and so displayed incorrectly. 
+If under palette assignation, "solarized" requires a suitable ANSI palette to ultimately display correctly. Thus "solarized" relies on the corresponding "Solarized" theme, and hence corresponding palette. Fortunately, the release of iTerm2 includes the "Solarized" theme. With any other theme, it is to be realized and so displayed incorrectly. 
 
-But if under direct assignation, none of the hex triplets being assigned is valid. As a result, iTerm2 is forced to perform degradation, and its judgement is poor. The result is a bunch of undefined behavior and incorrect realization. 
+But if under direct assignation, none of the hex triplets being assigned is valid in the case of "solarized". As a result, iTerm2 is forced to perform degradation, and its judgement is poor. The result is a bunch of undefined behavior and incorrect realization. 
 
-Thus motivated, Romain Lafourcade prepared a simplified version named "flattened" for sake of robustness. When under direct assignation, *it assigns hex triplets same as "solarized", but defines degradation function in case true colors are not feasible*. And when under palette assignation, it *assigns a number within the already standardized 256 xterm palette*, ensuring they are all valid, irrespective of ANSI palette. 
+Thus motivated, Romain Lafourcade prepared a simplified version named "flattened" for sake of robustness. When under direct assignation, *it assigns hex triplets same as "solarized", but defines degradation function in case true colors are not feasible*. And when under palette assignation, it *assigns a number within the already standardized 256 xterm palette*, ensuring they are all valid, irrespective of the ANSI palette the terminal theme provides. 
 
-Similar can be said of all other schemes I listed. For direct assignation, they either *simply assign a hex triplets of a valid color, or assign an invalid triplet but specify degradation method themselves*. For palette assignation, it directly assigns a valid color in the xterm palette, which must be valid. They all work (though very slightly differently) with either palette or direct assignation. 
+Similar can be said of all other schemes I listed. For direct assignation, they either *simply assign a hex triplets of a valid color, or assign an invalid triplet but specify degradation method themselves*. For palette assignation, it *directly assigns a valid color in the xterm palette*, which must be valid. They all work (though very slightly differently) with either palette or direct assignation. 
 
 I suppose it is fair to say that the original "solarized", though carefully researched and customized, is ill-designed. 
 
