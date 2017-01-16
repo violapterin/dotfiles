@@ -15,3 +15,6 @@ When being searched in Vim, `\r` represents `<CR>`, while `\n` represents EOL. B
 
 For relevant information, see `:h fileformats`, `:h pattern`, and`:h digraph`, but throughout these help articles, different terminologies are used, making the whole affair confusing.
 
+By the way, I too edit in TextEdit often. Pressing return in TextEdit produces a `<LF>`. But TextEdit renders either Window-styled `<CR><LF>` or Unix-styled `<LF>` as an EOL, making them undistinguishable.
+
+As a digression, TextEdit does not append an EOL to the last character of the file, thus Vim warns `[noeol]` (no end-of-line) when it opens a TextEdit-saved file. But when saving it, Vim would append an EOL at the end.
