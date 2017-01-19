@@ -1,4 +1,4 @@
-# Note on "solarized" and other color schemes for Vim
+# The "solarized" and other color schemes for Vim
 *Jan. 7, 2017*
 
 This note first explains the basic idea of syntax highlighting in Vim, then describes my experience with several popular color schemes, reminds the reader several caveats, and points out the moral of the story. I will focus only on Vim opened in the terminal emulator iTerm2, rather than GUI version of Vim, for example gVim or MacVim. 

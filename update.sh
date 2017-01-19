@@ -1,8 +1,5 @@
 #! /usr/bin/env bash
-# To update newest version of templates and scripts.
-
-NUM_DOC=11 # number of documents
-COMMAND="cp -f" # command to be applied
+# To update newest version of templates and scripts, and set read-only.
 
 list_files=(
    .vimrc
@@ -19,11 +16,13 @@ list_files=(
    makefile_xelatex
 )
 
-dir_from="~"
-dir_to="dirname $0"
+# the directory where source is
+dir_from="${HOME}"
+# the destination they are copied to.
+# `"$0"` is filename (with path) of this script.
+dir_to=$(dirname "$0")
 
-
-for (( i=1; i<=NUM_DOC; i++ ));
-do
-   ${CMD} ${dir_from}\/${list_files[i]} ${dir_to}\/${list_files[i]}
+for file in "${list_files[@]}"; do
+   cp -f ${dir_from}\/${file} ${dir_to}\/${file}
+   chmod 444 ${dir_to}\/${file}
 done
