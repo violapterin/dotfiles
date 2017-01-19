@@ -1,4 +1,4 @@
-# Note on end-of-line characters
+# End-of-line characters
 *Jan. 7, 2017*
 
 When editing, using Vim, a pure text file created by MS Windows, or copying and pasting, into Vim, some lines from a binary file created by MS Windows, one is likely to find the whole file, or part of it, shown with no proper end-of-lines (EOL, aka line break) as should have been, but instead strewn with `^M`'s. A `^M` is not concatenation of literal `^` and `M`, but a digraph. To type it, press `<c-v><c-m>` (`c` for control).

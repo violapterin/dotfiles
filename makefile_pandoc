@@ -1,0 +1,42 @@
+# filename: makefile
+# author: Tzu-Yu Jeng
+# date: Jan. 2017
+# description: to export all `.md` (Markdown) files into `.pdf`
+# requirement: having assumed pandoc and xelatex being installed
+
+# to call bash shell for recipe
+SHELL := /usr/bin/env bash
+
+# to specify location of program
+PRG := ~/run-pandoc.sh
+
+# to hold message displayed in the beginning
+MSG := Now exporting all Markdown's to Pdf's in the current directory...
+
+# to set the Markdown source files, either in root or in a subfolder (but no deeper);
+# it's forbidden to contain whitespace ` ` in filename, or Makefile would separate them
+SRCS = $(wildcard *.md **/*.md)
+
+# to replace all `.md` with `.pdf`
+PDFS = $(SRCS:.md=.pdf)
+
+# to delete binary files
+RM := rm -f
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+# for release
+all : message $(PDFS)
+
+# output pre-build message
+message :
+	@echo $(MSG)
+
+./%.pdf : ./%.md
+	@echo Compiling "$@" from "$<" ...
+	$(PRG) "$<"
+
+.PHONY : all message clean 
+
+clean :
+	$(RM) $(PDFS)
