@@ -1,15 +1,15 @@
 # Git isn't that Hard
 *Jan. 25, 2017*
 
-£Here are a slowly growing summary of Git settings and commands I find useful, with short explanations following, addressed to the reader in second person.
+Here are a slowly growing summary of Git settings and commands I find useful, with short explanations following, addressed to the reader in second person.
 
-£I claim no intention to make it a complete table, even in the most rudimentary sense. What I have supposed to be helpful, I summary and explain here, and what I have not, I do not. It has not been long since I started learning to use Git, and many point are simply paraphrased from some Stack Overflow answer. Thus, I deeply appreciate the reader to remind me of any error.
+I claim no intention to make it a complete table, even in the most rudimentary sense. What I have supposed to be helpful, I summary and explain here, and what I have not, I do not. It has not been long since I started learning to use Git, and many point are simply paraphrased from some Stack Overflow answer. Thus, I deeply appreciate the reader to remind me of any error.
 
-£I use Mac OS (presently Sierra) on MacBook Air. From now on, by convention, commands meant to be run in Bash shell is prefixed with a `$` for clarity. Mac users new to shell concepts may just open the Terminal.app, copy and paste whatever I quoted (without `$`), and hit the Return key.
+I use Mac OS (presently Sierra) on MacBook Air. From now on, by convention, commands meant to be run in Bash shell is prefixed with a `$` for clarity. Mac users new to shell concepts may just open the Terminal.app, copy and paste whatever I quoted (without `$`), and hit the Return key.
 
-£Git commands require the current working directory set to be the top directory or any subdirectory of it except except those inside `.git/`. There are workarounds if you really don't want to do this. But I guess it is safest just to always go (by `cd`) into the top directory. This will be assume true hereafter.
+Git commands require the current working directory set to be the top directory or any subdirectory of it except except those inside `.git/`. There are workarounds if you really don't want to do this. But I guess it is safest just to always go (by `cd`) into the top directory. This will be assume true hereafter.
 
-£Before we continue, keep in mind that Git comes with a detailed manual. If you have any question of `fetch`, for example, open Git man pages by:
+Before we continue, keep in mind that Git comes with a detailed manual. If you have any question of `fetch`, for example, open Git man pages by:
 
     $ git help fetch
 
@@ -90,7 +90,7 @@ and generate local repo with:
 
     $ git init
 
-£Following our example, the local repo will be named `~/templates_configs_notes/.git/`. Remember that nothing affects the remote repo unless you push. The implication is that if you have screwed up something and want to start anew from the very beginning, willing to abandon the not-yet-pushed changes in the working tree, you can simply delete `./.git/` and `git init` again.
+Following our example, the local repo will be named `~/templates_configs_notes/.git/`. Remember that nothing affects the remote repo unless you push. The implication is that if you have screwed up something and want to start anew from the very beginning, willing to abandon the not-yet-pushed changes in the working tree, you can simply delete `./.git/` and `git init` again.
 
 ## Creating Remote Repo
 
@@ -100,11 +100,7 @@ The following instructions apply to GitHub, but the main idea is similar. In you
 
 When you name your remote repo, note that GitHub disallow special characters, and forbids even underscores, but allows hyphen. I deem it a good convention to name local repo with underscore-separated words, and remote repo with the same name with hyphen-separated words. Traditionally repos are named all in lower case. Following the above example, let us call it `templates-configs-notes`.
 
-
-
-GitHub offers two protocals: `https` and `ssh`.
-
-Enter the page for the repo, and click the green button "Clone or download". If the small title reads "Clone with HTTPS", there is a url that looks like
+GitHub offers two protocals: `https` and `ssh`. Enter the page for the repo, and click the green button "Clone or download". If the small title reads "Clone with HTTPS", there is a url that looks like
 
     https://github.com/aminopterin/templates_configs_notes.git
 
@@ -153,11 +149,11 @@ Navigation commands are identical to `less`, and similar to Vim. Hit `j`, `e` or
 
 If there are new files created or old files deleted, run this to update the index according to the present working tree:
 
-    git add -A
+    $ git add -A
 
 This does almost the same, except in that it ignores newly created folders:
 
-    git add .
+    $ git add .
 
 ### To Commit
 
@@ -179,14 +175,24 @@ Now, an editor opens, showing the commit message in the top, where you may revis
 
 Afterwards, you can view the commit log with
 
-    git log
+    $ git log
 
 The result shows commit IDs, authors, time stamps, and commit messages.
 To make the log more concise and informative,
 
-    git log --all --decorate --oneline --graph
+    $ git log --all --decorate --oneline --graph
 
 The option names are pretty explanatory. Mnemonic: "a dog".
+
+## Branching and Manipulation
+
+### To Clone and Fork
+
+### To Create New Branch
+
+### To Mergjk
+
+### 
 
 ## Configuring Git
 
@@ -227,7 +233,7 @@ You can set it to be your favorite editor.
 
 Alternatively, you can set the editor in Git's part, with
 
-   $ git config --global core.editor "vim"
+    $ git config --global core.editor "vim"
 
 ### Color 
 
@@ -239,27 +245,27 @@ All the various `color.*` (where `*` is wildcard) configurations available with 
 
 ### Showing non-ASCII characters
 
-By default, non-ASCII characters, such as Chinese characters, are backslash-escaped according to C-styled character codes. For example, "我" becomes "\346\210\221". To show them as verbatim,
+By default, non-ASCII characters, such as Chinese characters, are backslash-escaped according to C-styled character codes. For example, "我" becomes `\346\210\221`. To show them as verbatim,
 
-    git config --global core.quotepath false
+    $ git config --global core.quotepath false
 
 ## More Information
 
 * The Git [Documentation](https://git-scm.com/documentation)
 
-This is the documentation on the official homepage of Git. Same material may be found in `man` pages that are included in the Git package itself, to quote the site.
+    This is the documentation on the official homepage of Git. Same material may be found in `man` pages that are included in the Git package itself, to quote the site.
 
 * Richard E. Silverman (2013). *Git Pocket Guide*. Sebastopol, CA: O’Reilly Media.
 
-Guides for Git are abundant. This is a short guide that may both be read from cover to cover, and looked up as reference.
+    Guides for Git are abundant. This is a short guide that may both be read from cover to cover, and looked up as reference.
 
 * [Git—The Simple Guide](http://up1.github.io/git-guide/index.html)
 
-A table of for the most common Git commands, and very brief explanations. On the site, there is a downloadable PDF version.
+    A table of for the most common Git commands, and very brief explanations. On the site, there is a downloadable PDF version.
 
 * [Stack Overflow](http://stackoverflow.com)
 
-Stack Overflow is still the most likely place you end up with if you google your problem, but, since everyone can submit, you should take their advice with a grain of salt.
+    Stack Overflow is still the most likely place you end up with if you google your problem, but, since everyone can submit, you should take their advice with a grain of salt.
 
 Alright. Maybe Git really is *that* hard.
 
