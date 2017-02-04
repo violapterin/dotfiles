@@ -92,8 +92,8 @@ noremap <leader>dd "*dd
 " Enable backspace to delete indentation, line breaks, pre-existing characters
 set backspace=eol,start,indent
 
-" Wait 3[s] for combination key, and afterwards wait 0.1[s] 
-" for key codes after that (both in ms), 
+" Wait 3[s] for combination key, and afterwards wait 0.1[s]
+" for key codes after that (both in ms),
 " preventing delay after `O` (opening another line above)
 set timeout
 set timeoutlen=3000
@@ -122,7 +122,7 @@ noremap <leader><cr> :nohlsearch<cr>
 " Ignore case when searching as default
 set ignorecase
 
-" When searching, if string contains one upper case and one lower 
+" When searching, if string contains one upper case and one lower
 " case, be case sensitive, otherwise not
 set smartcase
 
@@ -203,7 +203,7 @@ nnoremap <leader>x :bprevious<cr>:bdelete #<cr>
 
 " Switch, with `<space>b` (for "buffer"), among existing
 " buffers by typing its number shown on the screen
-nnoremap <leader>b :ls<cr>:buffer 
+nnoremap <leader>b :ls<cr>:buffer
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 "          Command bar and other tools
@@ -274,7 +274,7 @@ set fileformat=unix
 set fileformats=unix
 
 " Force wide characters (like Chinese) are displayed twice as wide
-set ambiwidth=double 
+set ambiwidth=double
 
 " Use spaces instead of tab-space
 set expandtab
@@ -414,28 +414,4 @@ endfunction
 " <space>w      Save the current buffer
 " <space>x      Close the current buffer
 " <space>y      Copy from system clipboard (similar for `Y`, `yy`)
-
-" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
-"          Regex workbench
-" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
-
-" In these leader-prefixed registers saved are some regex commands
-" I find useful; they are not necessarily important or of lasting virtue.
-
-" To replace trailing whitespaces and newline with newline and one whitespace
-nnoremap <leader>1 :%s/\s*\n\{1}\([^ \)/\r \1/g<cr>
-
-" To remove trailing whitespaces
-nnoremap <leader>2 :%s/\s\+$//g<cr>
-
-" To remove physical newlines within a intended paragraph XXX
-" ??????
-nnoremap <leader>3 :%s/\n\{1}//g<cr>
-
-"nnoremap <leader>4 
-
-
-
-
-
 

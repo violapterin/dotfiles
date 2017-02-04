@@ -1,27 +1,29 @@
 # filename: makefile
 # author: Tzu-Yu Jeng
 # date: Jan. 2017
-# description: to export all `.tex` (xeLaTeX) files possibly with CJK, into `.pdf`
+# description: to export all `.tex` (LaTeX) files without CJK, into `.pdf`
 # requirement: having assumed pandoc and xelatex being installed
 
 # to call bash shell for recipe
 SHELL := /usr/bin/env bash
 
 # to specify location of program
-PRG := ~/run-xelatex.sh
+PRG := $${HOME}/run_pdflatex.sh
 
 # to hold message displayed in the beginning
-MSG := Now exporting all xeLaTeX's to Pdf's in the current directory...
+MSG := Now exporting all LaTeX's to Pdf's in the current directory...
 
-# to set the xeLaTeX source files, either in root or in a subfolder (but no deeper);
+# to set the LaTeX source files, either in root or in a subfolder (but no deeper);
 # it's forbidden to contain whitespace ` ` in filename, or Makefile would separate them
-SRCS = $(wildcard *.tex **/*.tex)
+SRC = $(wildcard *.tex */*.tex */*/*.tex)
 
 # to replace all `.tex` with `.pdf`
-PDFS = $(SRCS:.tex=.pdf)
+PDF = $(SRC:.tex=.pdf)
 
 # other affiliated files
-AFF = $(wildcard *.aux **/*.aux) $(wildcard *.log **/*.log) $(wildcard *.gz **/*.gz)
+AUX = $(wildcard *.aux */*.aux */*/*.aux)
+LOG = $(wildcard *.log */*.log */*/*.log)
+GZ = $(wildcard *.gz */*.gz */*/*.gz)
 
 # to delete binary files
 RM := rm -f
@@ -29,7 +31,7 @@ RM := rm -f
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # for release
-all : message $(PDFS)
+all : message $(PDF)
 
 # output pre-build message
 message :
@@ -42,4 +44,4 @@ message :
 .PHONY : all message clean 
 
 clean :
-	$(RM) $(PDFS) $(AFF)
+	$(RM) "$(PDF)" "$(AUX)" "$(LOG)" "$(GZ)"

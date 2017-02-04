@@ -1,13 +1,13 @@
-# Templates and Settings
-*as of late 2016*
+# Templates, Configuration files, and Related Notes
+*Mostly Dec. 2016 to Jan. 2017*
 
-This repo backs up templates and settings I commonly use. 
+This repo backs up templates I commonly use, settings for some programs, and several related notes.
 
 ## My `.vimrc`
 
-The `.vimrc` is a plain text file that holds desired settings to be initialized in Vim. It specifies read-and-write settings, search-and-replace options, self-defined shortcuts, user-implemented functions, and more. If saved in the current user's home, it is read in runtime, and applied by, Vim.
+The `.vimrc` is a plain text file that holds desired settings to be initialized in Vim. (Here `rc` means "run commands", a phrase originated in Unix-like systems.) It specifies read-and-write settings, search-and-replace options, self-defined shortcuts, user-implemented functions, and more. If saved in the current user's home, it is read in runtime, and applied by, Vim.
 
-One short note on end-of-line styles of different file formats, and another longer note on "solarized" and other color schemes, are to be found in this repo.
+Two notes, "End-of-line characters", and "The 'solarized' and other color schemes for Vim", are to be found in this repo.
 
 ## My `.bashrc` and `.bash_profile`
 
@@ -15,13 +15,13 @@ The `.bash_profile` consists only one line, namely one that sources `.bashrc` if
 
 The `.bashrc` includes all my custom appearances, shortcuts, functions, variables, and more, for the Bash shell.
 
-For the difference between them, see a note I wrote saved in this repo.
+For further explanation, see a note I wrote saved in this repo, "Difference between `.bashrc` and `.bash_profile`".
 
 ## My LaTeX template for Latin languages
 
 The `template-Latin.tex` is the LaTeX template I use for my writings, either personal or scholastic, but without Chinese. It contains custom abbreviations, the load of important packages, preferred appearances, self-implemented functions and more.
 
-The LaTeX documents based on this template is intended to be compiled into `.pdf` format by the `pdflatex` script, which is a wrapper of the compiler `pdftex`. The `pdflatex` is already included in [MacTex](http://www.tug.org/mactex/) distribution, which I installed on my MacBook Air.
+The LaTeX documents based on this template is intended to be compiled into `.pdf` format by the `pdflatex` script, which is a wrapper of the compiler `pdftex`. The `pdflatex` is already included in [MacTeX](http://www.tug.org/mactex/) distribution, which I installed on my MacBook Air.
 
 I set another alias `Pdflatex` to call a short script I wrote with specification of options. To compile with that, enter `Pdflatex <file-name>`. 
 
@@ -29,7 +29,7 @@ I set another alias `Pdflatex` to call a short script I wrote with specification
 
 The `template-CJK.tex` is the LaTeX template I use for Chinese writings. It is mostly taken from the above mentioned template of Latin languages, but rid of unnecessary packages or what packages I observed to have resulted conflict. The `xeCJK` package is included to facilitate typesetting of Chinese.
 
-The XeLaTeX documents based on this template is intended to be compiled into `.pdf` format by the `xelatex` script, which is a wrapper of the compiler `xetex`. The `xelatex` is already included in [MacTex](http://www.tug.org/mactex/) distribution, which I installed on my MacBook Air.
+The XeLaTeX documents based on this template is intended to be compiled into `.pdf` format by the `xelatex` script, which is a wrapper of the compiler `xetex`. The `xelatex` is already included in [MacTeX](http://www.tug.org/mactex/) distribution, which I installed on my MacBook Air.
 
 I set another alias `Xelatex` to call a short script I wrote with specification of options. To compile with that, enter `Xelatex <file-name>`. 
 
@@ -46,6 +46,12 @@ In case one need include other packages or define other commands, he or she only
 To reduce potential conflicts between packages and enhance portability, I have only included those absolutely necessary. For example, the `\mathscr` is commonly used, which requires `mathrsfs` package, and is thus called. And, as I write in Chinese, which requires `xelatex` engine, the `xeCJK` package is called.
 
 I set another alias `Pandoc` to call a short script I wrote with specification of options. To compile with that, enter `Pandoc <file-name>`. 
+
+## Makefiles and scripts
+
+As mentioned above, 
+
+When using them,
 
 ## A Script for update
 

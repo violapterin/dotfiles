@@ -1,10 +1,27 @@
-#! /usr/bin/env bash
-# To update newest version of templates and scripts, and set read-only.
+#!/usr/bin/env bash
+# To update newest version of templates and scripts.
 
-list_files=(
+# the directory where source is.
+DIR_FROM="${HOME}"
+
+# the destination they are copied to.
+# `"$0"` is filename (with path) of this script.
+DIR_TO=$(dirname "$0")
+
+# To first copy (deleting old versions), then set them to read-only.
+transfer () {
+   local file_from=${DIR_FROM}\/"$1"
+   local file_to=${DIR_TO}\/"$1"\/"$2"
+   cp -f ${file_from} ${file_to}
+   chmod 444 ${file_to}
+}
+
+
+# list of filenames to be copied.
+list_file=(
    .vimrc
-   .bash_profile 
    .bashrc
+   .bash_profile 
    template_pandoc.tex
    template_Latin.tex
    template_CJK.tex
@@ -16,13 +33,26 @@ list_files=(
    makefile_xelatex
 )
 
-# the directory where source is
-dir_from="${HOME}"
-# the destination they are copied to.
-# `"$0"` is filename (with path) of this script.
-dir_to=$(dirname "$0")
+# list of local directories which they are to be copied into.
+list_dir=(
+   configs
+   configs
+   configs
+   tex_templates
+   tex_templates
+   tex_templates
+   scripts
+   scripts
+   scripts
+   makefiles
+   makefiles
+   makefiles
+)
 
-for file in "${list_files[@]}"; do
-   cp -f ${dir_from}\/${file} ${dir_to}\/${file}
-   chmod 444 ${dir_to}\/${file}
+len_file=${#list_file[@]}
+
+# Do for all files listed above:
+for ((i=1; i<=${len_file}; i++))
+do
+   transfer list_file[i] list_dir[i]
 done

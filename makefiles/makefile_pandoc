@@ -8,35 +8,43 @@
 SHELL := /usr/bin/env bash
 
 # to specify location of program
-PRG := ~/run-pandoc.sh
+PRG := $${HOME}/run_pandoc.sh
 
 # to hold message displayed in the beginning
 MSG := Now exporting all Markdown's to Pdf's in the current directory...
 
 # to set the Markdown source files, either in root or in a subfolder (but no deeper);
 # it's forbidden to contain whitespace ` ` in filename, or Makefile would separate them
-SRCS = $(wildcard *.md **/*.md)
+SRC = $(wildcard *.md */*.md */*/*.md)
 
 # to replace all `.md` with `.pdf`
-PDFS = $(SRCS:.md=.pdf)
+PDF = $(SRC:.md=.pdf)
 
 # to delete binary files
 RM := rm -f
 
+# exclamation mark, indicating unfinished work
+EXCL = !
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # for release
-all : message $(PDFS)
+all : message $(PDF)
 
 # output pre-build message
 message :
 	@echo $(MSG)
 
+# only if the first character is not `!` (otherwise unfinished)
 ./%.pdf : ./%.md
+ifeq ($(call substr,$@,1,1),$(EXCL))
+	
+else
 	@echo Compiling "$@" from "$<" ...
 	$(PRG) "$<"
+endif
 
 .PHONY : all message clean 
 
 clean :
-	$(RM) $(PDFS)
+	$(RM) "$(PDF)"
