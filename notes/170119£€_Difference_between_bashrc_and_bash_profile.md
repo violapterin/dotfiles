@@ -1,4 +1,5 @@
 # Difference between `.bashrc` and `.bash_profile`
+*Jan. 19, 2017*
 
 To understand when `.bash_profile` or `.bashrc` are used and differences between them, we introduce several terms. I shall focus on Mac OS, which I use. 
 

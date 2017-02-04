@@ -55,12 +55,18 @@ $endif$
 
 % % % % % begin my addition % % % % %
 
-    \usepackage{xeCJK}% use Latin font whenever possible
-    \setCJKmainfont[BoldFont=PingFang SC,ItalicFont=STKaiti]{STSong}
-    \setCJKsansfont[BoldFont=STHeiti]{STXihei}
-    \setCJKmonofont{STFangsong}
-    \XeTeXlinebreaklocale "zh"% for word wrap of Chinese
-    \XeTeXlinebreakskip = 0pt plus 1pt% ibid., cont.
+\usepackage{xeCJK}% use Latin font whenever possible
+\setCJKmainfont[BoldFont=PingFang SC,ItalicFont=STKaiti]{STSong}
+\setCJKsansfont[BoldFont=STHeiti]{STXihei}
+\setCJKmonofont{STFangsong}
+\XeTeXlinebreaklocale "zh"% for word wrap of Chinese
+\XeTeXlinebreakskip = 0pt plus 1pt% ibid., cont.
+
+% `pandoc` original template:
+%$if(CJKmainfont)$
+%    \usepackage{xeCJK}
+%    \setCJKmainfont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKmainfont$}
+%$endif$
 
 % % % % % end my addition % % % % %
 
@@ -163,12 +169,22 @@ $if(strikeout)$
 $endif$
 $if(indent)$
 $else$
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
+
+% % % % % begin my addition % % % % %
+
+\setlength{\parskip}{1.5ex}% vertical spacing between paragraphs
+\setlength{\parindent}{4ex}% indent in a paragraph
+
+% `pandoc` original template:
+%\IfFileExists{parskip.sty}{%
+%\usepackage{parskip}
+%}{% else
+%\setlength{\parindent}{0pt}
+%\setlength{\parskip}{6pt plus 2pt minus 1pt}
+%}
+
+% % % % % end my addition % % % % %
+
 $endif$
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%

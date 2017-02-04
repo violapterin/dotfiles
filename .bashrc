@@ -32,6 +32,11 @@ bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 
 # --------------------------------
+# to set MacVim as the default editor, such as commit logs.
+export VISUAL=vim
+export EDITOR="$VISUAL"
+
+ #--------------------------------
 # to show hidden files in Mac Finder.app
 alias ShowFiles='defaults write com.apple.finder AppleShowAllFiles YES'
 # to show hidden files in Mac Finder.app
