@@ -24,6 +24,9 @@ namePdf="${nameSrc%%.*}.pdf"
 nameSrc=$(printf '%q' "${nameSrc}")
 namePdf=$(printf '%q' "${namePdf}")
 
+# Location of template for `pandoc`
+PATH_TEMPLATE=/Users/amino/Documents/templates_configs_notes/tex_templates/template_pandoc.tex
+
 # `pandoc` options: `-s` for standalone, `-o` for output,
 # `-V` for value, `margin` meaning page margin,
 # `--template` is called for LaTeX compiler's use,
@@ -32,7 +35,7 @@ options=(
       -s
       -o ${namePdf}
       -V geometry:margin=1in
-      --template=/Users/amino/template_pandoc.tex
+      --template=${PATH_TEMPLATE}
       --latex-engine=xelatex
 )
 

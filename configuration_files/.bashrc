@@ -45,13 +45,13 @@ alias HideFiles='defaults write com.apple.finder AppleShowAllFiles NO'
 # --------------------------------
 # `cd` (change directory) shortcuts
 MY_DOC='/Users/amino/Documents/'
-alias GoToEssays='cd ${MY_DOC}8_essays_since_Jan_2017'
-alias GoToAllFairCopies='cd ${MY_DOC}all_fair_copies'
-alias GoToLilyPondWork='cd ${MY_DOC}LilyPond_work'
-alias GoToLaTexWork='cd ${MY_DOC}LaTeX_work'
-alias GoToPrograms='cd ${MY_DOC}programs_of_mine'
-alias GoToStackExchange='cd ${MY_DOC}stack_exchange_questions'
-alias GoToBooks='cd ${MY_DOC}books'
+alias GoToEssays='cd "${MY_DOC}essays_vol_8_(since_Jan_2017)"'
+alias GoToAllFairCopies='cd "${MY_DOC}all_fair_copies"'
+alias GoToLilyPondWork='cd "${MY_DOC}LilyPond_work"'
+alias GoToLaTexWork='cd "${MY_DOC}LaTeX_work"'
+alias GoToPrograms='cd "${MY_DOC}programs_of_mine"'
+alias GoToStackExchange='cd "${MY_DOC}stack_exchange_questions"'
+alias GoToBooks='cd "${MY_DOC}books"'
 
 # --------------------------------
 # app shortcuts
@@ -68,7 +68,8 @@ function TextEdit(){
 
 # to rename `foo` with `bar`, with `RecursivelyRename foo bar`,
 # within filenames throughout current directory and all subdirectories.
-# In doing so, a Perl-based utility `rename` is used.
+# A Perl-based utility `rename` is used; `-S` for "substitute all".
+# Enter `brew install rename` to install.
 function RecursivelyRename(){
    find . -exec rename -S "$@" {} +
 }
