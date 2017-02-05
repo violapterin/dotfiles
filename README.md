@@ -53,8 +53,12 @@ As mentioned above,
 
 When using them,
 
+
 ## A Script for update
 
-The `.bash_profile`, `.bashrc`, and `.vimrc` are saved in my home (`~`) as they should be, and I update them when I feel like to. I also store the above-mentioned makefiles and shell scripts simply in my home. 
+The `.bash_profile`, `.bashrc`, `.gitignore`, and `.vimrc` are saved in my home (`~`) as they should be, and I update them when I feel like to. I also store the above-mentioned makefiles and shell scripts simply in my home. 
 
-On the contrary, this repo is intended to be a passive backup of them, that is, I update the copies saved in home and copied them to the local repo from time to time, rather than directly update files in this repo. Furthermore, I shall protect files backed up by setting them to be only readable. Thus a short script, `update.sh`, that automates the mentioned action is included in this repo. 
+On the contrary, this repo is intended to be a passive backup of them, that is, I update the copies saved in home and copied them to the local repo from time to time, rather than directly update files in this repo. Furthermore, I shall protect files backed up by setting them to be only readable. A short script, , that automates the mentioned action is saved in `update.sh` included in this repo.
+
+Not to confuse the reader with duplicate makefiles, the notes in the `notes` directory will be compiled to PDF by simply listing them. This is also done in `update.sh`.
+

@@ -7,18 +7,15 @@
 # requirement: having assumed script `pdflatex` and engine `pdftex`
 
 # The engine `pdflatex` exports LaTeX as PDF.
-program='pdflatex'
+COMPILER='pdflatex'
+EXT_BIN='.pdf'
 
 # As I have tested, `pdflatex` does not allow any
 # `%` (percent) or `"` (double quote) in filename.
 # Other all Bash-reserved characters must be escaped, 
 # as usually the case for executables.
 # Like: `draft (2016).tex` is passed as `draft\ \(2016\).tex`.
-nameSrc="$1"
-
-# Despite being read into Bash, it's still necessary to escape
-# Bash-reserved characters, just as if being entered literally.
-nameSrc=$(printf '%q' "${nameSrc}")
+name_src="$1"
 
 # `pdflatex` options:
 #  -synctex=1`: Let PDF not contain info about source position's lookup.
@@ -32,9 +29,7 @@ options=(
       -file-line-error
 )
 
-# The full line of command
-command="${program} ${options[*]} ${nameSrc}"
-echo ${command} # first print it
-eval ${command} # then evaluate it
-
-
+# The full line of command (echo what is executed)
+set -x
+"${COMPILER} ${options[*]} ${name_src}"
+set +x

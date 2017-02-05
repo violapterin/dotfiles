@@ -9,7 +9,8 @@ SUBDIR=configuration_files
 
 # the destination they are copied to.
 # `"$0"` is filename (with path) of this script.
-DIR_TO=$(dirname "$0")/${SUBDIR}
+DIR_REPO=$(dirname "$0")
+DIR_TO=${DIR_REPO}/${SUBDIR}
 
 # To first copy (deleting old versions), then set them to read-only.
 transfer() {
@@ -33,5 +34,18 @@ len_file=${#LIST_FILE[@]}
 for ((i=0; i<=${len_file}-1; i++))
 do
    transfer "${LIST_FILE[i]}"
+done
+
+################################
+
+# where notes are saved
+DIR_NOTES=${DIR_REPO}/notes
+RUN_PANDOC=${DIR_REPO}/scripts/run_pandoc.sh
+
+rm ${DIR_NOTES}/*.pdf
+
+for f in ${DIR_NOTES}/*.md;
+do
+   ${RUN_PANDOC} "${f}"
 done
 
