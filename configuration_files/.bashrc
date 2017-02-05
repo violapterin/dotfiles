@@ -44,14 +44,14 @@ alias HideFiles='defaults write com.apple.finder AppleShowAllFiles NO'
 
 # --------------------------------
 # `cd` (change directory) shortcuts
-MY_DOC='/Users/amino/Documents/'
-alias GoToEssays='cd "${MY_DOC}essays_vol_8_(since_Jan_2017)"'
-alias GoToAllFairCopies='cd "${MY_DOC}all_fair_copies"'
-alias GoToLilyPondWork='cd "${MY_DOC}LilyPond_work"'
-alias GoToLaTexWork='cd "${MY_DOC}LaTeX_work"'
-alias GoToPrograms='cd "${MY_DOC}programs_of_mine"'
-alias GoToStackExchange='cd "${MY_DOC}stack_exchange_questions"'
-alias GoToBooks='cd "${MY_DOC}books"'
+MY_DOC="${HOME}/Documents"
+alias GoToEssays="cd ${MY_DOC}/essays_vol_8_(since_Jan_2017)"
+alias GoToAllFairCopies="cd ${MY_DOC}/all_fair_copies"
+alias GoToLilyPondWork="cd ${MY_DOC}/LilyPond_work"
+alias GoToLaTexWork="cd ${MY_DOC}/LaTeX_work"
+alias GoToPrograms="cd ${MY_DOC}/programs_of_mine"
+alias GoToStackExchange="cd ${MY_DOC}/stack_exchange_questions"
+alias GoToBooks="cd ${MY_DOC}/books"
 
 # --------------------------------
 # app shortcuts
@@ -83,14 +83,16 @@ alias BrowsePtt='ssh bbsu@ptt.cc'
 # to browse PTT2
 alias BrowsePtt2='ssh bbsu@ptt2.cc'
 
+MY_SCRIPTS=${MY_DOC}/templates_configs_notes/scripts
+
 # to compile Markdown (possibly with LaTeX embedded)
-alias Pandoc='~/run_pandoc.sh'
+alias Pandoc=${MY_SCRIPTS}/run_pandoc.sh
 
 # to compile LaTeX (without Chinese) into PDF
-alias Pdflatex='~/run_pdflatex.sh'
+alias Pdflatex=${MY_SCRIPTS}/templatesrun_pdflatex.sh
 
 # to compile XeLaTeX source (possibly with Chinese) into PDF
-alias Xelatex='~/run_xelatex.sh'
+alias Xelatex=${MY_SCRIPTS}/run_xelatex.sh
 
 # This line was added by system when installing Perl5.
 # It calls `perlbrew`, which maintains and updates Perl.

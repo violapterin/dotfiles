@@ -7,17 +7,14 @@
 # requirement: having assumed script `xelatex` and engine `pdftex`
 
 # The engine `xelatex` exports xeLaTeX as PDF.
-program='xelatex'
+COMPILER='xelatex'
+EXT_BIN='.pdf'
 
 # As I have tested, `xelatex` only disallow `%` (percent) in filename.
 # Other Bash-reserved characters are okay, but must be escaped, 
 # as usually the case for executables.
 # Like: `draft (2016).tex` is passed as `draft\ \(2016\).tex`.
-nameSrc="$1"
-
-# Despite being read into Bash, it's still necessary to escape
-# Bash-reserved characters, just as if being entered literally.
-nameSrc=$(printf '%q' "${nameSrc}")
+name_src="$1"
 
 # `xelatex` options:
 #  -synctex=1`: Let PDF not contain info about source position's lookup.
@@ -30,9 +27,7 @@ options=(
       -file-line-error
 )
 
-# The full line of command
-command="${program} ${options[*]} ${nameSrc}"
-echo ${command} # first print it
-eval ${command} # then evaluate it
-
-
+# The full line of command (echo what is executed)
+set -x
+"${COMPILER} ${options[*]} ${name_src}"
+set +x
