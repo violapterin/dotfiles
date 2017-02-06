@@ -1,42 +1,46 @@
-# filename: makefile
-# author: Tzu-Yu Jeng
-# date: Jan. 2017
-# description: to export all `.md` (Markdown) files into `.pdf`
-# requirement: having assumed pandoc and xelatex being installed
+# Filename: makefile
+# Author: Tzu-Yu Jeng
+# Date: Jan. 2017
+# Description: to export all `.md` (Markdown) files into `.pdf`
+# Requirement: that `pandoc` and `xelatex` be installed
 
-# to call bash shell for recipe
+# To call bash shell for recipe.
 SHELL := /usr/bin/env bash
 
-# to specify location of program
+# To specify location of program.
 PRG := $${HOME}/run_pandoc.sh
 
-# to hold message displayed in the beginning
+# To hold message displayed in the beginning.
 MSG := Now exporting all Markdown's to Pdf's in the current directory...
 
-# to set the Markdown source files, either in root or in a subfolder (but no deeper);
-# it's forbidden to contain whitespace ` ` in filename, or Makefile would separate them
-SRC = $(wildcard *.md */*.md */*/*.md)
+# extensions resp. of souce and binary files
+EXT_SRC := .md
+EXT_BIN := .pdf
 
-# to replace all `.md` with `.pdf`
-PDF = $(SRC:.md=.pdf)
+# To set the Markdown source files in the top directory,
+# or in a subfolder, or in a subsubfolder.
+# Filenames must not contain whitespace ` `, or Makefile parses them.
+SRC = $(wildcard *$(EXT_SRC) */*$(EXT_SRC) */*/*$(EXT_SRC))
 
-# to delete binary files
+# To replace all `.md` with `.pdf`.
+BIN = $(SRC:$(EXT_SRC)=$(EXT_BIN))
+
+# To delete binary files.
 RM := rm -f
 
-# exclamation mark, indicating unfinished work
+# Exclamation mark, indicating unfinished work.
 EXCL = !
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-# for release
-all : message $(PDF)
+all : message $(BIN)
 
-# output pre-build message
+# To output pre-build message.
 message :
 	@echo $(MSG)
 
-# only if the first character is not `!` (otherwise unfinished)
-./%.pdf : ./%.md
+# To compile only if not-`!`-prefixed (otherwise unfinished).
+./%$(EXT_BIN) : ./%$(EXT_SRC)
 ifeq ($(call substr,$@,1,1),$(EXCL))
 	
 else
@@ -44,7 +48,9 @@ else
 	$(PRG) "$<"
 endif
 
+# To declare phony objects, so rules are always executed.
 .PHONY : all message clean 
 
+# To delete binary files.
 clean :
-	$(RM) "$(PDF)"
+	$(RM) "$(BIN)"
