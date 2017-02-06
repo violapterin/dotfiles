@@ -1,8 +1,8 @@
-# filename: makefile
-# author: Tzu-Yu Jeng
-# date: Jan. 2017
-# description: to export all `.tex` (xeLaTeX) files possibly with CJK, into `.pdf`
-# requirement: having assumed pandoc and xelatex being installed
+# Filename: makefile
+# Author: Tzu-Yu Jeng
+# Date: Jan. 2017
+# Description: to export all `.tex` (xeLaTeX) files into `.pdf` with `xelatex`
+# Requirement: that `xelatex` be installed
 
 # to call bash shell for recipe
 SHELL := /usr/bin/env bash
@@ -18,7 +18,7 @@ MSG := Now exporting all xeLaTeX's to Pdf's in the current directory...
 SRC = $(wildcard *.tex */*.tex */*/*.tex)
 
 # to replace all `.tex` with `.pdf`
-PDF = $(SRC:.tex=.pdf)
+BIN = $(SRC:.tex=.pdf)
 
 # other affiliated files
 AUX = $(wildcard *.aux */*.aux */*/*.aux)
@@ -31,7 +31,7 @@ RM := rm -f
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # for release
-all : message $(PDF)
+all : message $(BIN)
 
 # output pre-build message
 message :
@@ -44,4 +44,4 @@ message :
 .PHONY : all message clean 
 
 clean :
-	$(RM) "$(PDF)" "$(AUX)" "$(LOG)" "$(GZ)"
+	$(RM) "$(BIN)" "$(AUX)" "$(LOG)" "$(GZ)"

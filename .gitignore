@@ -2,4 +2,7 @@
 *.docx
 *.png
 *.pdf
+*.aux
+*.log
+*.gz
 .DS_Store

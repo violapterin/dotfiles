@@ -89,7 +89,7 @@ MY_SCRIPTS=${MY_DOC}/templates_configs_notes/scripts
 alias Pandoc=${MY_SCRIPTS}/run_pandoc.sh
 
 # to compile LaTeX (without Chinese) into PDF
-alias Pdflatex=${MY_SCRIPTS}/templatesrun_pdflatex.sh
+alias Pdflatex=${MY_SCRIPTS}/run_pdflatex.sh
 
 # to compile XeLaTeX source (possibly with Chinese) into PDF
 alias Xelatex=${MY_SCRIPTS}/run_xelatex.sh

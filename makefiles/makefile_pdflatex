@@ -1,47 +1,51 @@
-# filename: makefile
-# author: Tzu-Yu Jeng
-# date: Jan. 2017
-# description: to export all `.tex` (LaTeX) files without CJK, into `.pdf`
-# requirement: having assumed pandoc and xelatex being installed
+# Filename: makefile
+# Author: Tzu-Yu Jeng
+# Date: Jan. 2017
+# Description: to export all `.tex` (LaTeX) files into `.pdf` with `pdflatex`
+# Requirement: that `pdflatex` be installed
 
-# to call bash shell for recipe
+# To call bash shell for recipe.
 SHELL := /usr/bin/env bash
 
-# to specify location of program
+# To specify location of program.
 PRG := $${HOME}/run_pdflatex.sh
 
-# to hold message displayed in the beginning
+# To hold message displayed in the beginning.
 MSG := Now exporting all LaTeX's to Pdf's in the current directory...
 
-# to set the LaTeX source files, either in root or in a subfolder (but no deeper);
-# it's forbidden to contain whitespace ` ` in filename, or Makefile would separate them
-SRC = $(wildcard *.tex */*.tex */*/*.tex)
+# extensions resp. of souce and binary files
+EXT_SRC := .tex
+EXT_BIN := .pdf
 
-# to replace all `.tex` with `.pdf`
-PDF = $(SRC:.tex=.pdf)
+# To set the LaTeX source files in the top directory,
+# or in a subfolder, or in a subsubfolder.
+# Filenames must not contain whitespace ` `, or Makefile parses them.
+SRC = $(wildcard *$(EXT_SRC) */*$(EXT_SRC) */*/*$(EXT_SRC))
 
-# other affiliated files
+# To replace all `.tex` with `.pdf`.
+BIN = $(SRC:$(EXT_SRC)=$(EXT_BIN))
+
+# Other affiliated files, to be deleted.
 AUX = $(wildcard *.aux */*.aux */*/*.aux)
 LOG = $(wildcard *.log */*.log */*/*.log)
 GZ = $(wildcard *.gz */*.gz */*/*.gz)
 
-# to delete binary files
+# To delete binary files.
 RM := rm -f
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-# for release
-all : message $(PDF)
+all : message $(BIN)
 
-# output pre-build message
+# To output pre-build message.
 message :
 	@echo $(MSG)
 
-./%.pdf : ./%.tex
+./%$(EXT_BIN) : ./%$(EXT_SRC)
 	@echo Compiling "$@" from "$<" ...
 	@$(PRG) "$<"
 
 .PHONY : all message clean 
 
 clean :
-	$(RM) "$(PDF)" "$(AUX)" "$(LOG)" "$(GZ)"
+	$(RM) "$(BIN)" "$(AUX)" "$(LOG)" "$(GZ)"

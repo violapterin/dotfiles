@@ -1,14 +1,13 @@
 #!/usr/bin/env bash
 
-# filename: run-xelatex.sh
-# author: Tzu-Yu Jeng
-# date: Jan. 2017
-# description: to export `.tex` (xeLaTeX) file as `.pdf`
-# requirement: having assumed script `xelatex` and engine `pdftex`
+# Filename: run-xelatex.sh
+# Author: Tzu-Yu Jeng
+# Date: Jan. 2017
+# Description: to export `.tex` (xeLaTeX) file as `.pdf`
+# Requirement: having assumed script `xelatex` and engine `pdftex`
 
 # The engine `xelatex` exports xeLaTeX as PDF.
-COMPILER='xelatex'
-EXT_BIN='.pdf'
+COMPILER="xelatex"
 
 # As I have tested, `xelatex` only disallow `%` (percent) in filename.
 # Other Bash-reserved characters are okay, but must be escaped, 
@@ -17,17 +16,18 @@ EXT_BIN='.pdf'
 name_src="$1"
 
 # `xelatex` options:
-#  -synctex=1`: Let PDF not contain info about source position's lookup.
-#  -interaction=nonstopmode`: Do not stop on error, but echo error message.
-#  -output-format=pdf`: Specify output format.
-#  -file-line-error`: Print filename and line number where error is.
+# -synctex=1`: Let PDF not contain info for looking up source.
+# -interaction=nonstopmode`: Do not stop on error, but echo.
+# -output-format=pdf`: Specify output format.
+# -file-line-error`: Print filename and line number where error is.
 options=(
       -synctex=0
       -interaction=nonstopmode
       -file-line-error
 )
 
-# The full line of command (echo what is executed)
+# the main command
+# `set -x` echoes what is executed; `set +x` cancels this.
 set -x
-"${COMPILER} ${options[*]} ${name_src}"
-set +x
+"${COMPILER}" ${options[*]} "${name_src}"
+{ set +x; } 2>/dev/null
