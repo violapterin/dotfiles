@@ -124,6 +124,10 @@ The result will look like:
     origin  git@github.com:aminopterin/templates_configs_notes.git (fetch)
     origin  git@github.com:aminopterin/templates_configs_notes.git (push)
 
+To see more information in order to trouble-shoot, you may
+
+    $ git remote show origin
+
 ## To Commit and Push
 
 ### To Compare
@@ -174,7 +178,7 @@ You can modify your commit message even after you commit, with
 
     $ git commit --amend
 
-Now, an editor opens, showing the commit message in the beginning, where you may revise it. You can add more explanatory lines below. The status is shown again as commented lines. This file is saved as `.git/COMMIT_EDITMSG`.
+Now, an editor opens, showing the commit message in the beginning, where you may revise it. I find it useful to edit here because you don't have to backslash-escape special characters, which may occur in verbatim expressions. You can also add more explanatory lines below. The status is shown again as commented lines to recapitulate for you. This file is saved as `.git/COMMIT_EDITMSG`.
 
 ### To View Commit Log
 
@@ -189,13 +193,27 @@ To make the log more concise and informative,
 
 The names of option are pretty explanatory. Mnemonic: "a dog".
 
+### To Push
+
+To 
+
+    $ git push origin master
+
+i.e., push commits from the local repo to the master branch in the remote repo (`origin`). Say yes, if you are asked that whether you should consider the RSA host key for GitHub's IP address as a safe one.
+
+If you have messed up something, and Git is unable to ancestral relation and thus refuses to push, you may try
+
+    $ git push origin master
+
+This forces everything in question in the local repo to overwrite its counterpart in the remote repo, and may cause the remote repo to lose data, so use it with caution.
+
 ## Branching and Manipulation
 
 ### To Clone and Fork
 
 ### To Create New Branch
 
-### To Mergk
+### To Merge
 
 ### 
 
@@ -256,12 +274,32 @@ By default, non-ASCII characters, such as Chinese characters, are backslash-esca
 
 ### Generating SSH Key and Automatic Login
 
+HTTPS and SSH differ in several aspects. On one hand, in the presence of a firewall, HTTPS port is almost always open, while SSH port is not, being often blocked by network firewalls. On the other hand, an SSH Key is more secure in that, under SSH protocol, the user does not actually login, but under HTTPS he or she has to login.
+
+Under SSH protocol, authentication of SSH Key is easily managed by an `ssh-agent`, while under HTTPS, the user may also use a credential helper, which I have not tried.
+
+To generate an SSH key for RSA cryptosystem, having 4096 bits, with your email specified,
+
+    $ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+
+You will be asked for the filename with path (by default, in `~/.ssh/`), and a passphrase. Since with an SSH-agent you have only to type the passphrase once, you may well choose a reasonably long (some 6-word) phrase. Special characters are not only allowed, but encouraged.
+
+If you have several keys, you may rename the public key (the one with extension `.pub`) and private key (the one without), but they must the same name except for extension. Let us rename it `rsa_github.pub`.
+
+Browse you GitHub account, and go to "Personal settings", and then "SSH and GPG keys". Click "New SSH key". Copy and paste the whole content of your public key, or more simply,
+
+    $ cat ~/.ssh/rsa_github.pub | pbcopy
+
+and paste to the box.
+
 To let Keychain remember the key, in `~/.ssh/config` append `UseKeychain yes` after the relevant lines (omitted lines shown as `...`)
 
     Host github.com
        User git
        ...
        UseKeychain yes
+
+Hopefully, you will only be asked for passphrase just once, or never.
 
 ## More Information
 
