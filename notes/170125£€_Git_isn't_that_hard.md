@@ -132,7 +132,7 @@ To see more information in order to trouble-shoot, you may
 
 ### To Compare
 
-Before committing, it is helpful to see what new work was done. To show modification not added to the index, that is, differences between working tree and the files as was indexed:
+Before committing, it is helpful to see what new work has been done. To show modification not added to the index, that is, differences between working tree and the files as was indexed:
 
     $ git diff
 
@@ -158,7 +158,7 @@ If there are new files created or old files deleted, run this to update the inde
 
     $ git add -A
 
-The following does almost the same, except in that it ignores files in a newly created folder:
+The following does almost the same, except in that it ignores files in a newly created directory:
 
     $ git add .
 
@@ -168,17 +168,19 @@ Before you commit, you may want to see a short summary of what files are changed
 
     $ git status
 
-To commit, use `git commit`. However a commit message is strongly recommended, which reminds you what you have done. For example,
+To commit, use `git commit`. However a commit message is strongly recommended, which reminds you as well as other people what you have done. For example,
 
     $ git commit -m "Rename files using new convention"
 
-Summarize your work concisely, less than some 70 characters. If you cannot do this, you should have probably split your work into two or more commits. It is the tradition that, to save space, verbs in base form are used, and no period is in the end.
+Summarize your work concisely, within less than some 70 characters. If you cannot do this, you should have probably split your work into two or more commits. It is the tradition that, to save space, verbs in base form are used, and no period is there in the end.
 
 You can modify your commit message even after you commit, with
 
     $ git commit --amend
 
-Now, an editor opens, showing the commit message in the beginning, where you may revise it. I find it useful to edit here because you don't have to backslash-escape special characters, which may occur in verbatim expressions. You can also add more explanatory lines below. The status is shown again as commented lines to recapitulate for you. This file is saved as `.git/COMMIT_EDITMSG`.
+Now, an editor opens, showing the commit message in the beginning, where you may revise it. This file is saved as `.git/COMMIT_EDITMSG`.
+
+I find it useful to edit here because you don't have to backslash-escape special characters, which may occur in verbatim expressions. You can also add more explanatory lines below, separated from the title with a blank line. The status is shown again as commented lines to recapitulate changes for you.
 
 ### To View Commit Log
 
@@ -187,6 +189,7 @@ Afterwards, you can view the commit log with
     $ git log
 
 The result shows commit IDs, authors, time stamps, and commit messages.
+
 To make the log more concise and informative,
 
     $ git log --all --decorate --oneline --graph
@@ -195,17 +198,17 @@ The names of option are pretty explanatory. Mnemonic: "a dog".
 
 ### To Push
 
-To 
+To push all commits from the local repo to the master branch in the remote repo (`origin`) whenever they have not been updated,
 
     $ git push origin master
 
-i.e., push commits from the local repo to the master branch in the remote repo (`origin`). Say yes, if you are asked that whether you should consider the RSA host key for GitHub's IP address as a safe one.
+Say yes, if, in the first time you push, you are asked that whether you should consider the RSA host key for GitHub's IP address as a safe one.
 
-If you have messed up something, and Git is unable to ancestral relation and thus refuses to push, you may try
+If you have messed up something, and Git is unable to figure out their ancestral relation and thus refuses to push, you may try
 
     $ git push origin master
 
-This forces everything in question in the local repo to overwrite its counterpart in the remote repo, and may cause the remote repo to lose data, so use it with caution.
+This forces every commit in question in the local repo to overwrite its counterpart in the remote repo, and may cause the remote repo to lose data, so think twice before using it.
 
 ## Branching and Manipulation
 
@@ -228,22 +231,20 @@ as to append the line
     [foo]
         bar = quux
 
-to `~/.gitconfig` (the second line should start with a tab). I will use the former command in the following.
+to `~/.gitconfig` (the second line should start with a tab). I will use the former form in the below.
 
 ### Ignoring Some Files
 
-It is not in general Git's purpose to track binary files. Binary files cannot be compared by utility `diff`, thus cannot be merged or rebased in the normal sense. So you don't track binary files unless some routine really needs it, and so it must be upload to the remote repo. For example, a logo of your program that you want those who clone to see.
-
-To tell Git to ignore specified files, all files in some folders, or all files having a certain extension, create a file named `.gitignore` in the top directory. If, for sake of illustration, your `.gitignore` has these lines,
+It is not in general Git's purpose to track binary files. Binary files cannot be compared by utility `diff`, thus cannot be merged or rebased in the normal sense. So you don't track binary files unless some routines really need it, and so it must be uploaded to the remote repo. For example, a logo of your program that you want those who clone to see.
+Create a file named `.gitignore` in the top directory to tell Git to ignore specified files, all files in specified directories, or all files having specified extension. If, for sake of illustration, your `.gitignore` has these lines,
 
     .DS_Store
     *.pdf
     sketch/
 
-Then the `.DS_Store` file in the top directory of local repo, all `.pdf` files anywhere in the repo, and all files in the folder called `sketch/` in the top directory, will be ignored by Git. You can play around with wildcard `*`.
+Then the `.DS_Store` file in the top directory of working tree, all `.pdf` files anywhere in the working tree, and all files in the subdirectory called `sketch/` in the top directory, will be ignored by Git. You can play around with wildcard `*`.
 
 ### Specifying Text Editor for Commit Message
-
 
 The default editor for commit message is vi. However, some of the lines in my `.vimrc` is not compatible with vi (which is normal), and Vim is used anyway with wrong color settings.
 
@@ -252,9 +253,9 @@ To set Vim as the commit message editor, put these in `~/.bashrc`:
     export VISUAL=vim
     export EDITOR="$VISUAL"
 
-You can set it to be your favorite editor.
+You can replace with your favorite editor.
 
-Alternatively, you can specify the editor in Git's part, with
+Alternatively, you can specify the editor not through Bash's setting but through Git's, with
 
     $ git config --global core.editor "vim"
 
@@ -264,7 +265,7 @@ To color Git's console output,
 
     $ git config --global color.ui auto
 
-All the various `color.*` (where `*` is wildcard) configurations available with git commands, will then be set. The `auto` makes sure Git try only those colors the current terminals emulator supports. When a command is used for the first time, relevant color configuration is be set.
+All the various `color.*` (where `*` is a wildcard) configurations available with git commands, will then be set. The `auto` makes sure Git try only those colors the current terminals emulator supports. When a command is used for the first time, relevant color configuration is set.
 
 ### Rendition of non-ASCII Characters
 
@@ -274,7 +275,7 @@ By default, non-ASCII characters, such as Chinese characters, are backslash-esca
 
 ### Generating SSH Key and Automatic Login
 
-HTTPS and SSH differ in several aspects. On one hand, in the presence of a firewall, HTTPS port is almost always open, while SSH port is not, being often blocked by network firewalls. On the other hand, an SSH Key is more secure in that, under SSH protocol, the user does not actually login, but under HTTPS he or she has to login.
+HTTPS and SSH differ in several aspects. On one hand, in the presence of a firewall, the HTTPS port is almost always open, while the SSH port is not, being often blocked by network firewalls. On the other hand, an SSH Key is more secure in that, under SSH protocol, the user does not actually login, but under HTTPS he or she has to login.
 
 Under SSH protocol, authentication of SSH Key is easily managed by an `ssh-agent`, while under HTTPS, the user may also use a credential helper, which I have not tried.
 
@@ -282,15 +283,15 @@ To generate an SSH key for RSA cryptosystem, having 4096 bits, with your email s
 
     $ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 
-You will be asked for the filename with path (by default, `~/.ssh/id_rsa`), and a passphrase. Since with an SSH-agent you have only to type the passphrase once, you may well choose a reasonably long (some 6-word) phrase. Special characters are not only allowed, but encouraged.
+You will be asked for the filename with path (by default, `~/.ssh/id_rsa`), and a passphrase. Since with an SSH-agent you have only to type the passphrase once, you may well choose a reasonably long (say, some 6-word) phrase. Special characters are not only allowed, but in fact encouraged.
 
-If you have several keys, you may rename the public key (the one with extension `.pub`) and private key (the one without), but they must have the same name except for extension. Let us rename it `rsa_github.pub` with `mv ~/.ssh/id_rsa ~/.ssh/rsa_github.pub`.
+If you have several keys, you may rename the public key (the one with extension `.pub`) and private key (the one without), but they must share the same name except for extension. Let us rename it `rsa_github.pub` with `mv ~/.ssh/id_rsa ~/.ssh/rsa_github.pub`.
 
 Browse your GitHub account, and go to "Personal settings", and then "SSH and GPG keys". Click "New SSH key". Copy and paste the whole content of your public key, or more simply,
 
     $ cat ~/.ssh/rsa_github.pub | pbcopy
 
-and paste into the box.
+and paste it into the box.
 
 To let Keychain remember the key, in `~/.ssh/config` append `UseKeychain yes` after the relevant lines (omitted lines shown as `...`)
 
@@ -300,6 +301,16 @@ To let Keychain remember the key, in `~/.ssh/config` append `UseKeychain yes` af
        UseKeychain yes
 
 Hopefully, you will never be asked for passphrase.
+
+### Reminding GitHub the correct language
+
+GitHub guesses the language in which most sources in your repo is written in. A comprehensive list is found [here](https://gitlab.com/gitlab-org/linguist/blob/master/lib/linguist/languages.yml). The language is shown besides a round dot in each repo in your own profile page.
+
+If you would like to use an idiosyncratic extension, GitHub may judge it wrongly. For example, GitHub does not recognize `.hpp` as C++ header. To prevent this, you add a file named `.gitattributes` in the top directory, with content
+
+    *.hpp linguist-language=C++
+
+The `.gitattributes` in this repo may serve as a template for such need.
 
 ## More Information
 
