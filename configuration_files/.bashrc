@@ -1,20 +1,20 @@
 # This is `.bashrc`, which a interactive non-login shell loads.
 
-# to open Bash profile
+# To open Bash profile.
 alias OpenBashrc='mvim -v ~/.bashrc'
-# to source Bash profile
+# To source Bash profile.
 alias SourceBashrc='source ~/.bashrc'
 
 # --------------------------------
-# configuring color
+# To configure color.
 
-# to prompt present time in minutes, and current directory (rather than full path)
+# To prompt time in minutes, and current directory (not full path).
 export PS1='\[\033[0;32m\]aminopterin\[\033[0;34m\][\A]\[\033[0;31m\]@\W\[\033[0;37m\]$ '
 
-# to enable color in command line interface
+# To enable color in command line interface.
 export CLICOLOR=1
 
-# to specify color settings used by `ls` ("list") display
+# To specify color settings used by `ls` ("list") display.
 export LSCOLORS='gxBxhxDxfxhxhxhxhxcxcx'
 
 # `ls` for hidden & short form; `Ls` unhidden & long form;
@@ -27,71 +27,72 @@ alias ls="ls -GFh"
 alias Ls="ls -alGFh"
 
 # --------------------------------
-# Command-line completion resp. using up and down arrow keys
+# Command-line completion resp. using up and down arrow keys.
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 
 # --------------------------------
-# to set MacVim as the default editor, such as commit logs.
+# To set MacVim as the default editor, such as commit logs.
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
- #--------------------------------
-# to show hidden files in Mac Finder.app
+# --------------------------------
+# To show hidden files in Mac Finder.app.
 alias ShowFiles='defaults write com.apple.finder AppleShowAllFiles YES'
-# to show hidden files in Mac Finder.app
+# To show hidden files in Mac Finder.app.
 alias HideFiles='defaults write com.apple.finder AppleShowAllFiles NO'
 
 # --------------------------------
-# `cd` (change directory) shortcuts
-MY_DOC="${HOME}/Documents"
-alias GoToEssays="cd ${MY_DOC}/essays_vol_8_(since_Jan_2017)"
-alias GoToAllFairCopies="cd ${MY_DOC}/all_fair_copies"
-alias GoToLilyPondWork="cd ${MY_DOC}/LilyPond_work"
-alias GoToLaTexWork="cd ${MY_DOC}/LaTeX_work"
-alias GoToPrograms="cd ${MY_DOC}/programs_of_mine"
-alias GoToStackExchange="cd ${MY_DOC}/stack_exchange_questions"
-alias GoToBooks="cd ${MY_DOC}/books"
+# `cd` (change directory) shortcuts.
+# (Double quote preserves them faithfully until runtime.)
+MY_DOC=${HOME}/Documents
+alias GoToEssays='cd "${MY_DOC}/essays_vol_8_(since_Jan_2017)"'
+alias GoToAllFairCopies='cd "${MY_DOC}/all_fair_copies"'
+alias GoToLilyPondWork='cd "${MY_DOC}/LilyPond_work"'
+alias GoToLaTexWork='cd "${MY_DOC}/LaTeX_work"'
+alias GoToPrograms='cd "${MY_DOC}/programs_of_mine"'
+alias GoToStackExchange='cd "${MY_DOC}/stack_exchange_questions"'
+alias GoToBooks='cd "${MY_DOC}/books"'
 
 # --------------------------------
-# app shortcuts
-# Note: `&` runs process as background,
+# Application shortcuts
+# Note: `&` runs process as background, while
 # `"$@"` (with quotes) expands to all parameters being passed.
 
-# to compile LilyPond .ly file
+# To compile LilyPond `.ly` file.
 alias LilyPond='/Applications/LilyPond.app/Contents/Resources/bin/lilypond'
 
-# to open `foo` as pure text with TextEdit with `TextEdit foo`
+# To open `foo` as pure text with TextEdit with `TextEdit foo`.
 function TextEdit(){
    open -a TextEdit "$@" &
 }
 
-# to rename `foo` with `bar`, with `RecursivelyRename foo bar`,
+# To rename `foo` with `bar`, with `RecursivelyRename foo bar`,
 # within filenames throughout current directory and all subdirectories.
 # A Perl-based utility `rename` is used; `-S` for "substitute all".
-# Enter `brew install rename` to install.
+# Enter `brew install rename` to install that.
 function RecursivelyRename(){
    find . -exec rename -S "$@" {} +
 }
 
-# to open with MacVim embedded in the terminal
+# To open with MacVim embedded in the terminal.
 alias Vim='mvim -v'
 
-# to browse PTT
+# To browse PTT.
 alias BrowsePtt='ssh bbsu@ptt.cc'
 
-# to browse PTT2
+# To browse PTT2.
 alias BrowsePtt2='ssh bbsu@ptt2.cc'
 
 MY_SCRIPTS=${MY_DOC}/templates_configs_notes/scripts
 
-# to compile Markdown (possibly with LaTeX embedded)
+# To compile Markdown (possibly with LaTeX embedded) into PDF.
 alias Pandoc=${MY_SCRIPTS}/run_pandoc.sh
 
-# to compile LaTeX (without Chinese) into PDF
+# To compile LaTeX (without Chinese) into PDF.
 alias Pdflatex=${MY_SCRIPTS}/run_pdflatex.sh
 
-# to compile XeLaTeX source (possibly with Chinese) into PDF
+# To compile XeLaTeX source (possibly with Chinese) into PDF.
 alias Xelatex=${MY_SCRIPTS}/run_xelatex.sh
 
 # This line was added by system when installing Perl5.
