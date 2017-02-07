@@ -282,15 +282,15 @@ To generate an SSH key for RSA cryptosystem, having 4096 bits, with your email s
 
     $ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 
-You will be asked for the filename with path (by default, in `~/.ssh/`), and a passphrase. Since with an SSH-agent you have only to type the passphrase once, you may well choose a reasonably long (some 6-word) phrase. Special characters are not only allowed, but encouraged.
+You will be asked for the filename with path (by default, `~/.ssh/id_rsa`), and a passphrase. Since with an SSH-agent you have only to type the passphrase once, you may well choose a reasonably long (some 6-word) phrase. Special characters are not only allowed, but encouraged.
 
-If you have several keys, you may rename the public key (the one with extension `.pub`) and private key (the one without), but they must the same name except for extension. Let us rename it `rsa_github.pub`.
+If you have several keys, you may rename the public key (the one with extension `.pub`) and private key (the one without), but they must have the same name except for extension. Let us rename it `rsa_github.pub` with `mv ~/.ssh/id_rsa ~/.ssh/rsa_github.pub`.
 
-Browse you GitHub account, and go to "Personal settings", and then "SSH and GPG keys". Click "New SSH key". Copy and paste the whole content of your public key, or more simply,
+Browse your GitHub account, and go to "Personal settings", and then "SSH and GPG keys". Click "New SSH key". Copy and paste the whole content of your public key, or more simply,
 
     $ cat ~/.ssh/rsa_github.pub | pbcopy
 
-and paste to the box.
+and paste into the box.
 
 To let Keychain remember the key, in `~/.ssh/config` append `UseKeychain yes` after the relevant lines (omitted lines shown as `...`)
 
@@ -299,7 +299,7 @@ To let Keychain remember the key, in `~/.ssh/config` append `UseKeychain yes` af
        ...
        UseKeychain yes
 
-Hopefully, you will only be asked for passphrase just once, or never.
+Hopefully, you will never be asked for passphrase.
 
 ## More Information
 
