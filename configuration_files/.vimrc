@@ -24,7 +24,7 @@ set nocompatible
 " not if readonly or filename exists.
 nnoremap <leader>w :w<cr>
 
-" To quit window with `<space>q` (for "quit"),
+" To close buffer and quit window with `<space>q` (for "quit"),
 " not if buffer not being saved.
 nnoremap <leader>q :q<cr>
 
@@ -223,6 +223,9 @@ set cmdheight=2
 
 " To turn on the wild menu of auto command line completion by pressing Tab.
 set wildmenu
+
+" To ignore files with some extensions when completing with tab.
+:set wildignore=*.swp,*.o,*.pyc,*.pdf,*.doc,*.docx,*.png,*.jpg,*.jpeg
 
 " To always show the status line, with height being 2 lines.
 set laststatus=2

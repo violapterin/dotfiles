@@ -51,7 +51,7 @@ alias GoToAllFairCopies='cd "${MY_DOC}/all_fair_copies"'
 alias GoToLilyPondWork='cd "${MY_DOC}/LilyPond_work"'
 alias GoToLaTexWork='cd "${MY_DOC}/LaTeX_work"'
 alias GoToPrograms='cd "${MY_DOC}/programs_of_mine"'
-alias GoToStackExchange='cd "${MY_DOC}/stack_exchange_questions"'
+alias GoToStackExchange='cd "${MY_DOC}/stack_exchange_posts"'
 alias GoToBooks='cd "${MY_DOC}/books"'
 
 # --------------------------------
