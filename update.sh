@@ -47,14 +47,15 @@ rm -f ${DIR_NOTES}/*.pdf
 
 for f in ${DIR_NOTES}/*.md;
 do
-   echo ${f}
    "${RUN_PANDOC}" "${f}"
+   echo
 done
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-# where notes are saved
-DIR_TEX=${DIR_REPO}/tex_templates
-RUN_PANDOC=${DIR_SCRIPTS}/run_.sh
-
+# To delete auxiliary files of TeX templates.
+for f in ${DIR_REPO}/tex_templates/*.{pdf,log,aux,gz};
+do
+   rm -f "${f}"
+done
 

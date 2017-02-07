@@ -2,7 +2,7 @@
 
 *.md linguist-language=Markdown
 *.txt linguist-language=Markdown
-*.sh linguist-language=Bash
+*.sh linguist-language=Shell
 *.cpp linguist-language=C++
 *.hpp linguist-language=C++
-*.tex linguist-language=LaTeX
+*.tex linguist-language=TeX

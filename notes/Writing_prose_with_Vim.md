@@ -1,9 +1,7 @@
-# Writing Prose with Vim: Wrapping and Other Headaches
+# Writing Prose with Vim: The Wrapping Problem
 *Jan. 21, 2017*
 
-This note first discusses the wrapping problem. I observe the pros and cons of both soft and hard wrap. Afterwards I shall add several unrelated remarks on configuring Vim embedded in a terminal emulator, for easier prose writing experience.
-
-## Motivation
+This note first discusses the wrapping problem. I observe the pros and cons of both soft and hard wrap.
 
 The present concerns are urged by my decision to use plain text to save my pieces of prose in Markdown. They are in turn edited with Vim, since, in the past four months or so, I have grown gradually accustomed with Vim, and have started to like it. Still, attempt to write and edit prose, rather source code, with Vim, leads to a number of difficulties related to wrapping of text.
 
@@ -153,64 +151,3 @@ If iTerm's window fits the screen, as I count it, a split window can show at mos
 
 That said, it is still unsatisfying that scrolling is not smooth, but a new frame must start with a displayed line of a paragraph (physical line) too. In Microsoft Word or TextEdit for example, this need not be the case, but the first displayed line of in new frame may be any displayed line in any paragraph.
 
-## Problem of Switching Input Source
-
-Having discussed the problem of wrapping, I shall share several configurations and practices that, I find, make it easier to write prose with Vim.
-
-
-The most used key in Vim, without doubt, is the Escape key, which returns to the normal mode.
-
-And for a Chinese user, like me, the second most used function is also clear: switching input source (IS) between a Chinese-IS and English-IS. Thus the user is likely to find it cumbersome to switch mode in Vim in such need.
-
-Indeed, to type one or more Chinese characters, he has to hit `i` (insert mode), switch to Chinese IS, type, switch back to English-IS, and hit escape. Such toil, unfortunately, nearly cancels the efficiency gained by Vim's modal design.
-
-It seems best to set both Escape key and the IS-switching key (or key combination) to be something close to the home row (the resting positiong where `F` and `J` are). Though Sierra (by now the latest version of Mac OS) allows the user to toggle between two ISs by Caps Lock (see System Preferences > Keyboard > Input Sources), I have already mapped Caps Lock as Escape (which is also possible only as late as Sierra came out). See: System Preferences > Keyboard > Keyboard > Modifier keys). And even if I set Caps Lock as the switch, still I have to set another key near to the home row to be Escape, but Sierra only allows me to set either Shift, Option, or Command as Escape, and each possibility is impractical.
-
-Fortunately, I found Karabiner Elements, which makes it possible to re-map keys. Karabiner Elements works by forcing the physical key `X`'s signal to be interpreted as key `Y`'s function. 
-
-Its precursor is [Karabiner](https://pqrs.org/osx/karabiner/index.html.en), which has been out of order in Sierra. But the team produced a version called [Karabiner Elements](https://github.com/tekezo/Karabiner-Elements) for Sierra. Here is the [latest compiled image](https://pqrs.org/latest/karabiner-elements-latest.dmg). 
-
-This is my setting. Physical Caps Lock now performs the function of Escape as before, and Escape that of `` `/~ ``, and `` `/~ `` that of Tab, and Tab that of F5 (or any seldom used function key; `F5` in Sierra dims the keyboard lighting), and `F5` that of Caps Lock.
-
-Then I set `F5` to switch to the previously-used input source. I am proud of my setting. Vim users for non-Latin family language will save considerable effort with this!
-
-## Displaying Halfwidth and Fullwidth Characters in Teminal Vim
-
-The following settings, as I see, makes iTerm2 properly and pleasingly display ASCII characters (hereafter ASCII), several extended Latin charactes (hereafter ELC), and both traditional and simplified Chinese characters and related symbols such as punctuation marks (hereafter CC). In the following, *halfwidth* means the width of ASCII, and *fullwidth* twice as wide. In iTerm2, a fullwidth is almost a square.
-
-Tick those boxes concerning display:
-
-* Use thin strokes for anti-aliased text: "Always"
-* Use HFS+ Unicode normolization (better fidelity but slower)
-* Use a different font for non-ASCII text
-* Anti-aliased [for ASCII text]
-* Anti-aliased [for non-ASCII text]
-
-Anti-aliasing makes strokes smoother, but too thick, thus we tell iTerm2 to use thin strokes, mitigating this effect.
-
-I set these fonts:
-
-* 14pt Monaco as default ASCII font
-* 15pt PT Mono for non-ASCII text
-
-The choice of non-ASCII font needs justification. It makes ASCII shown in 14pt Monaco, ELC in 15pt PT Mono, and CC in 15pt PingFang SC Regular.
-
-Why is it so? In fact, I guess it is because, whenever a specified font does not cover the present character, Mac applies to it a similar styled font. So, if it is not specified that non-ASCII text shall be shown in another font, by default Mac will show CC in ST Heiti.
-
-Previously I set non-ASCII font to be PingFang SC, since I like it. But I soon find some ELCs too wide, wider than halfwidth. After some trial and error, I discovered that PT Mono applied to ELCs looks good, and furthermore it leaves CC applied to PingFang SC, and all is well. How did it take me so long to discover this, all these months tolerating eye-strainingly thick Sans serif fonts!
-
-I also recommend to tick those boxes to introduce more variety in font.
-
-* Draw bold text in bold font 
-* Draw bold text in bright color
-* Italic text allowed
-
-## Character Width Shown in Vim
-
-As for Vim, stick to the default `set ambiwidth=single`, and do not set it `double`.
-
-In the beginning I heard it said somewhere that CC expects fullwidth, and thus requires `set ambiwidth=double` to be displayed correctly (see `:help ambiwidth`). But I this is not the case. Either Vim or MacVim running in either Terminal.app or iTerm2 already displays CC correctly with `ambiwidth=single`. (I suppose same is true for Japanese and Korean, but I know neither, and haven't tried.)
-
-In fact, when previously I set it `double`, I find the following ELCs displayed in fullwidth also: `ß` and `ü` used in German, and ligature `Œ` and `œ`, and Norwegian vowel `ø`, and some special symbols like Euro `€`, section sign `§`, and pilcrow `¶`.
-
-The fact may be related to the observation said above that some CC fonts renders some ELCs wider than halfwidth. I guess that, in these fonts, ELCs just mentioned will be better shown in fullwidth than in halfwidth.
