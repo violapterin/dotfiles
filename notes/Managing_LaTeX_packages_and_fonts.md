@@ -89,3 +89,12 @@ It is not easy matter to find the fontcode and relevant package you have to inst
 * Times / `times` / `ptm`
 * Utopia / `utopia` / `put`
 
+## Engines `pdftex`, `xetex`, and `luatex`, and their Chinese compatibility
+
+The original `pdftex` does not support UTF-8 characters (such as umlauts, Chinese, and other non-Latin languages), but both `xetex` and `luatex` do. Here `xetex` is an extension to the original `tex` engine, while `luatex` is a new implementation of TeX written in Lua. When symbolic links `pdflatex`, `xelatex`, and `lualatex` are called respectively, they call `pdftex`, `xetex`, and `luatex` respectively and load LaTeX libraries (packages).
+
+To type CJK characters, the package `xeCJK` is generally recommended for `xetex`, and the package `luaxexja` for `luatex`. It is said that `xeCJK` supports Chinese typesetting well, but is poor in rendering Japanese and Korean. And some claim that, while `luaxexja` is designed by a Japanese team, the output for Chinese is somewhat unconventional. I have not tried it.
+
+As I tried, `pdflatex` is the fastest, `xelatex` usually slower, and `lualatex` often incredibly slow. Furthermore, the principle of least complexity dictates that I use `pdflatex` whenever possible. Thus I use `pdflatex` when working on a purely-Latin source. Only if there are Chinese or other UTF-8 characters, shall I use `xelatex`. 
+
+Be careful that, since their libraries are also different, you may well define a macro of your own, which has the same name as (say) a command for `xelatex`, but such thing does not happen if you use `pdflatex`. Following this example, you should use `\newcommand` for that macro if compiling with `pdflatex`, but `\renewcommand`, if with `xelatex`. It is often troublesome to find the cause.
