@@ -1,8 +1,0 @@
-# This is added to tell GitHub correct language
-
-*.md linguist-language=Markdown
-*.txt linguist-language=Markdown
-*.sh linguist-language=Shell
-*.cpp linguist-language=C++
-*.hpp linguist-language=C++
-*.tex linguist-language=TeX

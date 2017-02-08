@@ -8,12 +8,12 @@
 SHELL := /usr/bin/env bash
 
 # To specify location of program.
-PRG := $${HOME}/run_pdflatex.sh
+PRG := $${HOME}/Documents/templates_configs_notes/scripts/run_pdflatex.sh
 
 # To hold message displayed in the beginning.
 MSG := Now exporting all LaTeX's to Pdf's in the current directory...
 
-# extensions resp. of souce and binary files
+# Extensions resp. of souce and binary files.
 EXT_SRC := .tex
 EXT_BIN := .pdf
 

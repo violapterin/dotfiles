@@ -28,6 +28,19 @@ options=(
       -file-line-error
 )
 
+# To check argument, then run main commands.
+# `set -x` echoes what is executed; `set +x` cancels this.
+if [ "$#" -eq 0 ]; then
+   echo "No arguments supplied. 1 or 2 expected, 0 present. Stop."
+elif [ "$#" -gt 3 ]; then
+   echo "Too many arguments. 1 or 2 expected, $# present. Stop."
+elif [ "$#" -eq 1 ]; then
+   set -x
+   "${COMPILER}" ${options[*]} "${name_src}"
+   { set +x; } 2>/dev/null
+elif [ "$#" -eq 2 ]; then
+
+
 # the main command
 # `set -x` echoes what is executed; `set +x` cancels this.
 set -x

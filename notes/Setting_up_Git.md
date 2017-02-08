@@ -203,5 +203,3 @@ GitHub guesses the language in which most sources in your repo is written in. A 
 If you would like to use an idiosyncratic extension, GitHub may judge it wrongly. For example, GitHub does not recognize `.hpp` as C++ header. To prevent this, you add a file named `.gitattributes` in the top directory, with content
 
     *.hpp linguist-language=C++
-
-The `.gitattributes` in this repo may serve as a template for such need.

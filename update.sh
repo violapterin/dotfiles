@@ -38,7 +38,7 @@ done
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-# where notes are saved
+# To export notes as PDF.
 DIR_NOTES=${DIR_REPO}/notes
 DIR_SCRIPTS=${DIR_REPO}/scripts
 RUN_PANDOC=${DIR_SCRIPTS}/run_pandoc.sh
@@ -54,7 +54,8 @@ done
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 # To delete auxiliary files of TeX templates.
-for f in ${DIR_REPO}/tex_templates/*.{pdf,log,aux,gz};
+DIR_TEMPLATES=${DIR_REPO}/tex_templates
+for f in ${DIR_TEMPLATES}/*.{pdf,log,aux,gz};
 do
    rm -f "${f}"
 done
