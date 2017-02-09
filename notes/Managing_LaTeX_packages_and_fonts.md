@@ -1,15 +1,26 @@
 # Managing LaTeX packages and fonts
 *Jan. 20, 2017*
 
-## Auto Installation of LaTeX Packages
+## The TeX Family
 
-TeX is a competent language for typesetting tasks, but for average readers, sophisticated TeX code is still necessary to implement relatively easy purpose. This is the reason LaTeX came out to wrap TeX, so readers may call LaTeX libraries (packages) to simplify their sources, making it easier to write, more robust, and more persistent.
+TeX is a competent language for typesetting tasks, but for average readers, sophisticated TeX code is still necessary to implement relatively easy purpose. This is the reason LaTeX, a collection of packages (libraries) came out to wrap TeX, so readers may call packages to simplify their sources, making it easier to write, more robust to run, and more resistant to change.
+
+Unfortunately, the original `pdftex` does not support UTF-8 characters (such as umlauts, Chinese, and other non-Latin languages). Both `xetex` and `luatex` compensate this flaw by accepting UTF-8 characters natively. Here `xetex` is an extension to the original `tex` engine, while `luatex` is a new implementation of TeX written in Lua. 
+
+Furthermore, while many of the plain TeX commands are not allowed for `pdflatex` users, `lualatex` has the advantage that users are not insulated from plain TeX commands but privileged to use them. When symbolic links `pdflatex`, `xelatex`, and `lualatex` are called respectively, they call binaries `pdftex`, `xetex`, and `luatex` respectively and load LaTeX packages.
+
+By the way, ConTeXt is another collection of packages, having nature comparable to LaTeX. The earlier version (Mark I) of ConTeXt first worked with Knuth's `dvi`-outputting engine, then (Mark II) with `pdftex`. The present version (Mark IV) always go with `luatex`.
+
+## Auto Installation of LaTeX Packages
 
 To use a LaTeX command, in theory the relevant `.sty` files have to be placed in the same directory as the source of document. However, for a Mac user like me the best bet is probably to install [MacTeX](http://www.tug.org/mactex/), a distribution for Mac including TeX Live, compilers, scripts, packages, and fonts. When I compile a document, I only have to declare the inclusion of the package, leaving its management of package to be taken care by Tex Live.
 
-As I observe the compiler's messages, it seems that whenever the compiler does not find a package, Tex Live installs it immediately. Indeed, I have the intention that I stick whenever possible to standard packages that come with MacTeX, in order to enhance compatibility for future readers. (I am not sure, though, whether all packages I call in my templates are natively included in MacTeX.)
+It is easy to install MacTeX. Just open the `.pkg` file, and follow the instructions. But if you want to uninstall existent version, you have to use command line. All related files are stored in 
+`/usr/local/texlive/2016` and `~/Library/texlive/2016`. Just delete them with `rm -rf`. The former requires `sudo` privilege, while the latter does not.
 
-Windows users may consult [MiKTeX's website](https://miktex.org/) for further information, though I haven't tried.
+With TeX Live, it is easy to manage packages. As I observe the compiler's messages, it seems that whenever the compiler does not find a package, Tex Live installs it immediately. Indeed, I have the intention that I stick whenever possible to standard packages that come with MacTeX, in order to enhance compatibility for future readers. (I am not sure, though, whether all packages I call in my templates are natively included in MacTeX.)
+
+Windows users may consult [MiKTeX's website](https://miktex.org/) for further information, though I haven't studied and suppose to be similar.
 
 ## Getting Non-Free Fonts
 
@@ -37,7 +48,7 @@ The reason, to quote one [TeX Stack Exchange answerer](http://tex.stackexchange.
 
 ## Changing Font Globally
 
-Having installed relevant packages, we have to find the usage of that font in question. We first consider to change font globally, that is throughout the whole document. A good reference is [The LaTeX Font Catalogue](http://www.tug.dk/FontCatalogue/). For example, there was several variations of Garamond on [The LaTeX Font Catalogue](http://www.tug.dk/FontCatalogue/). As I recall, not everyone works with mathematical formulae. One that works reads (comments being mine)
+Having installed relevant packages, we have to find the usage of that font in question. The following method works for `pdftex` only, not for `xetex` or `luatex`. We first consider to change font globally, that is throughout the whole document. A good reference is [The LaTeX Font Catalogue](http://www.tug.dk/FontCatalogue/). For example, there was several variations of Garamond on [The LaTeX Font Catalogue](http://www.tug.dk/FontCatalogue/). As I recall, not everyone works with mathematical formulae. One that works reads (comments being mine)
 
     \usepackage{garamondx}% default font: Garamond
     \usepackage[garamondx,cmbraces]{newtxmath}% math supporting package
@@ -89,11 +100,9 @@ It is not easy matter to find the fontcode and relevant package you have to inst
 * Times / `times` / `ptm`
 * Utopia / `utopia` / `put`
 
-## Engines `pdftex`, `xetex`, and `luatex`, and their Chinese compatibility
+## CJK compatibility of Various Engines
 
-The original `pdftex` does not support UTF-8 characters (such as umlauts, Chinese, and other non-Latin languages), but both `xetex` and `luatex` do. Here `xetex` is an extension to the original `tex` engine, while `luatex` is a new implementation of TeX written in Lua. When symbolic links `pdflatex`, `xelatex`, and `lualatex` are called respectively, they call `pdftex`, `xetex`, and `luatex` respectively and load LaTeX libraries (packages).
-
-To type CJK characters, the package `xeCJK` is generally recommended for `xetex`, and the package `luaxexja` for `luatex`. It is said that `xeCJK` supports Chinese typesetting well, but is poor in rendering Japanese and Korean. And some claim that, while `luaxexja` is designed by a Japanese team, the output for Chinese is somewhat unconventional. I have not tried it.
+To type CJK (Chinese, Japanese, or Korean) characters, the package `xeCJK` is generally recommended for `xetex`, and the package `luaxexja` for `luatex`. It is said that `xeCJK` supports Chinese typesetting well, but is poor in rendering Japanese and Korean. And some claim that, while `luaxexja` is designed by a Japanese team, the output for Chinese is somewhat unconventional. I have not tried it.
 
 As I tried, `pdflatex` is the fastest, `xelatex` usually slower, and `lualatex` often incredibly slow. Furthermore, the principle of least complexity dictates that I use `pdflatex` whenever possible. Thus I use `pdflatex` when working on a purely-Latin source. Only if there are Chinese or other UTF-8 characters, shall I use `xelatex`. 
 
