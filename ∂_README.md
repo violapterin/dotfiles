@@ -1,4 +1,4 @@
-# Templates, Configuration files, and Related Notes
+# Templates, Configuration files, and Explanatory Notes
 *Mostly Dec. 2016 to Jan. 2017*
 
 This repo backs up templates I commonly use, settings for some programs, and several related notes.

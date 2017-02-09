@@ -62,11 +62,11 @@ $endif$
 \XeTeXlinebreaklocale "zh"% for word wrap of Chinese
 \XeTeXlinebreakskip = 0pt plus 1pt% ibid., cont.
 
-% `pandoc` original template:
-%$if(CJKmainfont)$
-%    \usepackage{xeCJK}
-%    \setCJKmainfont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKmainfont$}
-%$endif$
+%% `pandoc` original template:
+% $if(CJKmainfont)$
+%     \usepackage{xeCJK}
+%     \setCJKmainfont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKmainfont$}
+% $endif$
 
 % % % % % end my addition % % % % %
 
@@ -81,7 +81,16 @@ $endif$
 $if(geometry)$
 \usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
 $endif$
-\usepackage[unicode=true]{hyperref}
+
+% % % % % begin my addition % % % % %
+
+\usepackage[colorlinks = true, urlcolor  = blue]{hyperref}
+
+%% `pandoc` original template:
+% \usepackage[unicode=true]{hyperref}
+
+% % % % % end my addition % % % % %
+
 $if(colorlinks)$
 \PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
 $endif$
@@ -175,13 +184,13 @@ $else$
 \setlength{\parskip}{1.5ex}% vertical spacing between paragraphs
 \setlength{\parindent}{4ex}% indent in a paragraph
 
-% `pandoc` original template:
-%\IfFileExists{parskip.sty}{%
-%\usepackage{parskip}
-%}{% else
-%\setlength{\parindent}{0pt}
-%\setlength{\parskip}{6pt plus 2pt minus 1pt}
-%}
+%% `pandoc` original template:
+% \IfFileExists{parskip.sty}{%
+%     \usepackage{parskip}
+% }{% else
+%     \setlength{\parindent}{0pt}
+%     \setlength{\parskip}{6pt plus 2pt minus 1pt}
+% }
 
 % % % % % end my addition % % % % %
 
