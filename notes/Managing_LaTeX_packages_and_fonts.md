@@ -24,11 +24,13 @@ Windows users may consult [MiKTeX's website](https://miktex.org/) for further in
 
 ## Getting Non-Free Fonts
 
-While packages are managed automatically by a standard distribution if it includes them, it is in general cumbersome to change font, globally or locally, into something other than the default Computer Modern. Such feature is not originally conceived as the scope of TeX.
+While packages are managed automatically by a standard distribution if it includes them, it is in general cumbersome to change font, globally or locally, into something other than the default Computer Modern, because such feature was not originally conceived to be the scope of TeX.
 
-The present concern is prompt by my choice to use the Garamond font, which requires additional toil. I first noticed the idiosyncrasy of Garamond in *Classical Dynamics of Particles and Systems* by Marion and Thornton (Boston: Brooks/Cole Cengage Learning). Looking back at that, I believe it is a variant of Garamond. I was in love with it at once. My infatuation with Garamond had given me great trouble. This, then, is probably the least portable of my settings.
+The desire to change font was urged by my choice to use the Garamond font when compiling with `pdflatex`. This turned out way more tiresome than I thought. 
 
-First we have to install "non-free fonts". To quote the [TeX Users Group](https://www.tug.org/fonts/getnonfreefonts/),
+I first noticed the idiosyncrasy of Garamond in *Classical Dynamics of Particles and Systems* by Marion and Thornton (Boston: Brooks/Cole Cengage Learning). Looking back at that, I believe it is a variant of Garamond. I was in love with it at once. My infatuation with Garamond had given me great trouble. This, then, is probably the least portable of my settings.
+
+The below instructions apply to `pdflatex` only. First we have to install "non-free fonts". To quote the [TeX Users Group](https://www.tug.org/fonts/getnonfreefonts/),
 
 >Some font suppliers provide fonts which can be used freely but they disallow charging money for the distribution. \[...\] `getnonfreefonts` is a script which downloads and installs these fonts.
 

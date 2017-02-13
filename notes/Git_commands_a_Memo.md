@@ -1,7 +1,7 @@
-# A Memo of Git Commands
+# Git Commands: A Memo
 *Feb. 6, 2017*
 
-Here is a slowly growing summary of Git commands I find helpful, with short explanations following them, addressed to the dear reader in second person. The reader may want to read "Setting up Git" first.
+Here is a slowly growing summary of Git commands I find helpful, with short explanations following them, addressed to the dear reader in second person. The reader may want to read "Setting up Git" first for relevant background.
 
 I claim no intention to make it a complete table, even in the most rudimentary sense. What I have supposed to be useful, I summary and explain here, and what I have not, I do not. Again, I appreciate anyone to correct my misunderstandings, if any.
 
@@ -93,9 +93,9 @@ To push all commits from the local repo to the master branch in the remote repo 
 
 Say yes, if, in the first time you push, you are asked that whether you should consider the RSA host key for GitHub's IP address as a safe one.
 
-If you have messed up something, and Git is unable to figure out their ancestral relation and thus refuses to push, you may try
+If you have messed up something, and Git is unable to figure out their ancestral relation and thus refuses to push, you may try with the flag `-f` or `--force`:
 
-    $ git push origin master
+    $ git push origin master -f
 
 This forces every commit in question in the local repo to overwrite its counterpart in the remote repo, and may cause the remote repo to lose data, so think twice before using it.
 
