@@ -32,17 +32,18 @@ options=(
 # `set -x` echoes what is executed; `set +x` cancels this.
 if [ "$#" -eq 0 ]; then
    echo "No arguments supplied. 1 or 2 expected, 0 present. Stop."
+   exit 1
 elif [ "$#" -gt 3 ]; then
    echo "Too many arguments. 1 or 2 expected, $# present. Stop."
+   exit 1
 elif [ "$#" -eq 1 ]; then
+   # the main command
+   # `set -x` echoes what is executed; `set +x` cancels this.
    set -x
    "${COMPILER}" ${options[*]} "${name_src}"
    { set +x; } 2>/dev/null
 elif [ "$#" -eq 2 ]; then
-
-
-# the main command
-# `set -x` echoes what is executed; `set +x` cancels this.
-set -x
-"${COMPILER}" ${options[*]} "${name_src}"
-{ set +x; } 2>/dev/null
+   set -x
+   "${COMPILER}" ${options[*]} "-jobname=$2" "${name_src}"
+   { set +x; } 2>/dev/null
+fi

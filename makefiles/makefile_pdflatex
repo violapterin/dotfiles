@@ -10,9 +10,6 @@ SHELL := /usr/bin/env bash
 # To specify location of program.
 PRG := $${HOME}/Documents/templates_configs_notes/scripts/run_pdflatex.sh
 
-# To hold message displayed in the beginning.
-MSG := Now exporting all LaTeX's to Pdf's in the current directory...
-
 # Extensions resp. of souce and binary files.
 EXT_SRC := .tex
 EXT_BIN := .pdf
@@ -35,17 +32,13 @@ RM := rm -f
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-all : message $(BIN)
-
-# To output pre-build message.
-message :
-	@echo $(MSG)
+all : $(BIN)
 
 ./%$(EXT_BIN) : ./%$(EXT_SRC)
 	@echo Compiling "$@" from "$<" ...
 	@$(PRG) "$<"
 
-.PHONY : all message clean 
+.PHONY : all clean 
 
 clean :
-	$(RM) "$(BIN)" "$(AUX)" "$(LOG)" "$(GZ)"
+	$(RM) $(BIN) $(AUX) $(LOG) $(GZ)

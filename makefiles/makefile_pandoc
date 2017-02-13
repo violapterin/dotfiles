@@ -10,9 +10,6 @@ SHELL := /usr/bin/env bash
 # To specify location of program.
 PRG := $${HOME}/run_pandoc.sh
 
-# To hold message displayed in the beginning.
-MSG := Now exporting all Markdown's to Pdf's in the current directory...
-
 # extensions resp. of souce and binary files
 EXT_SRC := .md
 EXT_BIN := .pdf
@@ -33,11 +30,7 @@ EXCL = !
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-all : message $(BIN)
-
-# To output pre-build message.
-message :
-	@echo $(MSG)
+all : $(BIN)
 
 # To compile only if not-`!`-prefixed (otherwise unfinished).
 ./%$(EXT_BIN) : ./%$(EXT_SRC)
@@ -49,8 +42,8 @@ else
 endif
 
 # To declare phony objects, so rules are always executed.
-.PHONY : all message clean 
+.PHONY : all clean 
 
 # To delete binary files.
 clean :
-	$(RM) "$(BIN)"
+	$(RM) $(BIN)
