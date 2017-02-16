@@ -3,15 +3,17 @@
 
 ## Need for Better Workflow
 
-Recently I have gradually reconized the dire need of devising a consistent way I save, supplement, and revise my work, especially as material had assimilated so much over the undergraduate years.
+Recently I have recognized the dire need of devising a consistent way I save, supplement, and revise my work, especially as material had assimilated so much over the undergraduate years. They include notes or solved problems on science or mathematics classes or books, as well as all my non-technical, and, of course, coding projects for either scholastic purpose or for fun, and my music compositions so dear to me.
 
-The reasons are numerous.
-Indeed, it is painful to back things up to and fro across several USBs and guessing from last-modified date which is new. 
-It is equally annoying to wait so long for Word to open, to paste between Word documents, to convert to PDF.
+With such need, the reasons are numerous to support a plain-text oreinted workflow.
 
-I am thus resolved to come up with a convenient way to manage those notes or solved problems on science or mathematics classes or books, as well as all my non-technical, and, of course, coding projects for either scholastic purpose or for fun, and my music compositions so dear to me.
+* **Version control**. Indeed, it is painful to back things up to and fro across several USBs and guessing from last-modified date which is new. This is however easy with Git.
 
-For one thing, I have the intention that the workflow which I am to design will remain valid for ten or twenty years. Therefore I have carefully chosen the tools that have long lasted, widely used, actively maintained, and free. Then I suppose they likely to last as long, or at least still compatible, as the modern computer technology. These tools are Bash, Git, Vim, Make, LaTeX, XeLaTeX, Markdown, LilyPond.
+* **Concise storage**. Because bloat in the Doc/Docx format, initialization of Word is slow, and Word works while occupying a lot of system resource.
+
+* **Easier command line manoeuvres**. Since plain text format is easy to access, command line tools exist that help conversion or manipulation of them.
+
+I have the intention that the workflow which I am to design will remain valid, or at least still compatible, for many years to come. Therefore I have carefully chosen the tools that have long lasted, widely used, actively maintained, and free. These tools are Bash, Git, Vim, Make, LaTeX, XeLaTeX, Markdown, LilyPond.
 
 # Plain Text and Version Control
 

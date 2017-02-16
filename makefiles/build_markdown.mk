@@ -8,7 +8,12 @@
 SHELL := /usr/bin/env bash
 
 # To specify location of program.
-PRG := $${HOME}/run_pandoc.sh
+NAME_PRG := run_pandoc
+DIR_PRG := $${HOME}/Documents/templates_configs_notes/scripts
+FULL_PRG := $(DIR_PRG)/$(NAME_PRG)
+
+# To delete binary files.
+RM := rm -f
 
 # extensions resp. of souce and binary files
 EXT_SRC := .md
@@ -21,9 +26,6 @@ SRC = $(wildcard *$(EXT_SRC) */*$(EXT_SRC) */*/*$(EXT_SRC))
 
 # To replace all `.md` with `.pdf`.
 BIN = $(SRC:$(EXT_SRC)=$(EXT_BIN))
-
-# To delete binary files.
-RM := rm -f
 
 # Exclamation mark, indicating unfinished work.
 EXCL = !

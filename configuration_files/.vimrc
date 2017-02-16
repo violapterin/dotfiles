@@ -32,8 +32,12 @@ nnoremap <leader>q :q<cr>
 " (Default is first to warn, and then allow edit.)
 autocmd BufRead * let &l:modifiable = !&readonly
 
-" To check file changes and prompt to reload, every moment window switched.
-autocmd WinEnter * checktime
+" To check file changes and prompt to reload, every moment Vim's
+" window is focussed again. If no change in Vim, buffer is reloaded.
+autocmd FocusGained * checktime
+
+" To reload all opened buffers manually with `<space>e` (for "edit").
+nnoremap <leader>e :bufdo e <cr>
 
 " To set to auto read when a file is changed from the outside.
 set autoread
@@ -62,11 +66,13 @@ set dir=~/Documents/Vim_swap_files_storeroom
 " To set how many lines of history Vim has to remember.
 set history=700
 
-" To open `~/.vimrc` in a new tab by `<space>v` (for "vimrc").
-nnoremap <leader>v :tabe $MYVIMRC<cr>
+" To open `~/.vimrc` in a new tab by `<space>,`.
+" (Preferences window of a Mac app is often opened by `<cmd>,`.)
+nnoremap <leader>, :tabe $MYVIMRC<cr>
 
-" To source (apply) `~/.vimrc` by `<space>s` (for "source").
-nnoremap <leader>s :source $MYVIMRC<cr>
+" To source (apply) `~/.vimrc` by `<space>.`
+" (`.` is a Bash alias for source.)
+nnoremap <leader>. :source $MYVIMRC<cr>
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 "          Edit, search and replace
@@ -116,8 +122,8 @@ set incsearch
 " To highlight search results.
 set hlsearch
 
-" But toggle not to highlight with `<space>h` (for "highlight").
-nnoremap <leader>h :setlocal nohlsearch!<cr>
+" But toggle not to highlight with `<space>l` (for "light").
+nnoremap <leader>l :setlocal nohlsearch!<cr>
 
 " To temporarily clean highlight of what's being searched with `<space><cr>`.
 noremap <leader><cr> :nohlsearch<cr>
@@ -180,9 +186,8 @@ let g:netrw_list_hide=
 " In NETRW buffer, to hide files specified above.
 let g:netrw_hide=1
 
-" In NETRW buffer, to toggle whether to hide files with `<space>.`.
-" (Think of `.` that prefixes hidden files.)
-noremap <silent> <leader>. :call ToggleDisplayHiddenFiles()<cr>
+" In NETRW buffer, to toggle hiding files with `<space>h` (for "hide").
+noremap <silent> <leader>h :call ToggleDisplayHiddenFiles()<cr>
 
 " To select the previous tab with `<space>9` (think of `(`).
 " To select the next tab with `<space>0` (think of `)`).
@@ -194,19 +199,19 @@ nnoremap <leader>0 gt
 nnoremap <leader>[ :bprevious<cr>
 nnoremap <leader>] :bnext<cr>
 
-" To open a new tab with `<space>=` showing current file (think of `+`).
-" To close the current tab with `<space>-`.
-nnoremap <leader>= :tabedit %<cr>
-nnoremap <leader>- :tabclose<cr>
+" To open a new tab with `<space>n` showing current file (for "new").
+" To close the current tab with `<space>c` (for "close").
+nnoremap <leader>n :tabedit %<cr>
+nnoremap <leader>c :tabclose<cr>
 
-" To open a new buffer with `<space>n` (for "new").
-" To delete current buffer with `<space>x` (think of `x` that deletes).
-nnoremap <leader>n :enew<cr>
-nnoremap <leader>x :bprevious<cr>:bdelete #<cr>
+" To open a new buffer with `<space>=` (think of `+`).
+" To delete current buffer with `<space>-` (meaning removal).
+nnoremap <leader>= :enew<cr>
+nnoremap <leader>- :bprevious<cr>:bdelete #<cr>
 
 " To switch, with `<space>b` (for "buffer"), among existing
 " buffers by typing its number shown on the screen.
-nnoremap <leader>b :ls<cr>:buffer 
+nnoremap <leader>b :ls<cr>:buffer
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 "          Command bar and other tools
@@ -238,8 +243,8 @@ set laststatus=2
 " `%V` virtual column no. as shown on the screen (with `-` sign).
 set statusline=\ %F%m%r%h\ B:%n\ L:%l\/%L\ C:%c%V
 
-" To toggle spell checking on and off with`<space>c` (for "check").
-noremap <leader>c :setlocal spell!<cr>
+" To toggle spell checking on and off with`<space>s` (for "spell").
+noremap <leader>s :setlocal spell!<cr>
 
 " To set dictionary for completion, called by `<ctrl>x<ctrl>k` in insert mode.
 set dictionary=/usr/share/dict/words
@@ -395,26 +400,27 @@ endfunction
 
 " Short summary in alphabetical order:
 " <space><cr>   To cancel highlight of the last search
-" <space>.      To toggle whether to hide files in NETRW
-" <space>-      To close the current tab
-" <space>=      To open a new tab with a new buffer
+" <space>,      To open `.vimrc` in a new tab
+" <space>.      To source `.vimrc`
+" <space>-      To delete the current buffer
+" <space>=      To open a new buffer
 " <space>[      To select the previous buffer
 " <space>]      To select the next buffer
 " <space>0      To select the next tab
 " <space>9      To select the previous tab
 " <space>b      To choose among existent buffers by number
-" <space>c      To toggle spell checking or not
+" <space>c      To close the current tab
 " <space>d      To cut from system clipboard (similar for `D`, `dd`)
-" <space>h      To toggle whether to highlight search
+" <space>e      To reload all opened buffers
+" <space>h      To toggle whether to hide files in NETRW
+" <space>l      To toggle whether to highlight search
 " <space>m      To save the current session
-" <space>n      To open a new buffer
+" <space>n      To open a new tab with a new buffer
 " <space>o      To load the saved session
 " <space>p      To paste from system clipboard (similar for `P`)
 " <space>q      To quit the current window
 " <space>r      To redraw the screen
-" <space>s      To source vimrc
+" <space>s      To toggle spell checking or not
 " <space>t      To choose among themes I favored
-" <space>v      To open vimrc in new tab
 " <space>w      To save the current buffer
-" <space>x      To close the current buffer
 " <space>y      To copy from system clipboard (similar for `Y`, `yy`)

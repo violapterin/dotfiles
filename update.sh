@@ -48,7 +48,6 @@ rm -f ${DIR_NOTES}/*.pdf
 for f in ${DIR_NOTES}/*.md;
 do
    "${RUN_PANDOC}" "${f}"
-   echo
 done
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
