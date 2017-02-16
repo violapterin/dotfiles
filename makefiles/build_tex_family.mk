@@ -1,16 +1,21 @@
-# Filename: makefile
+# Filename: make_tex_family
 # Author: Tzu-Yu Jeng
 # Date: Jan. 2017
-# Description: to export all `.tex` (LaTeX) files into `.pdf` with `pdflatex`
-# Requirement: that `pdflatex` be installed
+# Description: to export all `.tex` (TeX-family) sources into `.pdf`
+# Requirement: that the engine be installed (specified as `NAME_PRG`)
 
 # To call bash shell for recipe.
 SHELL := /usr/bin/env bash
 
 # To specify location of program.
-PRG := $${HOME}/Documents/templates_configs_notes/scripts/run_pdflatex.sh
+DIR_PRG := $${HOME}/Documents/templates_configs_notes/scripts
+FULL_PRG := $(DIR_PRG)/$(NAME_PRG)
+
+# To delete binary files.
+RM := rm -f
 
 # Extensions resp. of souce and binary files.
+BASE_SRC := main
 EXT_SRC := .tex
 EXT_BIN := .pdf
 
@@ -27,16 +32,13 @@ AUX = $(wildcard *.aux */*.aux */*/*.aux)
 LOG = $(wildcard *.log */*.log */*/*.log)
 GZ = $(wildcard *.gz */*.gz */*/*.gz)
 
-# To delete binary files.
-RM := rm -f
-
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 all : $(BIN)
 
-./%$(EXT_BIN) : ./%$(EXT_SRC)
+./*/%/%$(EXT_BIN) : ./*/%/$(BASE_SRC)$(EXT_SRC)
 	@echo Compiling "$@" from "$<" ...
-	@$(PRG) "$<"
+	$(FULL_PRG) "$<"
 
 .PHONY : all clean 
 
