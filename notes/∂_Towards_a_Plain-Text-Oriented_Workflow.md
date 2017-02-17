@@ -1,11 +1,16 @@
 # Towards a Plain-Text Oriented Workflow
 *Feb. 2, 2017*
 
-## Need for Better Workflow
+## Motivation: Need of Better Workflow
 
 Recently I have recognized the dire need of devising a consistent way I save, supplement, and revise my work, especially as material had assimilated so much over the undergraduate years. They include notes or solved problems on science or mathematics classes or books, as well as all my non-technical, and, of course, coding projects for either scholastic purpose or for fun, and my music compositions so dear to me.
 
-With such need, the reasons are numerous to support a plain-text oreinted workflow.
+I have the intention that the toolkit I use will remain valid, or at least still compatible, for many years to come. Therefore I have carefully chosen the tools that have long lasted, widely used, actively maintained, and free. These tools are Bash, Git, Vim, Make, LaTeX, XeLaTeX, Markdown, LilyPond.
+
+Before I describe them in detail, let me make the distinction between a *visual tool* and a *instructional tool*. Basically this overlap with the traditional division of WYSIWYG (what you see is what you get) and non-WYSIWYG tools. But I seek to convey a more subtle point than that, namely that a visual tool imitates the operation of physical objects in daily life, while an instructional tool simply commands the computer intended action.
+
+
+Consequently plain-text formats are preferred to binary formats for numerous reasons:
 
 * **Version control**. Indeed, it is painful to back things up to and fro across several USBs and guessing from last-modified date which is new. This is however easy with Git.
 
@@ -13,7 +18,6 @@ With such need, the reasons are numerous to support a plain-text oreinted workfl
 
 * **Easier command line manoeuvres**. Since plain text format is easy to access, command line tools exist that help conversion or manipulation of them.
 
-I have the intention that the workflow which I am to design will remain valid, or at least still compatible, for many years to come. Therefore I have carefully chosen the tools that have long lasted, widely used, actively maintained, and free. These tools are Bash, Git, Vim, Make, LaTeX, XeLaTeX, Markdown, LilyPond.
 
 # Plain Text and Version Control
 

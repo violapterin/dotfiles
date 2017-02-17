@@ -14,33 +14,46 @@ FULL_PRG := $(DIR_PRG)/$(NAME_PRG)
 # To delete binary files.
 RM := rm -f
 
+# Directives where each source is saved (with slash suffixed).
+DIR = $(sort $(dir $(wildcard ./*/*/*)))
+
 # Extensions resp. of souce and binary files.
-BASE_SRC := main
+BASE_IN := main
+BASE_OUT := all
 EXT_SRC := .tex
 EXT_BIN := .pdf
 
 # To set the LaTeX source files in the top directory,
 # or in a subfolder, or in a subsubfolder.
 # Filenames must not contain whitespace ` `, or Makefile parses them.
-SRC = $(wildcard *$(EXT_SRC) */*$(EXT_SRC) */*/*$(EXT_SRC))
+SRC = $(addsuffix $(BASE_IN)$(EXT_SRC),$(DIR))
 
 # To replace all `.tex` with `.pdf`.
-BIN = $(SRC:$(EXT_SRC)=$(EXT_BIN))
+BIN = $(addsuffix $(BASE_OUT)$(EXT_BIN),$(DIR))
 
 # Other affiliated files, to be deleted.
-AUX = $(wildcard *.aux */*.aux */*/*.aux)
-LOG = $(wildcard *.log */*.log */*/*.log)
-GZ = $(wildcard *.gz */*.gz */*/*.gz)
+AUX = $(wildcard $(addsuffix *.aux,$(DIR)))
+LOG = $(wildcard $(addsuffix *.log,$(DIR)))
+GZ = $(wildcard $(addsuffix *.gz,$(DIR)))
+
+# Partial derivative, indicating unfinished work.
+PARTIAL = ∂
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 all : $(BIN)
 
-./*/%/%$(EXT_BIN) : ./*/%/$(BASE_SRC)$(EXT_SRC)
+# To compile only if not-`∂`-prefixed (otherwise unfinished).
+# Note that `cd` is executed in a temporary shell twice `cd ..` is not necessary.
+%/$(BASE_OUT)$(EXT_BIN) : %/$(BASE_IN)$(EXT_SRC)
+ifeq ($(call substr,$(call notdir,$@),1,1),$(PARTIAL))
+	
+else
 	@echo Compiling "$@" from "$<" ...
-	$(FULL_PRG) "$<"
+	cd $$(dirname "$<") && $(FULL_PRG) "$(BASE_IN)$(EXT_SRC)" "$(BASE_OUT)$(EXT_BIN)"
+endif
 
-.PHONY : all clean 
+.PHONY : all clean
 
 clean :
 	$(RM) $(BIN) $(AUX) $(LOG) $(GZ)

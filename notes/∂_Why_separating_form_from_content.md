@@ -73,31 +73,57 @@ And, the concern that MS had and will dominate software market, is also real eno
 
 
 
-# LilyPond vs. Sibelius and Finale
+# LilyPond format vs. Sibelius and Finale format
 
-They started as the dissatisfaction with 
+Just like the case for TeX, LilyPond's format, which has extension `.ly` (hereafter called LY source), is saved in pure text, while like Microsoft Word, Sibelius (`.sib`) and Finale (`.musc`) use proprietary, opaque formats. So the comparison between Doc and Tex formats mostly apply here.
+
+For example, lyrics are easier to edit in the plain text. In Sibelius the addition or deletion of lyrics means re-typing the whole line, but in LilyPond no more than editing modified part.
+
+Editing orchestral score and parts is cumbersome in Sibelius when the file gets large, but LilyPond makes it possible to focus on one or two instruments only by commenting out others, like how it is when writing codes. When it is done, just putting them together.
+
+!!!!
+The worry of obselete format is alleviated by the introduction of LilyPond. Indeed, Sibelius is somewhat abandoned by Avid company, and the future of Sibelius is unknown. If it disappears, all old scores are not easily modified. 
+By LY source is transparent and easy to convert or modify. since elost information
+
+On the other hand, composing, as well as fine-tuning score layout, nevertheless has more component of graphical nature than writing text. Take Sibelius for instance, which I am familiar. Both Sibelius and LilyPond implement a slur as a Bézier curve, which is determined by four points on the plane that span a trapezoid. It is easy in Sibelius to draw a slur, since the eye-hand coordination helps the user to control its curvature. But is not easy to directly estimate the proper location of four points in the head, then specify them in the LY source. 
+
+Moreover, when still assembling my material, my source is a chaos, and I deem it not easy to find the line where a particular passage of mine is among my LY source. A GUI Frescobaldi exists, that offers a split view of both source and compiled PDF, like TeXstudio. Even so, locating the source is still not easy. Indeed, in TeXstudio, `synctex` provides the map between source and PDF, but there is no comparable utility designed for LY source.
+
+Navigation might be easier, if the composer comments its measure number on every measure, or every five measure for exampel. But that is not feasible, since numbers will change as I reorganize or add material.
+
+There are some things you can do conveniently in Sibelius and Finale, but not in LilyPond, like: directly, with one keystroke combination, deleting measure 7 in all staves; or transposing the source from measures 11 to 15 of both violins and cellos only by a minor third; or giving each of these selected notes a staccato, and so on.
 
 # Vim vs. TextEdit and Notepad
 
-The Last example is the comparison between Vim and TextEdit and Notepad.
-It is perhaps surprising to digress from debates on typesetting format for text and music to one on text editors.
-But a moment's revelation, as follows, shows that underlying concerns are similar.
+The Last example is the comparison between Vim and TextEdit (or Notepad). Microsoft Word is also relevant here, though the comparison is complicated by the Doc format, which is treated above.
 
-Most GUI text editors mimic the by everyday life action on objects. This lowers the required training, making laypeople more easily to be familiar with the product.
+It is perhaps surprising to digress from debates on typesetting format for text and music to one on text editors. But a moment's revelation, as follows, shows that underlying concerns are similar.
 
-Vim, on the other hand, does not 
+Most text editors mimic the everyday life action on objects. 
+Indeed, when we type, we are 
+When we select some words, we drag the cursor over them, like we are painting.
 
-Not doing so opens up a whole range of possibility.
-We have mainly the normal mode, insert mode, and visual mode.
-then there is no need to define complicated key combinations, but our keyboard essentially plays three times of original roles. 
+This lowers the required training, making laypeople more easily to be familiar with the product.
+
+The 
+
+Vim, on the other hand, simply instucts necessary navigation or editing actions. The alphabet keys in most text editors 
+
+
+
+Not doing so opens up a whole range of possibility. A very creative solution to the navigation problem was thus possible, namely the concept of mode, which is incompatible with the visual principle. We have mainly the normal mode, insert mode, and visual mode. Our keyboard essentially plays three times of original roles. This replaces the job of mouse, and complicated key combinations are no longer necessary either.
 
 It is less straightforward to specify that "I want to scroll 3 pages", rather than scroll so long that the distance amouts to 3 pages.
 The latter is through a translation of mouse (or trackpad) motion to display area.
 
+Vim has many other virtues, like recording, 
+The decision of not implementing these features in 
+
 # Having a Good Tool matters
 
-As I said, I am not against those using Word for whatever purpose. 
-But 
+I am not against those using Word for whatever purpose. 
+But, as I see, many too have the need for a better tool for their jobs, no matter they are preparing purposals, writing reports, 
+
 
 --------------------------
 
