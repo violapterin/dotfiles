@@ -8,7 +8,6 @@
 SHELL := /usr/bin/env bash
 
 # To specify location of program.
-NAME_PRG := run_pandoc
 DIR_PRG := $${HOME}/Documents/templates_configs_notes/scripts
 FULL_PRG := $(DIR_PRG)/$(NAME_PRG)
 
@@ -27,24 +26,24 @@ SRC = $(wildcard *$(EXT_SRC) */*$(EXT_SRC) */*/*$(EXT_SRC))
 # To replace all `.md` with `.pdf`.
 BIN = $(SRC:$(EXT_SRC)=$(EXT_BIN))
 
-# Exclamation mark, indicating unfinished work.
-EXCL = !
+# Partial derivative, indicating unfinished work.
+PARTIAL = ∂
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 all : $(BIN)
 
-# To compile only if not-`!`-prefixed (otherwise unfinished).
+# To compile only if not-`∂`-prefixed (otherwise unfinished).
 ./%$(EXT_BIN) : ./%$(EXT_SRC)
-ifeq ($(call substr,$@,1,1),$(EXCL))
+ifeq ($(call substr,$@,1,1),$(PARTIAL))
 	
 else
 	@echo Compiling "$@" from "$<" ...
-	$(PRG) "$<"
+	$(FULL_PRG) "$<"
 endif
 
 # To declare phony objects, so rules are always executed.
-.PHONY : all clean 
+.PHONY : all clean
 
 # To delete binary files.
 clean :
