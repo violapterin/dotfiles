@@ -1,8 +1,11 @@
-# Filename: make_tex_family
+# Filename: share_tex_family.mk
 # Author: Tzu-Yu Jeng
 # Date: Jan. 2017
-# Description: to export all `.tex` (TeX-family) sources into `.pdf`
-# Requirement: that the engine be installed (specified as `NAME_PRG`)
+# Description: to export all `.tex` (TeX-family) sources into `.pdf`.
+# Requirement: that the engine `NAME_PRG` be installed.
+
+# Note that this file is shared by all makefiles for `.tex`.
+# Please specify the `NAME_PRG` to be the engine intended to be used.
 
 # To call bash shell for recipe.
 SHELL := /usr/bin/env bash
@@ -41,7 +44,7 @@ PARTIAL = ∂
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-all : $(BIN)
+all : $(BIN) join
 
 # To compile only if not-`∂`-prefixed (otherwise unfinished).
 # Note that `cd` is executed in a temporary shell twice `cd ..` is not necessary.
@@ -53,7 +56,7 @@ else
 	cd $$(dirname "$<") && $(FULL_PRG) "$(BASE_IN)$(EXT_SRC)" "$(BASE_OUT)$(EXT_BIN)"
 endif
 
-.PHONY : all clean
+.PHONY : all join clean
 
 clean :
 	$(RM) $(BIN) $(AUX) $(LOG) $(GZ)

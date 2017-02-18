@@ -1,4 +1,4 @@
-# Filename: makefile
+# Filename: build_markdown.mk
 # Author: Tzu-Yu Jeng
 # Date: Jan. 2017
 # Description: to export all `.md` (Markdown) files into `.pdf`
@@ -8,6 +8,7 @@
 SHELL := /usr/bin/env bash
 
 # To specify location of program.
+NAME_PRG := run_pandoc.sh
 DIR_PRG := $${HOME}/Documents/templates_configs_notes/scripts
 FULL_PRG := $(DIR_PRG)/$(NAME_PRG)
 
