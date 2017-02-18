@@ -10,6 +10,7 @@ I have the intention that the toolkit I use will remain valid, or at least still
 Before I describe them in detail, let me make the distinction between a *visual tool* and a *instructional tool*. Basically this overlap with the traditional division of WYSIWYG (what you see is what you get) and non-WYSIWYG tools. But I seek to convey a more subtle point than that, namely that a visual tool imitates the operation of physical objects in daily life, while an instructional tool simply commands the computer intended action.
 
 
+
 Consequently plain-text formats are preferred to binary formats for numerous reasons:
 
 * **Version control**. Indeed, it is painful to back things up to and fro across several USBs and guessing from last-modified date which is new. This is however easy with Git.
