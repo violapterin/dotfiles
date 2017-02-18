@@ -1,21 +1,17 @@
 # Templates, Configuration files, and Explanatory Notes
 *Mostly Dec. 2016 to Jan. 2017*
 
-This repo backs up templates I commonly use, settings for some programs, and several related notes.
+This repo backs up templates I commonly use, settings for some programs, scripts I use personally, and several related notes.
 
 ## My `.vimrc`
 
 The `.vimrc` is a plain text file that holds desired settings to be initialized in Vim. (Here `rc` means "run commands", a phrase originated in Unix-like systems.) It specifies read-and-write settings, search-and-replace options, self-defined shortcuts, user-implemented functions, and more. If saved in the current user's home, it is read in runtime, and applied by, Vim.
-
-Two notes, "End-of-line characters", and "The 'solarized' and other color schemes for Vim", are to be found in this repo.
 
 ## My `.bashrc` and `.bash_profile`
 
 The `.bash_profile` consists only one line, namely one that sources `.bashrc` if the latter exists.
 
 The `.bashrc` includes all my custom appearances, shortcuts, functions, variables, and more, for the Bash shell.
-
-For further explanation, see a note I wrote saved in this repo, "Difference between `.bashrc` and `.bash_profile`".
 
 ## My LaTeX template for Latin languages
 
@@ -53,7 +49,11 @@ These makefiles organizes conversion and build of Markdown and TeX formats. Make
 
 To enhance code reuse, I have saved the specification of compilers and the building process in different files. When compiling from a particular directory, I shall simply include the makefiles in this repo.
 
-## A Script for update
+## Notes
+
+Many points I suddenly grasp while preparing all these materials, are too long to be included in this README. I have made each a self-containing note. Many information is not easily found in Google (at least at first glance), and I wish to share with others what I have comprehended by making them public.
+
+## A script for update
 
 The `.bash_profile`, `.bashrc`, `.gitignore`, and `.vimrc` are saved in my home (`~`) as they should be, and I update them when I feel like to. This repo is intended to be a passive backup of them, that is, the updated copies saved in my home are copied them to this repo from time to time, and versions in this repo are not modified. Furthermore, I shall protect files backed up by setting them to be only readable. A short script, , that automates the mentioned action is saved in `update.sh` included in this repo.
 

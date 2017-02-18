@@ -54,6 +54,11 @@ SOUNDFONT := /Library/Audio/Sounds/Banks/FluidR3_GM.sf2
 
 # `lame` is an open-source audio encoder that converts WAV to MP3.
 2ND_CONVERTER := lame
+# To choose quality of conversion.
+2ND_CONVERTER_OPT := --preset standard
+
+# Removal of files.
+DELETE := rm -f
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
@@ -79,13 +84,13 @@ $(dir_name_mp3) : $(dir_name_midi)
 	@echo Converting MIDI to WAV...
 	$(1ST_CONVERTER) $(1ST_CONVERTER_OPT) $(SOUNDFONT) $(dir_name_midi)
 	@echo Converting WAV to MP3...
-	$(2ND_CONVERTER) $(dir_name_wav)
+	$(2ND_CONVERTER) $(1ST_CONVERTER_OPT) $(dir_name_wav)
 	@echo MP3 has been successfully written!
-	rm $(dir_name_wav)
+	$(DELETE) $(dir_name_wav)
 
 # A phony (fake) target is always out-of-date, and thus re-made.
 .PHONY : all unwrap get_pdf get_midi get_mp3 clean
 
 # To delete output files. Shell command `rm` means "remove".
 clean :
-	rm -f $(dir_name_pdf) $(dir_name_midi) $(dir_name_wav) $(dir_name_mp3)
+	 $(DELETE) $(dir_name_pdf) $(dir_name_midi) $(dir_name_mp3)
