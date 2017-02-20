@@ -43,11 +43,11 @@ To reduce potential conflicts between packages and enhance portability, I have o
 
 I set another alias `Pandoc` to call a short script I wrote with specification of options. To compile with that, enter `Pandoc <file-name>`. 
 
-## Makefiles and scripts
+## Bash scripts
 
-These makefiles organizes conversion and build of Markdown and TeX formats. Makefiles automate these tasks, and avoid repeating unncessary steps. When using them, type `make` in the top directory of the directory.
+Some scripts build Markdown and TeX formats. Other scripts organize and automate these tasks, and avoid repeating unnecessary steps. In fact, I wrote them with the intention of playing the same role as makefiles.
 
-To enhance code reuse, I have saved the specification of compilers and the building process in different files. When compiling from a particular directory, I shall simply include the makefiles in this repo.
+To enhance code reuse, I have saved the specification of compilers and the building process in different files. When compiling from a particular directory, I shall simply include the maker scripts in this repo.
 
 ## Notes
 

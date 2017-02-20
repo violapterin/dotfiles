@@ -6,6 +6,8 @@
 # Description: to export `.tex` (LaTeX) file as `.pdf`
 # Requirement: having assumed script `pdflatex` and engine `pdftex`
 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
 # The engine `pdflatex` exports LaTeX as PDF.
 # As I have tested, `pdflatex` does not allow any
 # `%` (percent) or `"` (double quote) in filename.
@@ -16,8 +18,10 @@ COMPILER="pdflatex"
 EXT_BIN=".pdf"
 
 # To check arguments, and compile.
-this_dir=$(dirname "$0")
-source "${this_dir}/check_arguments.sh"
+DIR_REPO="${HOME}/templates_configs_scripts"
+DIR_SCRIPTS="${DIR_REPO}/scripts"
+SOURCE_NAME="parse_src_bin_name.sh"
+source "${DIR_SCRIPTS}/${SOURCE_NAME}"
 
 # `pdflatex` options:
 # -synctex=1`: Let PDF not contain info for looking up source.
@@ -25,11 +29,10 @@ source "${this_dir}/check_arguments.sh"
 # -output-format=pdf`: Specify output format.
 # -file-line-error`: Print filename and line number where error is.
 options=(
-      -synctex=1
-      -interaction=nonstopmode
-      -jobname="${basename_bin}"
-      -output-format=pdf
-      -file-line-error
+      "-synctex=1"
+      "-interaction=nonstopmode"
+      "-jobname=${bare_name_bin}"
+      "-file-line-error"
 )
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -37,5 +40,5 @@ options=(
 # To run the main command.
 # `set -x` echoes what is executed; `set +x` cancels this.
 set -x
-"${COMPILER}" ${options[*]} "${name_src}"
+"${COMPILER}" ${options[*]} "${full_name_src}"
 { set +x; } 2>/dev/null
