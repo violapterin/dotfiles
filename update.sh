@@ -1,33 +1,28 @@
 #!/usr/bin/env bash
 # To copy newest version of config files, compile notes and TEX templates
 
-# the directory where configuration files are
-DIR_FROM="${HOME}"
-
-# the subdirectory they are sent to
-SUBDIR=/configuration_files
-
-# the destination they are copied to.
 # `"$0"` is filename (with path) of this script.
 DIR_REPO=$(dirname "$0")
-DIR_TO=${DIR_REPO}${SUBDIR}
+
+# Resp., the directory where configuration files are saved in, and copied to.
+DIR_CONFIGS_FROM="${HOME}"
+DIR_CONFIGS_TO =${DIR_REPO}/configuration_files
 
 # To first copy (deleting old versions), then set them to read-only.
 transfer() {
-   local file_from="${DIR_FROM}/$1"
-   local file_to="${DIR_TO}/$1"
+   local file_from="${DIR_CONFIGS_FROM}/$1"
+   local file_to="${DIR_CONFIGS_TO}/$1"
    cp -f "${file_from}" "${file_to}"
    chmod 444 "${file_to}"
 }
 
-# list of filenames to be copied.
+# List of filenames to be copied.
 LIST_FILE=(
    .vimrc
    .bashrc
    .bash_profile
    .gitconfig
 )
-
 len_file=${#LIST_FILE[@]}
 
 # Do for all files listed above:
