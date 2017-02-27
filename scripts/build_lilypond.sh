@@ -5,7 +5,7 @@
 # Date: Jan. 2017
 # Description: to export `.ly` (LilyPond) files into `.pdf`,
 #    and generate `.midi` and `.mp3` too.
-# Requirement: that the TeX engine specified be installed
+# Requirement: that `lilypond` be installed.
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 

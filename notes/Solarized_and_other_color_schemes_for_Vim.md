@@ -87,7 +87,7 @@ Afterwards I discovered "Flattened", which applies easier method to mix colors. 
 
     hi Normal guifg=#bac3c4
 
-To choose the triplet, one may want to see 256 native colors of the present terminal. Scripts such as `mgedmin/show-all-256-colors.py` is handy. 
+To choose the triplet, one may want to see 256 native colors of the present terminal. Scripts such as `mgedmin/show-all-256-colors.py` in GitHub Gist is handy. 
 
 Lastly, "Solarized" theme also makes console output too dim, as is the case of normal text in Vim. To change it, in `~/.bash_profile`, to the line `export PS1=` which sets you personal prompt, please append `\[\033[1;37m\]` (escape sequence for pure white in the ANSI palette) at the end. 
 At this point, I am more than satisfied.

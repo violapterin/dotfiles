@@ -16,12 +16,16 @@ EXT_BIN=".pdf"
 # To check arguments, and compile.
 DIR_REPO="${HOME}/templates_configs_scripts"
 DIR_SCRIPTS="${DIR_REPO}/scripts"
-SOURCE_NAME="parse_src_bin_name.sh"
-source "${DIR_SCRIPTS}/${SOURCE_NAME}"
+DIR_TEMPLATES="${DIR_REPO}/tex_templates"
+
+# `full_name_src` and `bare_name_bin` will be defined:
+full_name_src=
+bare_name_bin=
+source "${DIR_SCRIPTS}/parse_src_bin_name.sh"
 
 # Location of template for `pandoc`
 ENGINE="xelatex"
-TEMPLATE_PANDOC="${DIR_REPO}/tex_templates/template_pandoc.tex"
+TEMPLATE_PANDOC="${DIR_TEMPLATES}/template_pandoc.tex"
 
 # `pandoc` options:
 # `--standalone`: Output a single file,

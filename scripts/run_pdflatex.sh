@@ -17,7 +17,7 @@
 COMPILER="pdflatex"
 EXT_BIN=".pdf"
 
-# To check arguments, and compile.
+# To check arguments, and compile. Now defining `full_name_src ` and `bare_name_bin`.
 DIR_REPO="${HOME}/templates_configs_scripts"
 DIR_SCRIPTS="${DIR_REPO}/scripts"
 SOURCE_NAME="parse_src_bin_name.sh"

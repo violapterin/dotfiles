@@ -27,10 +27,11 @@ EXT_SRC=".tex"
 EXT_BIN=".pdf"
 BARE_NAME_SRC_CHIEF="main"
 BARE_NAME_SRC_ALL="standalone"
-FULL_NAME_SRC=${BARE_NAME_SRC_CHIEF}${EXT_SRC}
+FULL_NAME_SRC_CHIEF=${BARE_NAME_SRC_CHIEF}${EXT_SRC}
+FULL_NAME_SRC_ALL=${BARE_NAME_SRC_ALL}${EXT_SRC}
 
 # To set the `main.tex` sources inside current working directory.
-list_chief_src=$(find . -name "${FULL_NAME_SRC}")
+list_chief_src=$(find . -name "${FULL_NAME_SRC_CHIEF}")
 
 # Partial derivative, indicating fragmentary work.
 FRAGMENT="∂"
@@ -39,12 +40,13 @@ FRAGMENT="∂"
 
 for dir_full_name_chief_src in ${list_chief_src}
 do
-   dir="$(dirname ${dir_full_name_src})"
+   dir="$(dirname ${dir_full_name_chief_src})"
    cd "${dir}"
    # To hold all sources in the current working directory.
    list_relavent_src=$(find . -name "*${EXT_SRC}")
    # To remove the `standalone.tex` generated from `main.tex`.
-   list_relavent_src="${list_relavent_src/${FULL_NAME_SRC}/}"
+   # (If the replaced contains `/`, 1st delimiter is `//` instead of `/`)
+   list_relavent_src="${list_relavent_src//.\/${FULL_NAME_SRC_CHIEF}/}"
 
    # Name the corresponding binary the same as directory.
    bare_name_bin="$(basename ${dir})"
@@ -52,7 +54,8 @@ do
    dir_full_name_bin="${dir}/${full_name_bin}"
 
    # Ignore `∂`-prefixed (unfinished) files.
-   if [ "${full_name_src:0:1}" == "${FRAGMENT}" ]; then
+   if [ "${full_name_src:0:1}" == "${FRAGMENT}" ]
+   then
       continue
    fi
 
@@ -60,17 +63,23 @@ do
    "${whether_make}" == "FALSE"
    for full_name_src in "${list_relavent_src}"
    do
-      hold="$(resp_old_new "${dir_full_name_bin}" "${dir_full_name_src}")"
-      if [ "${hold}" == "TRUE" ]; then
-         whether_make="${hold}"
+      dir_full_name_src="${dir}${full_name_src}"
+      hold="$(resp_old_new "${dir_full_name_src}" "${dir_full_name_bin}")"
+      if [ "${hold}" == "FALSE" ]
+      then
+         whether_make="TRUE"
          break
       fi
    done
-   if [ "${whether_make}" == "FALSE" ]; then
+   if [ "${whether_make}" == "FALSE" ]
+   then
       continue
    fi
 
    # Compilation of the binary file.
-   echo "Compiling ${full_name_bin} from ${FULL_NAME_SRC} ..."
+   echo "Compiling ${full_name_bin} from ${FULL_NAME_SRC_CHIEF} ..."
    "${FULL_PRG}" "${dir_full_name_src}" "${bare_name_bin}"
+
+   # XXX: prepare `standalone.tex`
+   # ${????} "${FULL_NAME_SRC_CHIEF}" "${FULL_NAME_SRC_ALL}"
 done

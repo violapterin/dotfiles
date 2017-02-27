@@ -6,7 +6,7 @@ DIR_REPO=$(dirname "$0")
 
 # Resp., the directory where configuration files are saved in, and copied to.
 DIR_CONFIGS_FROM="${HOME}"
-DIR_CONFIGS_TO =${DIR_REPO}/configuration_files
+DIR_CONFIGS_TO="${DIR_REPO}/configuration_files"
 
 # To first copy (deleting old versions), then set them to read-only.
 transfer() {
