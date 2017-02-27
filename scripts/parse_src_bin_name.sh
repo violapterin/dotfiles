@@ -5,9 +5,11 @@
 #    when there are two arguments, the 1st is source, the 2nd binary
 #    without extension; when there is only one, it is source, and the
 #    binary's name is obtained by substituting source's extension.
-#    The basename of binary is saved as `basename_bin`.
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
+# The fullname of source is saved as `full_name_src`.
+# The basename of binary is saved as `basename_bin`.
 
 # Note that `EXT_BIN` need to be defined in advance!
 # To check number of arguments.
@@ -26,7 +28,7 @@ fi
 
 # To replace extension of source with that of binary.
 if [ "$#" -eq 1 ]; then
-   bare_name_bin="${name_src%%.*}"
+   bare_name_bin="${full_name_src%%.*}"
 
 # To set binary name to be the 2nd argument stripped of extension.
 elif [ "$#" -eq 2 ]; then

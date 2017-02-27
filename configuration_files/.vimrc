@@ -10,7 +10,7 @@
 
 " First, to define a "leader" to be the space bar, after turning off
 " its default behavior (right arrow). The enables lots more combinations.
-nnoremap <space> <Nop>
+nnoremap <space> <nop>
 let mapleader=" "
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
@@ -66,11 +66,11 @@ set dir=~/Documents/Vim_swap_files_storeroom
 " To set how many lines of history Vim has to remember.
 set history=700
 
-" To open `~/.vimrc` in a new tab by `<space>,`.
-" (Preferences window of a Mac app is often opened by `<cmd>,`.)
+" To open `~/.vimrc` in a new tab with `<space>,`.
+" (Preferences window of a Mac app is often opened with `<cmd>,`.)
 nnoremap <leader>, :tabe $MYVIMRC<cr>
 
-" To source (apply) `~/.vimrc` by `<space>.`
+" To source (apply) `~/.vimrc` with `<space>.`
 " (`.` is a Bash alias for source.)
 nnoremap <leader>. :source $MYVIMRC<cr>
 
@@ -151,10 +151,6 @@ noremap <leader>o :source ~/.my_vim_session.vim<cr>
 " Don't update the display while executing macros.
 set lazyredraw
 
-" To redraw screen  with `<space>r` (for "refresh"),
-" since I have mapped `<ctrl>l` for toggling linebreak.
-nnoremap <leader>r <c-l>
-
 " To always show current position.
 set ruler
 
@@ -164,11 +160,17 @@ set number
 " To show the present mode.
 set showmode
 
-" To move windows simply by `<ctrl>` plus `h`, `j`, `k`, or `l`.
-nnoremap <c-k> <c-w>k
-nnoremap <c-j> <c-w>j
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
+" Suppress usual function of arrow, since I shall overload them.
+noremap <up> <nop>
+noremap <down> <nop>
+noremap <left> <nop>
+noremap <right> <nop>
+
+" To focus on windows with arrow keys of according direction.
+nnoremap <up> <c-w>k
+nnoremap <down> <c-w>j
+nnoremap <left> <c-w>h
+nnoremap <right> <c-w>l
 
 " To initialize settings in NETRW buffer (directory browser).
 let g:netrw_bufsettings='nomodifiable nomodified number nobuflisted wrap readonly'
@@ -189,20 +191,10 @@ let g:netrw_hide=1
 " In NETRW buffer, to toggle hiding files with `<space>h` (for "hide").
 noremap <silent> <leader>h :call ToggleDisplayHiddenFiles()<cr>
 
-" To select the previous tab with `<space>9` (think of `(`).
-" To select the next tab with `<space>0` (think of `)`).
-nnoremap <leader>9 gT
-nnoremap <leader>0 gt
-
 " To select the previous buffer with `<space>[`.
 " To select the next buffer with `<space>]`.
 nnoremap <leader>[ :bprevious<cr>
 nnoremap <leader>] :bnext<cr>
-
-" To open a new tab with `<space>n` showing current file (for "new").
-" To close the current tab with `<space>c` (for "close").
-nnoremap <leader>n :tabedit %<cr>
-nnoremap <leader>c :tabclose<cr>
 
 " To open a new buffer with `<space>=` (think of `+`).
 " To delete current buffer with `<space>-` (meaning removal).
@@ -211,7 +203,21 @@ nnoremap <leader>- :bprevious<cr>:bdelete #<cr>
 
 " To switch, with `<space>b` (for "buffer"), among existing
 " buffers by typing its number shown on the screen.
-nnoremap <leader>b :ls<cr>:buffer
+" A custom function displays filename only, suppressing its full path.
+nnoremap <leader>b :call ListBuffersFilenameOnly()<cr>:buffer 
+
+" To open a new tab with `<space>n` showing current file (for "new").
+" To close the current tab with `<space>c` (for "close").
+nnoremap <leader>n :tabedit %<cr>
+nnoremap <leader>c :tabclose<cr>
+
+" To select the previous tab with `<space>9` (think of `(`).
+" To select the next tab with `<space>0` (think of `)`).
+nnoremap <leader>9 gT
+nnoremap <leader>0 gt
+
+" In a tab, to display filename only, instead of full path to it.
+set guitablabel=%t
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 "          Command bar and other tools
@@ -226,7 +232,7 @@ nnoremap <cr> :!
 " To set height of the command bar to be 2 lines.
 set cmdheight=2
 
-" To turn on the wild menu of auto command line completion by pressing Tab.
+" To turn on the wild menu of auto command line completion with pressing Tab.
 set wildmenu
 
 " To ignore files with some extensions when completing with tab.
@@ -246,10 +252,10 @@ set statusline=\ %F%m%r%h\ B:%n\ L:%l\/%L\ C:%c%V
 " To toggle spell checking on and off with`<space>s` (for "spell").
 noremap <leader>s :setlocal spell!<cr>
 
-" To set dictionary for completion, called by `<ctrl>x<ctrl>k` in insert mode.
+" To set dictionary for completion, called with `<ctrl>x<ctrl>k` in insert mode.
 set dictionary=/usr/share/dict/words
 
-" To set source codes syntax completion, called by `<ctrl>x<ctrl>o` in insert mode.
+" To set source codes syntax completion, called with `<ctrl>x<ctrl>o` in insert mode.
 set omnifunc=syntaxcomplete#Complete
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
@@ -320,7 +326,7 @@ set list
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 
 " Since line-wrapping is set, to navigate in terms of display lines
-" by `j` and `k`, and of physical lines by `gj` and `gk`, swapping them.
+" with `j` and `k`, and of physical lines with `gj` and `gk`, swapping them.
 noremap j gj
 noremap k gk
 noremap gj j
@@ -358,6 +364,7 @@ set mouse=
 "          Helper functions's implementation
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 
+" To toggle showing text hidden for lack of space (see `<space>\`).
 function! ToggleDisplayLastLine()
     if (&display=='')
         let &display='truncate'
@@ -366,6 +373,9 @@ function! ToggleDisplayLastLine()
     endif
 endfunction
 
+" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+
+" In NETRW buffer, to toggle hiding files (see `<space>h`).
 function! ToggleDisplayHiddenFiles()
     if (g:netrw_hide==0)
         let g:netrw_hide=1
@@ -374,8 +384,9 @@ function! ToggleDisplayHiddenFiles()
     endif
 endfunction
 
-" To switch among my favorite color schemes only.
-" (Place desired `.vim` in `~/.vim/colors` in order to add a color scheme.)
+" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+
+" To switch among chosen color schemes (see `<space>t`).
 function! ChooseNextColor()
     if (g:colors_name=='flattened')
         :colorscheme gruvbox
@@ -392,6 +403,58 @@ function! ChooseNextColor()
     endif
 
     highlight Comment cterm=italic
+endfunction
+
+" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+
+" List buffer's filename only, suppressing path (see `<space>b`).
+function! ListBuffersFilenameOnly()
+    " To redirect `ls` result, and save as `ls_output`.
+    redir => s:list
+    silent exec 'ls'
+    redir END
+
+
+    " Replacement syntax is same as `:s`; `g` for global action.
+"    let s:status = substitute( s:list, '"\([^\n]*\)"', '©\1©', 'g' )
+    let s:list = substitute( s:list, '"\([^\n]*\)"\s*line \(\d\+\)', 'line ®\2®: ©\1©', 'g' )
+    let s:list = substitute( s:list, '©.\+/\([^/]\)©', '\1', 'g' )
+
+    " To pad whitespace to align.
+    let s:list = substitute( s:list, '®\(\d\{1}\)®:', '\1:     ', 'g' )
+    let s:list = substitute( s:list, '®\(\d\{2}\)®:', '\1:    ', 'g' )
+    let s:list = substitute( s:list, '®\(\d\{3}\)®:', '\1:   ', 'g' )
+    let s:list = substitute( s:list, '®\(\d\{4}\)®:', '\1:  ', 'g' )
+    let s:list = substitute( s:list, '®\(\d\{5}\)®:', '\1: ', 'g' )
+"    let s:list = substitute( s:list, '"[^"]*/\([^/"]\+\)"\s*line \(\d\+\)', 'Line:\2      "\1"', 'g' )
+"    let s:status = substitute( s:list,
+"            \ '\([^"]\+\)"[^"]*/\([^/"]\+\)" \+line\(\S\+\) *', '\1', 'g' )
+"    let s:filename = substitute( s:list,
+"            \ '^\([^"]*\)"[^"]*/\([^/"]\+\)"\s\+line\(\d\+\).*$', '"\2"', 'g' )
+"    let s:number_line = substitute( s:list,
+"            \ '^\([^"]*\)"[^"]*/\([^/"]\+\)"\s\+line\(\d\+\).*$', '\3', 'g' )
+    let s:count_pad = 10
+
+    echo s:list
+endfunction
+   
+   
+    "           \ '\([^"]*\)"[^"]*"[^"]*', '\1', 'g' )
+"    let s:filename = substitute( s:list,
+"            \ '.*"[^"]*/\([^/"]\+\)".*', '"\1"', 'g' )
+"    let s:number_line = substitute( s:list,
+"            \ '.*line \(\d\+\).*', '\1', 'g' )
+"    let s:count_pad = 10
+"    let s:number_line = s:number_line . repeat( ' ', s:count_pad -len(s:number_line) )
+
+"            \ '^\([^"]*\)"[^"]*/\([^/"]\+\)"\s\+line\(\d\+\).*$', '"\1"', 'g' )
+
+" \ '"\([^"]*\)"\s\+line \(\d\+\)', 'L:\2      "\1"', 'g' )
+"    echo s:status
+
+
+function! PadWhitespace(str,num)
+    return a:str . repeat( ' ', a:amt -len(a:str) )
 endfunction
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
@@ -419,7 +482,6 @@ endfunction
 " <space>o      To load the saved session
 " <space>p      To paste from system clipboard (similar for `P`)
 " <space>q      To quit the current window
-" <space>r      To redraw the screen
 " <space>s      To toggle spell checking or not
 " <space>t      To choose among themes I favored
 " <space>w      To save the current buffer

@@ -19,8 +19,11 @@ EXT_BIN=".pdf"
 # To check arguments, and compile.
 DIR_REPO="${HOME}/templates_configs_scripts"
 DIR_SCRIPTS="${DIR_REPO}/scripts"
-SOURCE_NAME="parse_src_bin_name.sh"
-source "${DIR_SCRIPTS}/${SOURCE_NAME}"
+
+# `full_name_src` and `bare_name_bin` will be defined:
+full_name_src=
+bare_name_bin=
+source "${DIR_SCRIPTS}/parse_src_bin_name.sh"
 
 # `xelatex` options:
 # -synctex=1`: Let PDF not contain info for looking up source.
