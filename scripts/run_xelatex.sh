@@ -8,9 +8,9 @@
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-# The engine `xelatex` exports xeLaTeX as PDF.
-# As I have tested, `xelatex` only disallow `%` (percent) in filename.
-# Other Bash-reserved characters are okay, but must be escaped, 
+# The engine `pdflatex` exports LaTeX as PDF. As I have tested,
+# `pdflatex` does not allow any `%` (percent) or `"` (double quote)
+# in filename. All other Bash-reserved characters must be escaped,
 # as usually the case for executables.
 # Like: `draft (2016).tex` is passed as `draft\ \(2016\).tex`.
 COMPILER="xelatex"

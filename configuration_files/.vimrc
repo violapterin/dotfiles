@@ -247,7 +247,14 @@ set laststatus=2
 " `%b` buffer number, `%l` current line no.,
 " `%L` total line no., `%c` current column no.,
 " `%V` virtual column no. as shown on the screen (with `-` sign).
-set statusline=\ %F%m%r%h\ B:%n\ L:%l\/%L\ C:%c%V
+" `%1*foo%*` displays `foo` in color `User1`, and so on.
+" They are defined in the lines after `colorscheme`.
+set statusline=
+set statusline+=%1*\ %F\ %*
+set statusline+=%2*%m%r%h%*
+set statusline+=%3*\ B:%n\ %*
+set statusline+=%4*\ L:%l\/%L\ %*
+set statusline+=%5*\ C:%c%V\ %*
 
 " To toggle spell checking on and off with`<space>s` (for "spell").
 noremap <leader>s :setlocal spell!<cr>
@@ -271,10 +278,17 @@ set termguicolors
 " To use dark background.
 set background=dark
 
-" To choose Romain Lafourcade's "flattened" (`romainl/flattened`) color scheme,
-" based on Ethan Schoonover's "solarized" (`altercation/vim-colors-solarized`).
-" (See note in README.md in the same directory.)
+" To choose Romain Lafourcade's "flattened" (`romainl/flattened`)
+" color scheme, based on Ethan Schoonover's "solarized" scheme
+" (`altercation/vim-colors-solarized`); see my note in this repo.
 colorscheme flattened
+
+" Status line colors. They must come after `colorscheme` file is read.
+hi User1 guifg=#ffffff  guibg=#660000
+hi User2 guifg=#ffffff  guibg=#990033
+hi User3 guifg=#ffffff  guibg=#666600
+hi User4 guifg=#ffffff  guibg=#336633
+hi User5 guifg=#ffffff  guibg=#336699
 
 " To switch among my favorite color schemes with `<space>t` (for "theme").
 nnoremap <leader>t :call ChooseNextColor()<cr>
@@ -285,15 +299,17 @@ highlight Comment cterm=italic
 " To set utf8 as standard encoding.
 set encoding=utf8
 
-" To force to use Unix-styled end-of-line (EOL)
-" (see note in README.md in the same directory).
+" To use Unix-styled end-of-line (`fileformat`), and to try only this
+" (`fileformats`); see one of my notes in this repo.
+
 set fileformat=unix
 set fileformats=unix
 
 " To use whitespaces instead of tabbed space.
 set expandtab
 
-" To always convert 1 tabbed space to 3 whitespaces.
+" When auto-indenting (`shiftwidth`), and when showing and interpreting
+" a file (`tabstop`), to set 1 tabbed space as 3 whitespaces.
 set shiftwidth=3
 set tabstop=3
 
@@ -320,6 +336,7 @@ noremap <silent> <leader>\ :call ToggleDisplayLastLine()<cr>
 " To mark newline, tabbed space, and unfinished or continued lineas.
 set listchars=eol:~,tab:>\ ,extends:+,precedes:-
 set list
+
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 "          Navigation and cursor
@@ -409,52 +426,28 @@ endfunction
 
 " List buffer's filename only, suppressing path (see `<space>b`).
 function! ListBuffersFilenameOnly()
-    " To redirect `ls` result, and save as `ls_output`.
+    " To redirect `:ls` result, and save as `list`; `s:` makes it local.
     redir => s:list
     silent exec 'ls'
     redir END
 
-
     " Replacement syntax is same as `:s`; `g` for global action.
-"    let s:status = substitute( s:list, '"\([^\n]*\)"', '©\1©', 'g' )
+    " The `®` and `©` are introduced temporarily for delimitation.
+    " First to isolate filenames and line numbers.
     let s:list = substitute( s:list, '"\([^\n]*\)"\s*line \(\d\+\)', 'line ®\2®: ©\1©', 'g' )
-    let s:list = substitute( s:list, '©.\+/\([^/]\)©', '\1', 'g' )
 
-    " To pad whitespace to align.
+    " To keep only basename of file and strip `©`.
+    let s:list = substitute( s:list, '©\([^©]*\)/\([^©/]\+\)©', '\2', 'g' )
+    let s:list = substitute( s:list, '©\([^©]\+\)©', '\1', 'g' )
+
+    " To pad whitespace to align and strip `®`.
     let s:list = substitute( s:list, '®\(\d\{1}\)®:', '\1:     ', 'g' )
     let s:list = substitute( s:list, '®\(\d\{2}\)®:', '\1:    ', 'g' )
     let s:list = substitute( s:list, '®\(\d\{3}\)®:', '\1:   ', 'g' )
     let s:list = substitute( s:list, '®\(\d\{4}\)®:', '\1:  ', 'g' )
     let s:list = substitute( s:list, '®\(\d\{5}\)®:', '\1: ', 'g' )
-"    let s:list = substitute( s:list, '"[^"]*/\([^/"]\+\)"\s*line \(\d\+\)', 'Line:\2      "\1"', 'g' )
-"    let s:status = substitute( s:list,
-"            \ '\([^"]\+\)"[^"]*/\([^/"]\+\)" \+line\(\S\+\) *', '\1', 'g' )
-"    let s:filename = substitute( s:list,
-"            \ '^\([^"]*\)"[^"]*/\([^/"]\+\)"\s\+line\(\d\+\).*$', '"\2"', 'g' )
-"    let s:number_line = substitute( s:list,
-"            \ '^\([^"]*\)"[^"]*/\([^/"]\+\)"\s\+line\(\d\+\).*$', '\3', 'g' )
-    let s:count_pad = 10
 
     echo s:list
-endfunction
-   
-   
-    "           \ '\([^"]*\)"[^"]*"[^"]*', '\1', 'g' )
-"    let s:filename = substitute( s:list,
-"            \ '.*"[^"]*/\([^/"]\+\)".*', '"\1"', 'g' )
-"    let s:number_line = substitute( s:list,
-"            \ '.*line \(\d\+\).*', '\1', 'g' )
-"    let s:count_pad = 10
-"    let s:number_line = s:number_line . repeat( ' ', s:count_pad -len(s:number_line) )
-
-"            \ '^\([^"]*\)"[^"]*/\([^/"]\+\)"\s\+line\(\d\+\).*$', '"\1"', 'g' )
-
-" \ '"\([^"]*\)"\s\+line \(\d\+\)', 'L:\2      "\1"', 'g' )
-"    echo s:status
-
-
-function! PadWhitespace(str,num)
-    return a:str . repeat( ' ', a:amt -len(a:str) )
 endfunction
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "

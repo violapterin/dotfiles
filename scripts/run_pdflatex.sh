@@ -8,20 +8,22 @@
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-# The engine `pdflatex` exports LaTeX as PDF.
-# As I have tested, `pdflatex` does not allow any
-# `%` (percent) or `"` (double quote) in filename.
-# Other all Bash-reserved characters must be escaped, 
+# The engine `pdflatex` exports LaTeX as PDF. As I have tested,
+# `pdflatex` does not allow any `%` (percent) or `"` (double quote)
+# in filename. All other Bash-reserved characters must be escaped,
 # as usually the case for executables.
 # Like: `draft (2016).tex` is passed as `draft\ \(2016\).tex`.
 COMPILER="pdflatex"
 EXT_BIN=".pdf"
 
-# To check arguments, and compile. Now defining `full_name_src ` and `bare_name_bin`.
+# To check arguments, and compile.
 DIR_REPO="${HOME}/templates_configs_scripts"
 DIR_SCRIPTS="${DIR_REPO}/scripts"
-SOURCE_NAME="parse_src_bin_name.sh"
-source "${DIR_SCRIPTS}/${SOURCE_NAME}"
+
+# `full_name_src` and `bare_name_bin` will be defined:
+full_name_src=
+bare_name_bin=
+source "${DIR_SCRIPTS}/parse_src_bin_name.sh"
 
 # `pdflatex` options:
 # -synctex=1`: Let PDF not contain info for looking up source.
