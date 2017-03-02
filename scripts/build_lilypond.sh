@@ -44,13 +44,15 @@ do
    full_name_bin="${bare_name_common}${EXT_BIN}"
 
    # Ignore `∂`-prefixed (unfinished) files.
-   if [ "${full_name_src:0:1}" == "${FRAGMENT}" ]; then
+   if [[ "${full_name_src:0:1}" == "${FRAGMENT}" ]]
+   then
       continue
    fi
 
    # Check timestamp according to dependency.
    whether_make=$(resp_old_new "${dir_full_name_src}" "${dir}/${full_name_bin}")
-   if [ "${whether_make}" == "TRUE" ]; then
+   if [[ "${whether_make}" == "TRUE" ]]
+   then
       continue
    fi
 

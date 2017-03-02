@@ -54,7 +54,7 @@ do
    dir_full_name_bin="${dir}/${full_name_bin}"
 
    # Ignore `∂`-prefixed (unfinished) files.
-   if [ "${full_name_src:0:1}" == "${FRAGMENT}" ]
+   if [[ "${full_name_src:0:1}" == "${FRAGMENT}" ]]
    then
       continue
    fi
@@ -65,13 +65,14 @@ do
    do
       dir_full_name_src="${dir}${full_name_src}"
       hold="$(resp_old_new "${dir_full_name_src}" "${dir_full_name_bin}")"
-      if [ "${hold}" == "FALSE" ]
+      if [[ "${hold}" == "FALSE" ]]
       then
          whether_make="TRUE"
          break
       fi
    done
-   if [ "${whether_make}" == "FALSE" ]
+
+   if [[ "${whether_make}" == "FALSE" ]]
    then
       continue
    fi
