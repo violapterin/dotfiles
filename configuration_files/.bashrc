@@ -10,9 +10,17 @@ alias OpenBashrc="mvim -v ~/.bashrc"
 # To source Bash profile.
 alias SourceBashrc="source ~/.bashrc"
 
+# Command-line completion resp. using up and down arrow keys.
+bind "\"\e[A\": history-search-backward"
+bind "\"\e[B\": history-search-forward"
+
+# To set MacVim as the default editor, such as Git commit logs.
+export VISUAL="mvim -v"
+export EDITOR="${VISUAL}"
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-# To configure color.
+# To configure displayed color.
 
 # To prompt time in minutes, and current directory (not full path).
 export PS1="\[\033[0;32m\]aminopterin\[\033[0;34m\][\A]\[\033[0;31m\]@\W\[\033[0;37m\]$ "
@@ -32,17 +40,9 @@ export LSCOLORS="gxBxhxDxfxhxhxhxhxcxcx"
 alias ls="ls -GFh"
 alias Ls="ls -alGFh"
 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# Disk usage
+alias Du="du -shc * | gsort -hr"
 
-# Command-line completion resp. using up and down arrow keys.
-bind "\"\e[A\": history-search-backward"
-bind "\"\e[B\": history-search-forward"
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
-
-# To set MacVim as the default editor, such as commit logs.
-export VISUAL="mvim -v"
-export EDITOR="${VISUAL}"
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
@@ -66,17 +66,11 @@ alias GoToBooks="cd \"${MY_DOC}/books\""
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-# Application shortcuts.
+# Application alias.
 # `&` runs process in background; `$@` expands to all passed parameters.
 
 # To compile LilyPond `.ly` file.
 alias LilyPond="/Applications/LilyPond.app/Contents/Resources/bin/lilypond"
-
-# To open `foo` as pure text with TextEdit with `TextEdit foo`.
-function TextEdit ()
-{
-   open -a TextEdit "$@" &
-}
 
 # To rename `foo` with `bar`, with `RecursivelyRename foo bar`,
 # within filenames throughout current directory and all subdirectories.
@@ -87,16 +81,25 @@ function RecursivelyRename ()
    find . -exec rename -S "$@" {} +
 }
 
+
 # To open with MacVim embedded in the terminal.
 alias Vim="mvim -v"
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 # To browse PTT.
 alias BrowsePtt="ssh bbsu@ptt.cc"
 # To browse PTT2.
 alias BrowsePtt2="ssh bbsu@ptt2.cc"
 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
 # The folder where scripts are saved.
 MY_SCRIPTS="${HOME}/templates_configs_scripts/scripts"
+
+# To open `foo` in TextEdit with `TextEdit foo`.
+alias PlainText="${MY_SCRIPTS}/edit_plain_text.sh"
+
 # To compile Markdown (possibly with LaTeX embedded) into PDF.
 alias Pandoc="${MY_SCRIPTS}/run_pandoc.sh"
 # To compile LaTeX (without Chinese) into PDF.

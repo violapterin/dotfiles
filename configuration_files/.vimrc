@@ -1,11 +1,29 @@
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
-"    Aminopterin: One heavy influence is Amir Salihefendic's `.vimrc`,
-" retrived from either `github.com/amix/vimrc` or `amix.dk/vim/vimrc.txt`
-"    I classfied settings in the manner of a usual GUI toolbar.
-"    Legend: `<cr>` for the return key, `<esc>` the escape key,
-" <bs> for the backspace, <space> for the spacebar, and
-" `<c-*>` for `<ctrl>*` (holding `<ctrl>` while pressing * where * is some key).
-"    Though abbreviations exist, I use full name form for ease of reading.
+"    Filename: .vimrc
+"    Date: mostly Oct. 2016 to Jan. 2017
+"    Organized by: Aminopterin (Tzu-Yu Jeng)
+"    Main based on: Amir Salihefendic (`github.com/amix/vimrc`). Also
+" influenced by various Stack Overflow and Vim Stack Exchange posts. Pardon
+" for not attributing each one of them, but my gratitude is genuine!
+"    Legend: `<cr>` for the return key, `<esc>` the escape key, <bs>
+" for the backspace, <space> for the spacebar, and `<c-*>` for 
+" `<ctrl>*` (holding `<ctrl>` while pressing * where * is some key).
+" Though abbreviations exist, I use full name form for ease of reading.
+" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+
+" From now on, I'll classify settings in the manner of a GUI toolbar.
+" *  Preparation
+" *  File, read and write
+" *  Edit, search and replace
+" *  View, windows, and NETRW
+" *  Display of text
+" *  Command bar and other tools
+" *  Navigation and cursor
+" *  Helper functions's implementation
+" *  Summary of custom leader commands
+
+" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+"          Miscellaneous preparation
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 
 " First, to define a "leader" to be the space bar, after turning off
@@ -13,8 +31,25 @@
 nnoremap <space> <nop>
 let mapleader=" "
 
+" To declare a group that holds auto-commands defined in this vimrc,
+" and delete all auto-commands having been defined at this point.
+augroup group_vimrc
+   autocmd!
+augroup END
+
+" To wait 3[s] for combination key, and afterwards wait 0.1[s]
+" for key codes after that (both in ms),
+" preventing delay after `O` (opening another line above).
+set timeout
+set timeoutlen=3000
+set ttimeoutlen=100
+
+" To disable `<shift><f5>` (I mapped `<tab>` key as `<f5>` key),
+" because I often accidentally hit it.
+inoremap <s-f5> <nop>
+
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
-"          File, read and write
+"          File, read, and write
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 
 " Do not make Vim compatible with Vi.
@@ -30,11 +65,11 @@ nnoremap <leader>q :q<cr>
 
 " To absolutely forbid modifying a file opened as read-only with `:vie[w]`.
 " (Default is first to warn, and then allow edit.)
-autocmd BufRead * let &l:modifiable = !&readonly
+autocmd group_vimrc BufRead * let &l:modifiable = !&readonly
 
 " To check file changes and prompt to reload, every moment Vim's
 " window is focussed again. If no change in Vim, buffer is reloaded.
-autocmd FocusGained * checktime
+autocmd group_vimrc FocusGained * checktime
 
 " To reload all opened buffers manually with `<space>e` (for "edit").
 nnoremap <leader>e :bufdo e <cr>
@@ -75,7 +110,7 @@ nnoremap <leader>, :tabe $MYVIMRC<cr>
 nnoremap <leader>. :source $MYVIMRC<cr>
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
-"          Edit, search and replace
+"          Edit, search, and replace
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 
 " To define `<shift>y` for "copying to end of line" for consistency (compare `D`).
@@ -101,17 +136,10 @@ set backspace=eol,start,indent
 " To add one whitespace only, when joining the lines with `J`.
 set nojoinspaces
 
-" To wait 3[s] for combination key, and afterwards wait 0.1[s]
-" for key codes after that (both in ms),
-" preventing delay after `O` (opening another line above).
-set timeout
-set timeoutlen=3000
-set ttimeoutlen=100
-
 " Do not automatically supply comment-symbol (e.g. "//" in C++).
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+autocmd group_vimrc FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-" To allow magic (which is default) so regular expressions are simplified,
+" To allow magic (which is default) that simplifies regular expressions,
 " but literal `\`, `~`, `*`, `$`, `.`  each requires escape by prefixing `\`
 " My mnemonic: STAMP -- backslash, tilde, asterisk, money, period.
 set magic
@@ -220,52 +248,6 @@ nnoremap <leader>0 gt
 set guitablabel=%t
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
-"          Command bar and other tools
-" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
-
-" To press backspace to initiate internal commands.
-nnoremap <bs> :
-
-" To press enter to initiate external shell commands.
-nnoremap <cr> :!
-
-" To set height of the command bar to be 2 lines.
-set cmdheight=2
-
-" To turn on the wild menu of auto command line completion with pressing Tab.
-set wildmenu
-
-" To ignore files with some extensions when completing with tab.
-:set wildignore=*.swp,*.o,*.pyc,*.pdf,*.doc,*.docx,*.png,*.jpg,*.jpeg
-
-" To always show the status line, with height being 2 lines.
-set laststatus=2
-
-" To format the status line. They are resp.:
-" `%F` full path to this file, `%m` modified flag,
-" `%r` readonly flag, `%h` help buffer flag,
-" `%b` buffer number, `%l` current line no.,
-" `%L` total line no., `%c` current column no.,
-" `%V` virtual column no. as shown on the screen (with `-` sign).
-" `%1*foo%*` displays `foo` in color `User1`, and so on.
-" They are defined in the lines after `colorscheme`.
-set statusline=
-set statusline+=%1*\ %F\ %*
-set statusline+=%2*%m%r%h%*
-set statusline+=%3*\ B:%n\ %*
-set statusline+=%4*\ L:%l\/%L\ %*
-set statusline+=%5*\ C:%c%V\ %*
-
-" To toggle spell checking on and off with`<space>s` (for "spell").
-noremap <leader>s :setlocal spell!<cr>
-
-" To set dictionary for completion, called with `<ctrl>x<ctrl>k` in insert mode.
-set dictionary=/usr/share/dict/words
-
-" To set source codes syntax completion, called with `<ctrl>x<ctrl>o` in insert mode.
-set omnifunc=syntaxcomplete#Complete
-
-" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 "          Display of text
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 
@@ -283,15 +265,20 @@ set background=dark
 " (`altercation/vim-colors-solarized`); see my note in this repo.
 colorscheme flattened
 
-" Status line colors. They must come after `colorscheme` file is read.
-hi User1 guifg=#ffffff  guibg=#660000
-hi User2 guifg=#ffffff  guibg=#990033
-hi User3 guifg=#ffffff  guibg=#666600
-hi User4 guifg=#ffffff  guibg=#336633
-hi User5 guifg=#ffffff  guibg=#336699
+" Colors of the status line, for the only active pane only.
+" They must come after `colorscheme` file is read.
+highlight User1 guifg=#ffffff  guibg=#660000
+highlight User2 guifg=#ffffff  guibg=#990033
+highlight User3 guifg=#ffffff  guibg=#666600
+highlight User4 guifg=#ffffff  guibg=#336633
+highlight User5 guifg=#ffffff  guibg=#336699
 
 " To switch among my favorite color schemes with `<space>t` (for "theme").
 nnoremap <leader>t :call ChooseNextColor()<cr>
+
+" To highlight the line where cursor is, but only in current buffer.
+autocmd group_vimrc VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+autocmd group_vimrc WinLeave * setlocal nocursorline
 
 " To make comments shown in terminal, italic; GUI MacVim already does.
 highlight Comment cterm=italic
@@ -299,10 +286,7 @@ highlight Comment cterm=italic
 " To set utf8 as standard encoding.
 set encoding=utf8
 
-" To use Unix-styled end-of-line (`fileformat`), and to try only this
-" (`fileformats`); see one of my notes in this repo.
-
-set fileformat=unix
+" To try Unix-styled end-of-line only (see relevant note in this repo).
 set fileformats=unix
 
 " To use whitespaces instead of tabbed space.
@@ -337,6 +321,68 @@ noremap <silent> <leader>\ :call ToggleDisplayLastLine()<cr>
 set listchars=eol:~,tab:>\ ,extends:+,precedes:-
 set list
 
+" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+"          Command bar and other tools
+" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+
+" To press backspace to initiate internal commands.
+nnoremap <bs> :
+
+" To press enter to initiate external shell commands.
+nnoremap <cr> :!
+
+" To set height of the command bar to be 2 lines.
+set cmdheight=2
+
+" To turn on the wild menu of auto command line completion with pressing Tab.
+set wildmenu
+
+" To ignore files with some extensions when completing with tab.
+:set wildignore=*.swp,*.o,*.pyc,*.pdf,*.doc,*.docx,*.png,*.jpg,*.jpeg
+
+" To always show the status line, with height being 2 lines.
+set laststatus=2
+
+" To format the status line. They are resp.:
+" `%F` full path to this file, `%m` modified flag,
+" `%r` readonly flag, `%h` help buffer flag,
+" `%b` buffer number, `%l` current line no.,
+" `%L` total line no., `%c` current column no.,
+" `%V` virtual column no. as shown on the screen (with `-` sign).
+" `%1*foo%*` displays `foo` in color `User1`, and so on.
+" They are defined in the lines after `colorscheme`.
+
+"set statusline=%1*\ %F\ %*%2*%m%r%h%*%3*\ B:%n\ %*%4*\ L:%l\/%L\ %*%5*\ C:%c%V\ %*
+
+
+" To define the only active pane.
+let s:active_statusline='%1* %F %*%2*%m%r%h%*%3* B:%n %*%4* L:%l/%L %*%5* C:%c%V %*'
+" To define other inactive panes.
+let s:inactive_statusline=' %F %m%r%h B:%n  L:%l/%L  C:%c%V '
+
+" 
+function! RefreshStatus()
+  for i in range(1, winnr('$'))
+    call setwinvar(i, '&statusline', '%!GetStatus(' . i . ')')
+  endfor
+endfunction
+
+function! GetStatus(w)
+  return a:w==winnr() ? s:active_statusline : s:inactive_statusline
+endfunction
+
+autocmd VimEnter,WinEnter,BufWinEnter * call RefreshStatus()
+
+
+" To toggle spell checking on and off with`<space>s` (for "spell").
+noremap <leader>s :setlocal spell!<cr>
+
+" To set dictionary for completion, called with `<ctrl>x<ctrl>k` in insert mode.
+set dictionary=/usr/share/dict/words
+
+" To set source codes syntax completion, called with `<ctrl>x<ctrl>o` in insert mode.
+set omnifunc=syntaxcomplete#Complete
+
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 "          Navigation and cursor
@@ -366,7 +412,7 @@ nnoremap <silent> <leader>k ?[、，；。！？：“”‘’「」『』—]<
 nnoremap <silent> <leader>j /[、，；。！？：“”‘’「」『』—]<cr>:noh<cr>
 
 " To return to last edit position upon opening files.
-autocmd BufReadPost *
+autocmd group_vimrc BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal! g`\"" |
     \ endif
@@ -378,7 +424,7 @@ set guicursor=n:blinkon0
 set mouse=
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
-"          Helper functions's implementation
+"          Helper functions implementation
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 
 " To toggle showing text hidden for lack of space (see `<space>\`).
@@ -455,6 +501,7 @@ endfunction
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 
 " Short summary in alphabetical order:
+
 " <space><cr>   To cancel highlight of the last search
 " <space>,      To open `.vimrc` in a new tab
 " <space>.      To source `.vimrc`
@@ -469,6 +516,8 @@ endfunction
 " <space>d      To cut from system clipboard (similar for `D`, `dd`)
 " <space>e      To reload all opened buffers
 " <space>h      To toggle whether to hide files in NETRW
+" <space>j      To jump to the next fullwidth punctuation
+" <space>k      To jump to the previous fullwidth punctuation
 " <space>l      To toggle whether to highlight search
 " <space>m      To save the current session
 " <space>n      To open a new tab with a new buffer

@@ -3,16 +3,14 @@
 # Filename: recursively_rename.sh
 # Author: Tzu-Yu Jeng
 # Date: Feb. 2017
-# Description: If included in a script, this parses input arguments;
-#    when there are two arguments, the 1st is source, the 2nd binary
-#    without extension; when there is only one, it is source, and the
-#    binary's name is obtained by substituting source's extension.
+# Description: To substitute `bar` for all substring `foo` occurring
+# in filename with `bar`, with `RecursivelyRename foo bar`, within
+# filenames in the current directory and all subdirectories, as well
+# as these directories themselves. A Perl-based utility `rename` is
+# used; Use `brew install rename` to install that.
 
 
-# To substitute `bar` for all substring `foo` occurring in filename with `bar`, with `RecursivelyRename foo bar`,
-# within filenames throughout current directory and all subdirectories.
-# A Perl-based utility `rename` is used; `-S` for "substitute all".
-# Enter `brew install rename` to install that.
+# `rename` options: `-S` for "substitute all".
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
@@ -54,3 +52,10 @@ then
    bare_name_bin=$2
    bare_name_bin="${bare_name_bin%%.*}"
 fi
+
+# `rename` options: (Keep them ordered as such! Do not rearrange!)
+options=(
+      --subst-all "${string_old}" "${string_new}"
+
+)
+

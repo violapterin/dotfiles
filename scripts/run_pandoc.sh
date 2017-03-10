@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Filename: run-pandoc.sh
+# Filename: run_pandoc.sh
 # Author: Tzu-Yu Jeng
 # Date: Jan. 2017
 # Description: to export `.md` (Markdown) file as `.pdf`

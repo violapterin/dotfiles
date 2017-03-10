@@ -1,19 +1,20 @@
 #!/usr/bin/env bash
 
-# Filename: run_xelatex.sh
+# Filename: run_lualatex.sh
 # Author: Tzu-Yu Jeng
 # Date: Jan. 2017
-# Description: to export `.tex` (xeLaTeX) file as `.pdf`
-# Requirement: that script `xelatex` and engine `pdftex` be installed.
+# Description: to export `.tex` (LaTeX) file as `.pdf`
+# Requirement: that script `lualatex` and engine `luatex` be installed.
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-# The engine `pdflatex` exports LaTeX as PDF. As I have tested,
-# `pdflatex` does not allow any `%` (percent) or `"` (double quote)
+# 
+# The engine `lualatex` exports LaTeX as PDF. As I have tested,
+# `lualatex` does not allow any `%` (percent) or `"` (double quote)
 # in filename. All other Bash-reserved characters must be escaped,
 # as usually the case for executables.
 # Like: `draft (2016).tex` is passed as `draft\ \(2016\).tex`.
-COMPILER="xelatex"
+COMPILER="lualatex"
 EXT_BIN=".pdf"
 
 # To check arguments, and compile.
@@ -25,7 +26,7 @@ full_name_src=
 bare_name_bin=
 source "${DIR_SCRIPTS}/parse_src_bin_name.sh"
 
-# `xelatex` options:
+# `lualatex` options:
 # -synctex=1`: Let PDF not contain info for looking up source.
 # -interaction=nonstopmode`: Do not stop on error, but echo.
 # -output-format=pdf`: Specify output format.

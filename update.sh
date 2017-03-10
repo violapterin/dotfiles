@@ -28,7 +28,9 @@ len_file=${#LIST_FILE[@]}
 # Do for all files listed above:
 for ((i=0; i<=${len_file}-1; i++))
 do
+   set -x
    transfer "${LIST_FILE[i]}"
+   { set +x; } 2>/dev/null
 done
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -38,11 +40,15 @@ DIR_NOTES=${DIR_REPO}/notes
 DIR_SCRIPTS=${DIR_REPO}/scripts
 RUN_PANDOC=${DIR_SCRIPTS}/run_pandoc.sh
 
+set -x
 rm -f ${DIR_NOTES}/*.pdf
+{ set +x; } 2>/dev/null
 
 for f in ${DIR_NOTES}/*.md;
 do
+   set -x
    "${RUN_PANDOC}" "${f}"
+   { set +x; } 2>/dev/null
 done
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -51,6 +57,8 @@ done
 DIR_TEMPLATES=${DIR_REPO}/tex_templates
 for f in ${DIR_TEMPLATES}/*.{pdf,log,aux,gz};
 do
+   set -x
    rm -f "${f}"
+   { set +x; } 2>/dev/null
 done
 
