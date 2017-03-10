@@ -12,8 +12,10 @@ DIR_CONFIGS_TO="${DIR_REPO}/configuration_files"
 transfer() {
    local file_from="${DIR_CONFIGS_FROM}/$1"
    local file_to="${DIR_CONFIGS_TO}/$1"
+   set -x
    cp -f "${file_from}" "${file_to}"
    chmod 444 "${file_to}"
+   { set +x; } 2>/dev/null
 }
 
 # List of filenames to be copied.
@@ -28,9 +30,7 @@ len_file=${#LIST_FILE[@]}
 # Do for all files listed above:
 for ((i=0; i<=${len_file}-1; i++))
 do
-   set -x
    transfer "${LIST_FILE[i]}"
-   { set +x; } 2>/dev/null
 done
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -46,9 +46,7 @@ rm -f ${DIR_NOTES}/*.pdf
 
 for f in ${DIR_NOTES}/*.md;
 do
-   set -x
    "${RUN_PANDOC}" "${f}"
-   { set +x; } 2>/dev/null
 done
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 

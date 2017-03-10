@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
 
 # Filename: combine_audio_and_image_as_video.sh
-# Author: Tzu-Yu Jeng
+# Author: Aminopterin (Tzu-Yu Jeng)
 # Date: Feb. 2017
-# Description: to save an audio and an image (in still manner) as a video;
-#       various formats of both the audio and image are supported.
-# Requirement: that open source program `ffmpeg` be installed.
-#       (One may use: `brew install ffmpeg`)
+# Description: To save an audio and an image (in still manner) as a video;
+#    various formats of both the audio and image are supported.
+# Requirement: That `ffmpeg` be installed (use: `brew install ffmpeg`).
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
