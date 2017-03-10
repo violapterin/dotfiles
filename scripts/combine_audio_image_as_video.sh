@@ -50,15 +50,15 @@ video_out="$3"
 
 # `ffmpeg` options: (Keep them ordered as such! Do not rearrange!)
 options=(
-      "-loop 1" # to loop it only once, i.e. no repeatition
-      "-i ${image_in}" # image being input
-      "-i ${audio_in}" # audio being input
-      "-c:v libx264" # to include x264 codec library
-      "-tune stillimage" # to change specific setting: stillimage
-      "-c:a aac" # to use the native advanced audio coding encoder
-      "-b:a 192k" # bit rate, i.e. bits per second
-      "-pix_fmt yuv420p" # pixel format: Y'UV420p, a common color encoding
-      "-shortest" # to finish encoding as the shortest input stream ends
+      "-loop 1" # to loop it only once, i.e. no repeatition.
+      "-i ${image_in}" # image being input.
+      "-i ${audio_in}" # audio being input.
+      "-c:v libx264" # to include x264 codec library.
+      "-tune stillimage" # to change specific setting: stillimage.
+      "-c:a aac" # to use the native advanced audio coding encoder.
+      "-b:a 192k" # bit rate, i.e. bits per second.
+      "-pix_fmt yuv420p" # pixel format: Y'UV420p, a common color encoding.
+      "-shortest" # to finish encoding as the shortest input stream ends.
 )
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

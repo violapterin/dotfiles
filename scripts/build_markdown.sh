@@ -59,5 +59,7 @@ do
 
    # Compilation of the binary file.
    echo "Compiling ${full_name_bin} from ${full_name_src} ..."
+   set -x
    "${FULL_PRG}" "${dir_full_name_src}" "${bare_name_common}"
+   { set +x; } 2>/dev/null
 done

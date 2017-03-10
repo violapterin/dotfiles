@@ -1,4 +1,4 @@
-# Filename: parse_jobname.sh
+# Filename: parse_src_bin_name.sh
 # Author: Tzu-Yu Jeng
 # Date: Feb. 2017
 # Description: If included in a script, this parses input arguments;

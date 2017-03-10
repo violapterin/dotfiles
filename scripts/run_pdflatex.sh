@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-# Filename: run-pdflatex.sh
+# Filename: run_pdflatex.sh
 # Author: Tzu-Yu Jeng
 # Date: Jan. 2017
 # Description: to export `.tex` (LaTeX) file as `.pdf`
-# Requirement: having assumed script `pdflatex` and engine `pdftex`
+# Requirement: that script `pdflatex` and engine `pdftex` be installed.
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
