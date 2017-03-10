@@ -1,14 +1,13 @@
 #!/usr/bin/env bash
 
 # Filename: run_lualatex.sh
-# Author: Tzu-Yu Jeng
+# Author: Aminopterin (Tzu-Yu Jeng)
 # Date: Jan. 2017
-# Description: to export `.tex` (LaTeX) file as `.pdf`
-# Requirement: that script `lualatex` and engine `luatex` be installed.
+# Description: To export one `.tex` (LaTeX) file as `.pdf`
+# Requirement: That script `lualatex` and engine `luatex` be installed.
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-# 
 # The engine `lualatex` exports LaTeX as PDF. As I have tested,
 # `lualatex` does not allow any `%` (percent) or `"` (double quote)
 # in filename. All other Bash-reserved characters must be escaped,

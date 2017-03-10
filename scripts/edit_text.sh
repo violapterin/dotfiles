@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-# Filename: edit_plain_text.sh
-# Author: Tzu-Yu Jeng
+# Filename: edit_text.sh
+# Author: Aminopterin (Tzu-Yu Jeng)
 # Date: Feb. 2017
-# Description: to call `TextEdit.app` to open file as plain text.
-# Requirement: that `TextEdit.app` be installed (which is, by default).
+# Description: To call `TextEdit.app` to open file as plain text.
+# Requirement: That `TextEdit.app` be installed (which was shipped with Mac).
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
@@ -34,5 +34,3 @@ APPLICATION=TextEdit
 set -x
 open -a "${APPLICATION}" "$@"
 { set +x; } 2>/dev/null
-
-# multiple files??

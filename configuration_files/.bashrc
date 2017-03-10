@@ -98,7 +98,7 @@ alias BrowsePtt2="ssh bbsu@ptt2.cc"
 MY_SCRIPTS="${HOME}/templates_configs_scripts/scripts"
 
 # To open `foo` in TextEdit with `TextEdit foo`.
-alias PlainText="${MY_SCRIPTS}/edit_plain_text.sh"
+alias EditText="${MY_SCRIPTS}/edit_text.sh"
 
 # To compile Markdown (possibly with LaTeX embedded) into PDF.
 alias Pandoc="${MY_SCRIPTS}/run_pandoc.sh"

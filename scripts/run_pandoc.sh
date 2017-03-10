@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 # Filename: run_pandoc.sh
-# Author: Tzu-Yu Jeng
+# Author: Aminopterin (Tzu-Yu Jeng)
 # Date: Jan. 2017
-# Description: to export `.md` (Markdown) file as `.pdf`
-# Requirement: having assumed library `pandoc` and script `xelatex`
+# Description: To export `.md` (Markdown) file as `.pdf`.
+# Requirement: That library `pandoc`, script `xelatex`, and engine `xetex` be installed.
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
@@ -18,9 +18,9 @@ DIR_REPO="${HOME}/templates_configs_scripts"
 DIR_SCRIPTS="${DIR_REPO}/scripts"
 DIR_TEMPLATES="${DIR_REPO}/tex_templates"
 
-# `full_name_src` and `bare_name_bin` will be defined:
-full_name_src=
-bare_name_bin=
+# `full_src` and `bare_bin` will be defined:
+full_src=
+bare_bin=
 source "${DIR_SCRIPTS}/parse_src_bin_name.sh"
 
 # Location of template for `pandoc`
@@ -34,7 +34,7 @@ TEMPLATE_PANDOC="${DIR_TEMPLATES}/template_pandoc.tex"
 # `--latex-engine`: Set LaTeX compiler.
 options=(
       "--standalone"
-      "--output=${bare_name_bin}${EXT_BIN}"
+      "--output=${bare_bin}${EXT_BIN}"
       "--template=${TEMPLATE_PANDOC}"
       "--latex-engine=${ENGINE}"
 )
@@ -44,5 +44,5 @@ options=(
 # To run the main command.
 # `set -x` echoes what is executed; `set +x` cancels this.
 set -x
-"${COMPILER}" ${options[*]} "${full_name_src}"
+"${COMPILER}" ${options[*]} "${full_src}"
 { set +x; } 2>/dev/null

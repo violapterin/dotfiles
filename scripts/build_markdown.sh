@@ -1,24 +1,24 @@
 #!/usr/bin/env bash
 
 # Filename: build_markdown.sh
-# Author: Tzu-Yu Jeng
+# Author: Aminopterin (Tzu-Yu Jeng)
 # Date: Jan. 2017
-# Description: to export all `.md` (Markdown) files into `.pdf`
-# Requirement: that `pandoc` and `xelatex` be installed
+# Description: To export all `.md` (Markdown) files into `.pdf`.
+# Requirement: That `pandoc` and `xelatex` be installed.
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 # To specify location of program.
-NAME_PRG="run_pandoc.sh"
+# Note: `FULL` and `DIR_TOP` must be specified in advance!
 DIR_SCRIPTS="${HOME}/templates_configs_scripts/scripts"
-FULL_PRG="${DIR_SCRIPTS}/${NAME_PRG}"
+PATH_FULL_PROGRAM="${DIR_SCRIPTS}/${FULL_PROGRAM}"
 
 # Define the dependency-checking function.
-NAME_FUN_DEF="function_resp_old_new.sh"
-source "${DIR_SCRIPTS}/${NAME_FUN_DEF}"
+FULL_FUN_DEF="function_resp_old_new.sh"
+source "${DIR_SCRIPTS}/${FULL_FUN_DEF}"
 
 # To delete binary files.
-RM="rm -f"
+DELETE="rm -f"
 
 # extensions resp. of souce and binary files
 EXT_SRC=".md"
@@ -32,34 +32,53 @@ FRAGMENT="∂"
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-for dir_full_name_src in ${list_global_src}
-do
-   # If `src` is `foo.bar.baz`, `bare_name_common` is `foo`.
-   dir="$(dirname ${dir_full_name_src})"
-   cd "${dir}"
-   full_name_src="$(basename ${dir_full_name_src})"
-   bare_name_common="${full_name_src%%.*}"
+if [[ "$#" -gt 1 ]]
+then
+   echo "Too many arguments. 0 or 1 expected, $# present. Stop." > /dev/stderr
+   exit 1
 
-   # Name the corresponding binary the same as according source.
-   full_name_bin="${bare_name_common}${EXT_BIN}"
-   dir_full_name_bin="${dir}/${full_name_bin}"
-
-   # Ignore `∂`-prefixed (unfinished) files.
-   if [[ "${full_name_src:0:1}" == "${FRAGMENT}" ]]
-   then
-      continue
+elif [[ "$#" -eq 1 ]]
+then
+   if [[ "$1" -eq "clean" ]]
+      "${DELETE}" 
+   else
+      echo "Argument $1 not recognized. Stop." > /dev/stderr
+      exit 1
    fi
 
-   # Check timestamp according to dependency.
-   hold="$(resp_old_new "${dir_full_name_src}" "${dir_full_name_bin}")"
-   if [[ "${hold}" == "TRUE" ]]
-   then
-      continue
-   fi
+# No argument present.
+elif
+then
+   # For every Markdown source, compile PDF in the same place.
+   for dir_full_src in ${list_global_src}
+   do
+      # If `src` is `foo.bar.baz`, `bare_common` is `foo`.
+      dir="$(dirname ${dir_full_src})"
+      cd "${dir}"
+      full_src="$(basename ${dir_full_src})"
+      bare_common="${full_src%%.*}"
 
-   # Compilation of the binary file.
-   echo "Compiling ${full_name_bin} from ${full_name_src} ..."
-   set -x
-   "${FULL_PRG}" "${dir_full_name_src}" "${bare_name_common}"
-   { set +x; } 2>/dev/null
-done
+      # Name the corresponding binary the same as according source.
+      full_bin="${bare_common}${EXT_BIN}"
+      dir_full_bin="${dir}/${full_bin}"
+
+      # Ignore `∂`-prefixed (unfinished) files.
+      if [[ "${full_src:0:1}" == "${FRAGMENT}" ]]
+      then
+         continue
+      fi
+
+      # Check timestamp according to dependency.
+      hold="$(resp_old_new "${dir_full_src}" "${dir_full_bin}")"
+      if [[ "${hold}" == "TRUE" ]]
+      then
+         continue
+      fi
+
+      # Compilation of the binary file.
+      echo "Compiling ${full_bin} from ${full_src} ..."
+      set -x
+      "${FULL_PRG}" "${dir_full_src}" "${bare_common}"
+      { set +x; } 2>/dev/null
+   done
+fi

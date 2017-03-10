@@ -13,17 +13,17 @@
 
 " From now on, I'll classify settings in the manner of a GUI toolbar.
 " *  Preparation
-" *  File, read and write
-" *  Edit, search and replace
+" *  Helper functions' implementation
+" *  File, read, and write
+" *  Edit, search, and replace
 " *  View, windows, and NETRW
 " *  Display of text
 " *  Command bar and other tools
 " *  Navigation and cursor
-" *  Helper functions's implementation
 " *  Summary of custom leader commands
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
-"          Miscellaneous preparation
+"          Preparation
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 
 " First, to define a "leader" to be the space bar, after turning off
@@ -37,16 +37,107 @@ augroup group_vimrc
    autocmd!
 augroup END
 
-" To wait 3[s] for combination key, and afterwards wait 0.1[s]
-" for key codes after that (both in ms),
-" preventing delay after `O` (opening another line above).
-set timeout
-set timeoutlen=3000
-set ttimeoutlen=100
+" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+"          Helper functions implementation
+" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 
-" To disable `<shift><f5>` (I mapped `<tab>` key as `<f5>` key),
-" because I often accidentally hit it.
-inoremap <s-f5> <nop>
+" To toggle showing text hidden for lack of space (see `<space>\`).
+function! ToggleDisplayLastLine()
+    if (&display=='')
+        let &display='truncate'
+    else
+        let &display=''
+    endif
+endfunction
+
+" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+
+" In NETRW buffer, to toggle hiding files (see `<space>h`).
+function! ToggleDisplayHiddenFiles()
+    if (g:netrw_hide==0)
+        let g:netrw_hide=1
+    else
+        let g:netrw_hide=0
+    endif
+endfunction
+
+" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+
+" To switch among chosen color schemes (see `<space>t`).
+function! ChooseNextColor()
+    if (g:colors_name=='flattened')
+        :colorscheme gruvbox
+    elseif (g:colors_name=='gruvbox')
+        :colorscheme tomorrow-eighties
+    elseif (g:colors_name=='tomorrow-eighties')
+        :colorscheme tomorrow-bright
+    elseif (g:colors_name=='tomorrow-bright')
+        :colorscheme molokai
+    elseif (g:colors_name=='molokai')
+        :colorscheme default
+    elseif (g:colors_name=='default')
+        :colorscheme flattened
+    endif
+
+    highlight Comment cterm=italic
+
+    call SetColorUsers()
+endfunction
+
+" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+
+" List buffer's filename only, suppressing path (see `<space>b`).
+function! ListBuffersFilenameOnly()
+    " To redirect `:ls` result, and save as `list`; `s:` makes it local.
+    redir => s:list
+    silent exec 'ls'
+    redir END
+
+    " Replacement syntax is same as `:s`; `g` for global action.
+    " The `®` and `©` are introduced temporarily for delimitation.
+    " First to isolate filenames and line numbers.
+    let s:list = substitute( s:list, '"\([^\n]*\)"\s*line \(\d\+\)', 'line ®\2®: ©\1©', 'g' )
+
+    " To keep only basename of file and strip `©`.
+    let s:list = substitute( s:list, '©\([^©]*\)/\([^©/]\+\)©', '\2', 'g' )
+    let s:list = substitute( s:list, '©\([^©]\+\)©', '\1', 'g' )
+
+    " To pad whitespace to align and strip `®`.
+    let s:list = substitute( s:list, '®\(\d\{1}\)®:', '\1:     ', 'g' )
+    let s:list = substitute( s:list, '®\(\d\{2}\)®:', '\1:    ', 'g' )
+    let s:list = substitute( s:list, '®\(\d\{3}\)®:', '\1:   ', 'g' )
+    let s:list = substitute( s:list, '®\(\d\{4}\)®:', '\1:  ', 'g' )
+    let s:list = substitute( s:list, '®\(\d\{5}\)®:', '\1: ', 'g' )
+
+    echo s:list
+endfunction
+
+" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+
+" To set the statusline for all windowss.
+function! RefreshStatusLine()
+    for i in range(1, winnr('$'))
+        call setwinvar(i, '&statusline', '%!GetStatusLine(' . i . ')')
+    endfor
+endfunction
+
+" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+
+" To choose the statusline for either active or inactive windowss.
+function! GetStatusLine(num_active_window)
+    return a:num_active_window==winnr() ? s:active_statusline : s:inactive_statusline
+endfunction
+
+" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+
+" To set colors used in status line.
+function! SetColorUsers()
+    highlight User1 guifg=#ffffff  guibg=#660000
+    highlight User2 guifg=#ffffff  guibg=#990033
+    highlight User3 guifg=#ffffff  guibg=#666600
+    highlight User4 guifg=#ffffff  guibg=#336633
+    highlight User5 guifg=#ffffff  guibg=#336699
+endfunction
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 "          File, read, and write
@@ -138,6 +229,17 @@ set nojoinspaces
 
 " Do not automatically supply comment-symbol (e.g. "//" in C++).
 autocmd group_vimrc FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+" To wait 3[s] for combination key, and afterwards wait 0.1[s]
+" for key codes after that (both in ms),
+" preventing delay after `O` (opening another line above).
+set timeout
+set timeoutlen=3000
+set ttimeoutlen=100
+
+" To disable `<shift><f5>` (I mapped `<tab>` key as `<f5>` key),
+" because I often accidentally hit it.
+inoremap <s-f5> <nop>
 
 " To allow magic (which is default) that simplifies regular expressions,
 " but literal `\`, `~`, `*`, `$`, `.`  each requires escape by prefixing `\`
@@ -265,13 +367,9 @@ set background=dark
 " (`altercation/vim-colors-solarized`); see my note in this repo.
 colorscheme flattened
 
-" Colors of the status line, for the only active pane only.
+" Colors of the status line, for the only active windows only.
 " They must come after `colorscheme` file is read.
-highlight User1 guifg=#ffffff  guibg=#660000
-highlight User2 guifg=#ffffff  guibg=#990033
-highlight User3 guifg=#ffffff  guibg=#666600
-highlight User4 guifg=#ffffff  guibg=#336633
-highlight User5 guifg=#ffffff  guibg=#336699
+call SetColorUsers()
 
 " To switch among my favorite color schemes with `<space>t` (for "theme").
 nnoremap <leader>t :call ChooseNextColor()<cr>
@@ -352,27 +450,13 @@ set laststatus=2
 " `%1*foo%*` displays `foo` in color `User1`, and so on.
 " They are defined in the lines after `colorscheme`.
 
-"set statusline=%1*\ %F\ %*%2*%m%r%h%*%3*\ B:%n\ %*%4*\ L:%l\/%L\ %*%5*\ C:%c%V\ %*
-
-
-" To define the only active pane.
+" First to define that for the only active windows.
 let s:active_statusline='%1* %F %*%2*%m%r%h%*%3* B:%n %*%4* L:%l/%L %*%5* C:%c%V %*'
-" To define other inactive panes.
+" Next to define those for other inactive windowss.
 let s:inactive_statusline=' %F %m%r%h B:%n  L:%l/%L  C:%c%V '
 
-" 
-function! RefreshStatus()
-  for i in range(1, winnr('$'))
-    call setwinvar(i, '&statusline', '%!GetStatus(' . i . ')')
-  endfor
-endfunction
-
-function! GetStatus(w)
-  return a:w==winnr() ? s:active_statusline : s:inactive_statusline
-endfunction
-
-autocmd VimEnter,WinEnter,BufWinEnter * call RefreshStatus()
-
+" Set the statusline whenever the active windows changes.
+autocmd group_vimrc VimEnter,WinEnter,BufWinEnter * call RefreshStatusLine()
 
 " To toggle spell checking on and off with`<space>s` (for "spell").
 noremap <leader>s :setlocal spell!<cr>
@@ -382,7 +466,6 @@ set dictionary=/usr/share/dict/words
 
 " To set source codes syntax completion, called with `<ctrl>x<ctrl>o` in insert mode.
 set omnifunc=syntaxcomplete#Complete
-
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 "          Navigation and cursor
@@ -422,79 +505,6 @@ set guicursor=n:blinkon0
 
 " To disallow "mouse" (i.e. trackpad or whatever) to change cursor location.
 set mouse=
-
-" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
-"          Helper functions implementation
-" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
-
-" To toggle showing text hidden for lack of space (see `<space>\`).
-function! ToggleDisplayLastLine()
-    if (&display=='')
-        let &display='truncate'
-    else
-        let &display=''
-    endif
-endfunction
-
-" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
-
-" In NETRW buffer, to toggle hiding files (see `<space>h`).
-function! ToggleDisplayHiddenFiles()
-    if (g:netrw_hide==0)
-        let g:netrw_hide=1
-    else
-        let g:netrw_hide=0
-    endif
-endfunction
-
-" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
-
-" To switch among chosen color schemes (see `<space>t`).
-function! ChooseNextColor()
-    if (g:colors_name=='flattened')
-        :colorscheme gruvbox
-    elseif (g:colors_name=='gruvbox')
-        :colorscheme tomorrow-eighties
-    elseif (g:colors_name=='tomorrow-eighties')
-        :colorscheme tomorrow-bright
-    elseif (g:colors_name=='tomorrow-bright')
-        :colorscheme molokai
-    elseif (g:colors_name=='molokai')
-        :colorscheme default
-    elseif (g:colors_name=='default')
-        :colorscheme flattened
-    endif
-
-    highlight Comment cterm=italic
-endfunction
-
-" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
-
-" List buffer's filename only, suppressing path (see `<space>b`).
-function! ListBuffersFilenameOnly()
-    " To redirect `:ls` result, and save as `list`; `s:` makes it local.
-    redir => s:list
-    silent exec 'ls'
-    redir END
-
-    " Replacement syntax is same as `:s`; `g` for global action.
-    " The `®` and `©` are introduced temporarily for delimitation.
-    " First to isolate filenames and line numbers.
-    let s:list = substitute( s:list, '"\([^\n]*\)"\s*line \(\d\+\)', 'line ®\2®: ©\1©', 'g' )
-
-    " To keep only basename of file and strip `©`.
-    let s:list = substitute( s:list, '©\([^©]*\)/\([^©/]\+\)©', '\2', 'g' )
-    let s:list = substitute( s:list, '©\([^©]\+\)©', '\1', 'g' )
-
-    " To pad whitespace to align and strip `®`.
-    let s:list = substitute( s:list, '®\(\d\{1}\)®:', '\1:     ', 'g' )
-    let s:list = substitute( s:list, '®\(\d\{2}\)®:', '\1:    ', 'g' )
-    let s:list = substitute( s:list, '®\(\d\{3}\)®:', '\1:   ', 'g' )
-    let s:list = substitute( s:list, '®\(\d\{4}\)®:', '\1:  ', 'g' )
-    let s:list = substitute( s:list, '®\(\d\{5}\)®:', '\1: ', 'g' )
-
-    echo s:list
-endfunction
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 "          Summary of custom leader commands
