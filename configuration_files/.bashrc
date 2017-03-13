@@ -2,6 +2,7 @@
 # Author: Tzu-Yu Jeng
 # Date: mostly late 2016
 # Description: An interactive non-login shell loads this file.
+# Requirement: That it be placed in user's home, and included in `.bash_profile`.
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
@@ -106,6 +107,8 @@ alias Pandoc="${MY_SCRIPTS}/run_pandoc.sh"
 alias Pdflatex="${MY_SCRIPTS}/run_pdflatex.sh"
 # To compile XeLaTeX source (possibly with Chinese) into PDF.
 alias Xelatex="${MY_SCRIPTS}/run_xelatex.sh"
+# To combine an audio and and still image as a video.
+alias Ffmpeg="${MY_SCRIPTS}/combine_image_audio_as_video.sh"
 
 # This line was added by system when installing Perl5.
 # It calls `perlbrew`, which maintains and updates Perl.
