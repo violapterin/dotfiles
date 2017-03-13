@@ -1,26 +1,34 @@
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
-"    Filename: .vimrc
-"    Date: mostly Oct. 2016 to Jan. 2017
-"    Organized by: Aminopterin (Tzu-Yu Jeng)
-"    Main based on: Amir Salihefendic (`github.com/amix/vimrc`). Also
-" influenced by various Stack Overflow and Vim Stack Exchange posts. Pardon
-" for not attributing each one of them, but my gratitude is genuine!
-"    Legend: `<cr>` for the return key, `<esc>` the escape key, <bs>
-" for the backspace, <space> for the spacebar, and `<c-*>` for 
-" `<ctrl>*` (holding `<ctrl>` while pressing * where * is some key).
-" Though abbreviations exist, I use full name form for ease of reading.
+"
+" Filename: .vimrc
+" Date: mostly Oct. 2016 to Jan. 2017
+" Author: Aminopterin (Tzu-Yu Jeng)
+" Description: Settings and custom commands for Vim.
+" Requirement: That this be saved in the home.
+"
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
-
-" From now on, I'll classify settings in the manner of a GUI toolbar.
-" *  Preparation
-" *  Helper functions' implementation
-" *  File, read, and write
-" *  Edit, search, and replace
-" *  View, windows, and NETRW
-" *  Display of text
-" *  Command bar and other tools
-" *  Navigation and cursor
-" *  Summary of custom leader commands
+"
+"    It's mainly based on Amir Salihefendic's `.vimrc` (`github.com/amix/vimrc`).
+" Also influenced by various Stack Overflow and Vim Stack Exchange posts. Excuse
+" me for not attributing each one of them, but my gratitude is genuine.
+"    Legend for keys: `<cr>` for the return key, `<esc>` the escape key, <bs>
+" for the backspace, <space> for the spacebar, and `<c-*>` for `<ctrl>*` 
+" (holding `<ctrl>` while pressing * where * is some key). Though abbreviations
+" exist, I shall use the full name form whenever possble, for ease of reading.
+"
+" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+"
+"    From now on, I'll classify settings in the manner of a GUI toolbar.
+"
+"    *  Preparation
+"    *  Helper functions' implementation
+"    *  File, read, and write
+"    *  Edit, search, and replace
+"    *  View, windows, and NETRW
+"    *  Display of text
+"    *  Command bar and other tools
+"    *  Navigation and cursor
+"    *  Summary of custom leader commands
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 "          Preparation

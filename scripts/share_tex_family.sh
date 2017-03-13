@@ -23,14 +23,14 @@ RM="rm -f"
 # Defined names of extensions resp. of souce and binary files.
 # Compiler reads `main.tex`, & join sources as `standalone.tex`
 EXT_SRC=".tex"
-EXT_BIN=".pdf"
+EXT_GRPH=".pdf"
 BARE_SRC_CHIEF="main"
 BARE_SRC_ALL="standalone"
-FULL_SRC_CHIEF=${BARE_SRC_CHIEF}${EXT_SRC}
-FULL_SRC_ALL=${BARE_SRC_ALL}${EXT_SRC}
+FULL_SRC_CHIEF="${BARE_SRC_CHIEF}${EXT_SRC}"
+FULL_SRC_ALL="${BARE_SRC_ALL}${EXT_SRC}"
 
 # To set the `main.tex` sources inside current working directory.
-list_full_src_chief=$(find ${DIR_TOP} -name "${FULL_SRC_CHIEF}")
+list_full_src_chief=$(find "${DIR_TOP}" -name "${FULL_SRC_CHIEF}")
 
 # Partial derivative, indicating fragmentary work.
 FRAGMENT="∂"
@@ -40,7 +40,7 @@ FRAGMENT="∂"
 # For every project within top directory, find main source, and compile
 for path_full_src_chief in ${list_full_src_chief}
 do
-   dir="$(dirname ${path_full_src_chief})"
+   dir=$(dirname "${path_full_src_chief}")
    cd "${dir}"
    # To hold all sources in the current working directory.
    list_full_src_relavent=$(find . -name "*${EXT_SRC}")
@@ -49,8 +49,8 @@ do
    list_full_src_relavent="${list_full_src_relavent//.\/${FULL_SRC_CHIEF}/}"
 
    # Name the corresponding binary the same as directory.
-   bare_bin="$(basename ${dir})"
-   full_bin="${bare_bin}${EXT_BIN}"
+   bare_bin=$(basename "${dir}")
+   full_bin="${bare_bin}${EXT_GRPH}"
    path_full_bin="${dir}/${full_bin}"
 
    # Ignore `∂`-prefixed (unfinished) files.
@@ -60,11 +60,11 @@ do
    fi
 
    # Check timestamp according to dependency.
-   "${whether_make}" == "FALSE"
+   whether_make="FALSE"
    for full_src in "${list_full_src_relavent}"
    do
       path_full_src_hold="${dir}${full_src}"
-      hold="$(resp_old_new "${path_full_src_hold}" "${path_full_bin}")"
+      hold=$(resp_old_new "${path_full_src_hold}" "${path_full_bin}")
       if [[ "${hold}" == "FALSE" ]]
       then
          whether_make="TRUE"
