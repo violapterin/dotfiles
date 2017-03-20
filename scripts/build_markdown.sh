@@ -5,7 +5,8 @@
 # Date: Jan. 2017
 # Description: To export all `.md` (Markdown) files inside current directory as `.pdf`.
 # Requirement: That `pandoc` and `xelatex` (which `pandoc` calls) be
-#       installed; also, `DIR_TOP` must be specified in advance!
+#    installed; also, `DIR_TOP` must be specified in advance!
+# Usage: `build_markdown.sh <markdown_source>`
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
@@ -88,15 +89,18 @@ do
    fi
 
    # Check timestamp according to dependency.
-   hold="$(resp_old_new "${path_full_src}" "${path_full_bin}")"
-   if [[ "${hold}" == "TRUE" ]]
+   whether_make="FALSE"
+   hold=$(resp_old_new "${path_full_src}" "${path_full_bin}")
+   if [[ "${hold}" == "FALSE" ]]
    then
-      continue
+      "${whether_make}"="TRUE"
    fi
 
-   # Compilation of the binary file.
-   echo "Compiling ${full_bin} from ${full_src} ..."
-   set -x
-   "${PATH_FULL_PROGRAM}" "${path_full_src}" "${bare_common}"
-   { set +x; } 2>/dev/null
+   if [[ "${whether_make}" == "TRUE" ]]
+   then
+      echo "Compiling ${full_bin} from ${full_src} ..."
+      set -x
+      "${PATH_FULL_PROGRAM}" "${path_full_src}" "${bare_common}"
+      { set +x; } 2>/dev/null
+   fi
 done

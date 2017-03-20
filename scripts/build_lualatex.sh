@@ -5,6 +5,8 @@
 # Date: Jan. 2017
 # Description: To export all `.tex` (LaTeX) file as `.pdf`, using `lualatex`.
 # Requirement: See the called script `run_lualatex.sh`.
+# Usage: Run this, with working directory containing several project
+#    directories, each of them intended to be compiled.
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 

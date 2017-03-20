@@ -5,16 +5,18 @@
 # Date: Feb. 2017
 # Description: To call `TextEdit.app` to open file as plain text.
 # Requirement: That `TextEdit.app` be installed (which was shipped with Mac).
+# Usage: edit_test.sh <text_file_1> ... <text_file_n>
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-# If no argument is provided:
+# If no argument is provided, emit error.
 if [[ "$#" -eq 0 ]]
 then
    echo "No arguments supplied. 1 or 2 expected, 0 present. Stop." > /dev/stderr
    exit 1
 fi
 
+# If one of the file does not exist, emit error.
 for f in "$@"
 do
    if [[ ! -f "${f}" ]]
