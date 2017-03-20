@@ -5,6 +5,7 @@
 # Date: Jan. 2017
 # Description: To export one `.tex` (LaTeX) file as `.pdf`
 # Requirement: That script `lualatex` and engine `luatex` be installed.
+# Usage: `run_lualatex.sh <latex_source>`
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 

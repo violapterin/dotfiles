@@ -5,6 +5,7 @@
 # Date: Jan. 2017
 # Description: To export all `.tex` (LaTeX) file as `.pdf`, using `xelatex`
 # Requirement: See the called script `run_xelatex.sh`
+# Usage: `run_xelatex.sh <latex_source>`
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
