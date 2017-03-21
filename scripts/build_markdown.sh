@@ -47,11 +47,11 @@ elif [[ "$#" -eq 1 ]]
 then
    if [[ "$1" == "clean" ]]
       # For every Markdown source, compile PDF in the same place.
-      for path_full_src in ${list_global_path_full_src}
+      for path_full_src_dm in ${list_global_path_full_src}
       do
          # See the next section for more comments.
-         dir=$(dirname "${path_full_src}")
-         full_src="$(basename ${path_full_src})"
+         dir=$(dirname "${path_full_src_dm}")
+         full_src="$(basename ${path_full_src_dm})"
          bare_common="${full_src%%.*}"
          full_bin="${bare_common}${EXT_GRPH}"
          path_full_bin="${dir}/${full_bin}"
@@ -70,12 +70,12 @@ fi
 
 # Otherwise, no argument present.
 # For every Markdown source, compile PDF in the same place.
-for path_full_src in ${list_global_path_full_src}
+for path_full_src_dm in ${list_global_path_full_src}
 do
    # If `src` is `foo.bar.baz`, `bare_common` is `foo`.
-   dir=$(dirname "${path_full_src}")
+   dir=$(dirname "${path_full_src_dm}")
    cd "${dir}"
-   full_src="$(basename ${path_full_src})"
+   full_src="$(basename ${path_full_src_dm})"
    bare_common="${full_src%%.*}"
 
    # Name the corresponding binary the same as according source.

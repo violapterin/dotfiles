@@ -116,18 +116,27 @@ fi
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # To unwrap sources.
-for path_full_src_pts in "${list_path_full_src_pts}"
-do
-   dir=$(dirname "${path_full_src_pts}")
-   full_src_pts=$(basename "${path_full_src_pts}")
-   bare_stc_pts="${full_src_pts%%.*}"
-   list_path_full_src_wrp_relevant=( "${list_path_full_src_wrp[@]/%/_${bare_src_pts}}" )
+whether_make="FALSE"
 
-   whether_make="FALSE"
-   for path_full_src_wrp_rlv in "${list_path_full_src_wrp_rlv}"
+for path_full_src_pts_dm in "${list_path_full_src_pts}"
+do
+   dir=$(dirname "${path_full_src_pts_dm}")
+   full_src_pts=$(basename "${path_full_src_pts_dm}")
+   bare_src_pts="${full_src_pts%%.*}"
+   
+   # The relevant wrappers from which `path_full_src_pts_dm` is generated.
+   for path_full_src_wrp_dm "${list_path_full_src_wrp}"
    do
-      hold_wrp=$(resp_old_new "${path_full_src_wrp_rlv}" "${path_full_src_pts}")
-      if [[ "${hold_wrp}" == "FALSE" ]]
+      if [[ ${path_full_src_pts_dm} == ${bare_src_pts}*${EXT_SRC} ]]
+      then
+         list_path_full_src_wrp_rlv+=("${path_full_src_pts_dm}")
+      fi
+   done
+
+   for path_full_src_wrp_rlv_dm in "${list_path_full_src_wrp_rlv}"
+   do
+      hold_src=$(resp_old_new "${path_full_src_wrp_rlv_dm}" "${path_full_src_pts_dm}")
+      if [[ "${hold_src}" == "FALSE" ]]
       then
          whether_make="TRUE"
          break
@@ -136,41 +145,25 @@ do
 
    if [[ "${whether_make}" == "TRUE" ]]
    then
-      # XXX: prepare part from wrapped
-      # ${????} "${list_path_full_src_wrp_rlv}" "${path_full_src_pts}"
-   fi
-done
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
-# Compilation of the score.
-whether_make="FALSE"
-for path_full_src in "${list_path_full_src_pts}" "${list_path_full_src_wrp}"
-do
-   hold_src=$(resp_old_new "${path_full_src}" "${path_bare_bin_common}${EXT_GRPH}")
-   if [[ "${hold_src}" == "FALSE" ]]
-   then
-      whether_make="TRUE"
       break
    fi
 done
 
 if [[ "${whether_make}" == "TRUE" ]]
 then
-   echo "Compiling ${full_bin} from ${full_src} ..."
-   set -x
-   ${COMPILER} ${OPT_COMPILER} ${path_full_src_chief}
-   { set +x; } 2>/dev/null
+   # XXX: prepare part from wrapped
+   # ${????} "${list_path_full_src_wrp_rlv}" "${path_full_src_pts_dm}"
 fi
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # Compilation of the score.
 whether_make="FALSE"
-for path_full_src in "${list_path_full_src_pts}" "${list_path_full_src_wrp}"
+
+for path_full_src_dm in "${list_path_full_src_pts}" "${list_path_full_src_wrp}"
 do
-   hold_grph=$(resp_old_new "${path_full_src}" "${path_full_grph}")
-   hold_snd1=$(resp_old_new "${path_full_src}" "${path_full_snd1}")
+   hold_grph=$(resp_old_new "${path_full_src_dm}" "${path_full_grph}")
+   hold_snd1=$(resp_old_new "${path_full_src_dm}" "${path_full_snd1}")
    if [[ "${hold_grph}" == "FALSE" ]] || [[ "${hold_snd1}" == "FALSE" ]]
    then
       whether_make="TRUE"
@@ -190,8 +183,9 @@ fi
 
 # Compilation of the WAV.
 whether_make="FALSE"
-hold_snd1=$(resp_old_new "${path_full_snd1}" "${path_full_snd2}")
-if [[ "${hold_snd1}" == "FALSE" ]]
+
+hold_snd2=$(resp_old_new "${path_full_snd1}" "${path_full_snd2}")
+if [[ "${hold_snd2}" == "FALSE" ]]
 then
    whether_make="TRUE"
    break
@@ -209,8 +203,9 @@ fi
 
 # Compilation of the MP3.
 whether_make="FALSE"
-hold_snd2=$(resp_old_new "${path_full_snd2}" "${path_full_snd3}")
-if [[ "${hold_snd2}" == "FALSE" ]]
+
+hold_snd3=$(resp_old_new "${path_full_snd2}" "${path_full_snd3}")
+if [[ "${hold_snd3}" == "FALSE" ]]
 then
    whether_make="TRUE"
    break
@@ -220,7 +215,7 @@ if [[ "${whether_make}" == "TRUE" ]]
 then
    echo "Compiling ${path_full_snd3} from ${path_full_snd2} ..."
    set -x
-   ${2ND_CONVERTER} ${OPT_2ND_CONVERTER} ${dir_name_wav}
+   ${2ND_CONVERTER} ${OPT_2ND_CONVERTER} ${path_full_snd2}
    { set +x; } 2>/dev/null
 fi
 
