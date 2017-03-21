@@ -61,9 +61,9 @@ fi
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 # For every project within top directory, find main source, and compile
-for path_full_src_chief in "${list_full_src_chief}"
+for path_full_src_chief_dm in "${list_full_src_chief}"
 do
-   dir=$(dirname "${path_full_src_chief}")
+   dir=$(dirname "${path_full_src_chief_dm}")
    cd "${dir}"
    # To hold all sources in the current working directory.
    list_full_src_rlv=$(find . -name "*${EXT_SRC}")
@@ -84,9 +84,9 @@ do
 
    # Check timestamp according to dependency.
    whether_make="FALSE"
-   for full_src in "${list_full_src_rlv}"
+   for full_src_dm in "${list_full_src_rlv}"
    do
-      path_full_src="${dir}${full_src}"
+      path_full_src="${dir}${full_src_dm}"
       hold=$(resp_old_new "${path_full_src}" "${path_full_bin}")
       if [[ "${hold}" == "FALSE" ]]
       then
@@ -98,8 +98,8 @@ do
    if [[ "${whether_make}" == "TRUE" ]]
    then
       # Compilation of the binary file.
-      echo "Compiling ${full_bin} from ${path_full_src_chief} ..."
-      "${FULL_PRG}" "${path_full_src_chief}" "${bare_bin}"
+      echo "Compiling ${full_bin} from ${path_full_src_chief_dm} ..."
+      "${FULL_PRG}" "${path_full_src_chief_dm}" "${bare_bin}"
 
       # XXX: prepare `standalone.tex`
       # ${????} "${FULL_SRC_CHIEF}" "${FULL_SRC_ALL}"
