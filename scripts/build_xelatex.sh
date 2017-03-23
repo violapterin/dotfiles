@@ -3,11 +3,14 @@
 # Filename: build_xelatex.sh
 # Author: Aminopterin (Tzu-Yu Jeng)
 # Date: Jan. 2017
-# Description: To export all `.tex` (LaTeX) file as `.pdf`, using `xelatex`
-# Requirement: See the called script `run_xelatex.sh`
-# Usage: `run_xelatex.sh <latex_source>`
+# Description: To compile PDF document of several LaTeX projects using `xelatex`.
+# Requirement: See the called script `run_xelatex.sh`.
+# Variable(s) defined in advance: `DIR_TOP`
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
+# `DIR_TOP` should contain several LaTeX project directories
+# that are intended to be compiled, and has a `main.tex` in it.
 
 DIR_SCRIPTS="${HOME}/templates_configs_scripts/scripts"
 FULL_MAKER="share_tex_family.sh"
