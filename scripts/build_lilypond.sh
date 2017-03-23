@@ -3,12 +3,15 @@
 # Filename: build_lilypond.sh
 # Author: Aminopterin (Tzu-Yu Jeng)
 # Date: Jan. 2017
-# Description: To compile graphics and audio files of one LilyPond project.
+# Description: To compile PDF score and synthesized MP3 of a LilyPond project.
 # Requirement: That `lilypond`, `fluidsynth`, and `lame` be installed;
 #    also, `TITLE` and `DIR_TOP` must be specified in advance!
-# Usage: Run this, with working directory the top of project directory.
+# Variable(s) defined in advance: `TITLE`, `DIR_TOP`
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
+# `DIR_TOP` should be the top directory of the desired LilyPond project.
+# `TITLE` should be the name of the project.
 
 # The location of music engraver LilyPond.
 COMPILER="/Applications/LilyPond.app/Contents/Resources/bin/lilypond"
@@ -50,11 +53,6 @@ path_full_snd3="${path_bare_bin_common}${EXT_SND3}"
 # List of LylyPond sources.
 list_src_parts="${DIR_SOURCE}*${EXT_SRC}"
 list_src_linkage="${DIR_LINKAGE}*${EXT_SRC}"
-
-# List of filenames of wrapped sources.
-items_wrapped=(
-# XXX
-)
 
 # To remove my wrapping of LilyPond sources.
 UNWRAPPER=
@@ -121,15 +119,17 @@ whether_make="FALSE"
 for path_full_src_pts_dm in "${list_path_full_src_pts}"
 do
    dir=$(dirname "${path_full_src_pts_dm}")
-   full_src_pts=$(basename "${path_full_src_pts_dm}")
-   bare_src_pts="${full_src_pts%%.*}"
+   full_src_pts_dm=$(basename "${path_full_src_pts_dm}")
+   bare_src_pts_dm="${full_src_pts_dm%%.*}"
    
    # The relevant wrappers from which `path_full_src_pts_dm` is generated.
    for path_full_src_wrp_dm "${list_path_full_src_wrp}"
    do
-      if [[ ${path_full_src_pts_dm} == ${bare_src_pts}*${EXT_SRC} ]]
+      full_src_wrp_dm=$(basename "${path_full_src_wrp_dm}")
+      bare_src_wrp_dm="${full_src_wrp_dm%%.*}"
+      if [[ ${bare_src_wrp_dm} == ${bare_src_pts_dm}* ]]
       then
-         list_path_full_src_wrp_rlv+=("${path_full_src_pts_dm}")
+         list_path_full_src_wrp_rlv+=("${path_full_src_wrp_dm}")
       fi
    done
 
@@ -160,10 +160,10 @@ fi
 # Compilation of the score.
 whether_make="FALSE"
 
-for path_full_src_dm in "${list_path_full_src_pts}" "${list_path_full_src_wrp}"
+for path_full_src_pts_dm in "${list_path_full_src_pts}" "${list_path_full_src_wrp}"
 do
-   hold_grph=$(resp_old_new "${path_full_src_dm}" "${path_full_grph}")
-   hold_snd1=$(resp_old_new "${path_full_src_dm}" "${path_full_snd1}")
+   hold_grph=$(resp_old_new "${path_full_src_pts_dm}" "${path_full_grph}")
+   hold_snd1=$(resp_old_new "${path_full_src_pts_dm}" "${path_full_snd1}")
    if [[ "${hold_grph}" == "FALSE" ]] || [[ "${hold_snd1}" == "FALSE" ]]
    then
       whether_make="TRUE"
@@ -173,7 +173,7 @@ done
 
 if [[ "${whether_make}" == "TRUE" ]]
 then
-   echo "Compiling ${path_full_grph} from ${FULL_SRC_CHIEF} ..."
+   echo "Compiling ${path_full_grph} from ${path_full_src_chief} ..."
    set -x
    ${COMPILER} ${OPT_COMPILER} ${path_full_src_chief}
    { set +x; } 2>/dev/null

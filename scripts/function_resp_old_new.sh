@@ -2,11 +2,13 @@
 # Author: Tzu-Yu Jeng
 # Date: Feb. 2017
 # Description: definition of function `resp_old_new`
-# Usage: foo bar` echoes string `TRUE` if `foo` has older, and `bar`
-#    has newer last modified date; and echoes `FALSE` otherwise.
+# Usage: `resp_old_new foo bar` echoes string `"TRUE"` if `foo` has older
+#    last modified date, and `bar` has newer; and `"FALSE"` otherwise.
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
+# Redirection to standard error is necessary, so that
+# message is not returned by `resp_old_new` through `echo`.
 function redirect ()
 {
    echo "$1" > /dev/stderr
@@ -35,7 +37,7 @@ function resp_old_new ()
    fi
 
    # If both the 1st and 2nd exists:
-   if [ ! -f "$1" ]
+   if [[ ! -f "$1" ]]
    then
       redirect "   File $1 missing. Stop."
       exit 1

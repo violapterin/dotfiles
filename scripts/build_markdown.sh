@@ -4,11 +4,14 @@
 # Author: Aminopterin (Tzu-Yu Jeng)
 # Date: Jan. 2017
 # Description: To export all `.md` (Markdown) files inside current directory as `.pdf`.
-# Requirement: That `pandoc` and `xelatex` (which `pandoc` calls) be
-#    installed; also, `DIR_TOP` must be specified in advance!
+# Requirement: That `pandoc` and `xelatex` be installed.
 # Usage: `build_markdown.sh <markdown_source>`
+# Variable(s) defined in advance: `DIR_TOP`
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
+# `DIR_TOP` should contain several (standalone) Markdown files,
+# each of them intended to be compiled.
 
 # To specify location of program.
 FULL_PROGRAM="run_pandoc.sh"

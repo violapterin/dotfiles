@@ -1,16 +1,19 @@
 # Filename: parse_src_bin_name.sh
 # Author: Aminopterin (Tzu-Yu Jeng)
 # Date: Feb. 2017
-# Description: If included in a script, this parses input arguments;
-#    when there are two arguments, the 1st is source, the 2nd binary
-#    without extension; when there is only one, it is source, and the
-#    binary's name is obtained by substituting source's extension.
-# Requirement: That `EXT_BIN` be defined in the including script.
+# Description: To parse source and binary names used in LaTeX compilation.
+# Requirement: No.
+# Variable(s) defined in advance: `EXT_BIN`
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-# The fullname of source will be saved as `full_src`.
-# The basename of binary will be saved as `bare_bin`.
+# If included in a script, this parses input arguments;
+# when there are two arguments, the 1st is source, the 2nd binary
+# without extension; when there is only one, it is source, and the
+# binary's name is obtained by substituting source's extension.
+
+# The fullname of source will be stored as `full_src`.
+# The basename of binary will be stored as `bare_bin`.
 full_src=
 bare_bin=
 

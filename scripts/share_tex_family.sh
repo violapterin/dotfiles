@@ -3,11 +3,13 @@
 # Filename: share_tex_family.sh
 # Author: Aminopterin (Tzu-Yu Jeng)
 # Date: Jan. 2017
-# Description: 
+# Description: This will be sourced by each TeX-making scripts.
 # Requirement: That the relevant TeX engine specified be installed.
-# Usage: This will be sourced by each TeX-making scripts.
+# Variable(s) defined in advance: `DIR_TOP`
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
+echo "DIR_TOP: ${DIR_TOP}" # XXX
 
 # To specify location of program.
 # Note: `NAME_PROGRAM` and `DIR_TOP` must be specified in advance!
@@ -31,7 +33,9 @@ FULL_SRC_CHIEF="${BARE_SRC_CHIEF}${EXT_SRC}"
 FULL_SRC_ALL="${BARE_SRC_ALL}${EXT_SRC}"
 
 # To set the `main.tex` sources inside current working directory.
-list_full_src_chief=$(find "${DIR_TOP}" -name "${FULL_SRC_CHIEF}")
+list_path_full_src_chief=$(find "${DIR_TOP}" -name "${FULL_SRC_CHIEF}")
+
+echo "list_path_full_src_chief: ${list_path_full_src_chief}" # XXX
 
 # Partial derivative, indicating fragmentary work.
 FRAGMENT="∂"
@@ -49,9 +53,10 @@ then
 elif [[ "$#" -eq 1 ]]
 then
    if [[ "$1" == "clean" ]]
-
-# XXX
-
+   then
+      # XXX
+      # XXX
+      exit 0
    else
       echo "Argument $1 not recognized. Stop." > /dev/stderr
       exit 1
@@ -60,21 +65,30 @@ fi
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
+# No argument present.
 # For every project within top directory, find main source, and compile
-for path_full_src_chief_dm in "${list_full_src_chief}"
+for path_full_src_chief_dm in "${list_path_full_src_chief}"
 do
-   dir=$(dirname "${path_full_src_chief_dm}")
-   cd "${dir}"
+   dir_dm=$(dirname "${path_full_src_chief_dm}")
+   echo "dir_dm: ${dir_dm}" # XXX
+   cd "${dir_dm}"
    # To hold all sources in the current working directory.
-   list_full_src_rlv=$(find . -name "*${EXT_SRC}")
+   list_path_full_src_rlv=$(find . -name "*${EXT_SRC}")
    # To remove the `standalone.tex` generated from `main.tex`.
    # (If the replaced contains `/`, 1st delimiter is `//` instead of `/`)
+   list_full_src_rlv=
+   for path_full_src_rlv_dm in "${list_path_full_src_rlv}"
+   do
+      full_src_rlv_dm=$(basename "${path_full_src_rlv_dm}")
+      list_full_src_rlv+=("full_src_rlv_dm")
+   done
    list_full_src_rlv="${list_full_src_rlv//.\/${FULL_SRC_CHIEF}/}"
+   echo "list_full_src_rlv: ${list_full_src_rlv}" # XXX
 
    # Name the corresponding binary the same as directory.
-   bare_bin=$(basename "${dir}")
-   full_bin="${bare_bin}${EXT_GRPH}"
-   path_full_bin="${dir}/${full_bin}"
+   bare_bin_dm=$(basename "${dir_dm}")
+   full_bin_dm="${bare_bin_dm}${EXT_GRPH}"
+   path_full_bin_dm="${dir_dm}/${full_bin_dm}"
 
    # Ignore `∂`-prefixed (unfinished) files.
    if [[ "${full_src:0:1}" == "${FRAGMENT}" ]]
@@ -86,8 +100,8 @@ do
    whether_make="FALSE"
    for full_src_dm in "${list_full_src_rlv}"
    do
-      path_full_src="${dir}${full_src_dm}"
-      hold=$(resp_old_new "${path_full_src}" "${path_full_bin}")
+      path_full_src="${dir_dm}/${full_src_dm}"
+      hold=$(resp_old_new "${path_full_src}" "${path_full_bin_dm}")
       if [[ "${hold}" == "FALSE" ]]
       then
          whether_make="TRUE"
@@ -98,8 +112,8 @@ do
    if [[ "${whether_make}" == "TRUE" ]]
    then
       # Compilation of the binary file.
-      echo "Compiling ${full_bin} from ${path_full_src_chief_dm} ..."
-      "${FULL_PRG}" "${path_full_src_chief_dm}" "${bare_bin}"
+      echo "Compiling ${full_bin_dm} from ${path_full_src_chief_dm} ..."
+      "${FULL_PRG}" "${path_full_src_chief_dm}" "${bare_bin_dm}"
 
       # XXX: prepare `standalone.tex`
       # ${????} "${FULL_SRC_CHIEF}" "${FULL_SRC_ALL}"
