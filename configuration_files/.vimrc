@@ -49,6 +49,11 @@ augroup END
 "          Helper functions implementation
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 
+" The implementation is placed before the main body of `.vimrc`,
+" in case that they are called within it, though some may not be.
+
+" " " " " " " " " " " " " " " "
+
 " To toggle showing text hidden for lack of space (see `<space>\`).
 function! ToggleDisplayLastLine()
     if (&display=='')
@@ -58,7 +63,7 @@ function! ToggleDisplayLastLine()
     endif
 endfunction
 
-" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+" " " " " " " " " " " " " " " "
 
 " In NETRW buffer, to toggle hiding files (see `<space>h`).
 function! ToggleDisplayHiddenFiles()
@@ -69,7 +74,7 @@ function! ToggleDisplayHiddenFiles()
     endif
 endfunction
 
-" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+" " " " " " " " " " " " " " " "
 
 " To switch among chosen color schemes (see `<space>t`).
 function! ChooseNextColor()
@@ -92,7 +97,7 @@ function! ChooseNextColor()
     call SetColorUsers()
 endfunction
 
-" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+" " " " " " " " " " " " " " " "
 
 " List buffer's filename only, suppressing path (see `<space>b`).
 function! ListBuffersFilenameOnly()
@@ -120,7 +125,7 @@ function! ListBuffersFilenameOnly()
     echo s:list
 endfunction
 
-" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+" " " " " " " " " " " " " " " "
 
 " To set the statusline for all windowss.
 function! RefreshStatusLine()
@@ -129,14 +134,14 @@ function! RefreshStatusLine()
     endfor
 endfunction
 
-" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+" " " " " " " " " " " " " " " "
 
 " To choose the statusline for either active or inactive windowss.
 function! GetStatusLine(num_active_window)
     return a:num_active_window==winnr() ? s:active_statusline : s:inactive_statusline
 endfunction
 
-" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+" " " " " " " " " " " " " " " "
 
 " To set colors used in status line.
 function! SetColorUsers()

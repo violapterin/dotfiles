@@ -10,7 +10,7 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 # To specify location of program.
-DIR_SCRIPTS="${HOME}/templates_configs_scripts/scripts"
+DIR_SCRIPTS="/Users/amino/templates_configs_scripts/scripts"
 PATH_FULL_PROGRAM="${DIR_SCRIPTS}/${FULL_PROGRAM}"
 
 # To define the dependency-checking function `resp_old_new`.
@@ -60,6 +60,7 @@ fi
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
+
 # No argument present.
 # For every project within top directory, find main source, and compile
 for path_full_src_chief_dm in ${list_path_full_src_chief}
@@ -70,7 +71,6 @@ do
    # To remove the `standalone.tex` generated from `main.tex`.
    # (If the replaced contains `/`, 1st delimiter is `//` instead of `/`)
    list_path_full_src_rlv="${list_path_full_src_rlv//${dir_dm}\/${FULL_SRC_ALL}/}"
-
    # Name the corresponding binary the same as directory.
    bare_bin_dm=$(basename "${dir_dm}")
    full_bin_dm="${bare_bin_dm}${EXT_GRPH}"
@@ -97,10 +97,12 @@ do
    if [[ "${whether_make}" == "TRUE" ]]
    then
       # Compilation of the binary file.
-      echo "Compiling ${full_bin_dm} from ${path_full_src_chief_dm} ..."
-      "${PATH_FULL_PROGRAM}" "${path_full_src_chief_dm}" "${bare_bin_dm}"
+      echo "Compiling ${path_full_bin_dm} from ${path_full_src_chief_dm} ..."
+      cd "${dir_dm}"
+      "${PATH_FULL_PROGRAM}" "${BARE_SRC_CHIEF}${EXT_SRC}" "${bare_bin_dm}"
 
       # XXX: prepare `standalone.tex`
       # ${????} "${FULL_SRC_CHIEF}" "${FULL_SRC_ALL}"
+      cd ..
    fi
 done
