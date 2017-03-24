@@ -15,6 +15,14 @@ alias SourceBashrc="source ~/.bashrc"
 bind "\"\e[A\": history-search-backward"
 bind "\"\e[B\": history-search-forward"
 
+# Initialize the `bash-completion` package.
+# (Install with `brew install bash-completion`.)
+if [ "$(uname)" == "Darwin" ]; then
+  if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+  fi
+fi
+
 # To set MacVim as the default editor, such as Git commit logs.
 export VISUAL="mvim -v"
 export EDITOR="${VISUAL}"
@@ -23,8 +31,9 @@ export EDITOR="${VISUAL}"
 
 # To configure displayed color.
 
-# To prompt time in minutes, and current directory (not full path).
-export PS1="\[\033[0;32m\]aminopterin\[\033[0;34m\][\A]\[\033[0;31m\]@\W\[\033[0;37m\]$ "
+# To prompt current username, time in minutes,
+# and current directory (not full path).
+export PS1="\[\033[0;32m\]\u\[\033[0;34m\][\A]\[\033[0;31m\]@\W\[\033[0;37m\]$ "
 
 # To enable color in command line interface.
 export CLICOLOR=1
@@ -76,7 +85,7 @@ alias LilyPond="/Applications/LilyPond.app/Contents/Resources/bin/lilypond"
 # To rename `foo` with `bar`, with `RecursivelyRename foo bar`,
 # within filenames throughout current directory and all subdirectories.
 # A Perl-based utility `rename` is used; `-S` for "substitute all".
-# Enter `brew install rename` to install that.
+# (Install with `brew install rename`.)
 function RecursivelyRename ()
 {
    find . -exec rename -S "$@" {} +
@@ -107,7 +116,7 @@ alias Pandoc="${MY_SCRIPTS}/run_pandoc.sh"
 alias Pdflatex="${MY_SCRIPTS}/run_pdflatex.sh"
 # To compile XeLaTeX source (possibly with Chinese) into PDF.
 alias Xelatex="${MY_SCRIPTS}/run_xelatex.sh"
-# To combine an audio and and still image as a video.
+# To combine a still image and an audio as a video.
 alias Ffmpeg="${MY_SCRIPTS}/combine_image_audio_as_video.sh"
 
 # This line was added by system when installing Perl5.

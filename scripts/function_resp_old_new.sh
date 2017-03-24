@@ -46,6 +46,7 @@ function resp_old_new ()
    if [[ ! -f "$2" ]]
    then
       redirect "   File $2 missing."
+      redirect "MISSING!" # XXX
       echo "FALSE"
       return 0
    fi

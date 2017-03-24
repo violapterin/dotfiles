@@ -13,7 +13,7 @@
 # `DIR_TOP` should contain several LaTeX project directories
 # that are intended to be compiled, and has a `main.tex` in it.
 
-DIR_SCRIPTS="${HOME}/templates_configs_scripts/scripts"
+DIR_SCRIPTS="/Users/amino/templates_configs_scripts/scripts"
 FULL_MAKER="share_tex_family.sh"
 FULL_PROGRAM="run_lualatex.sh"
 
