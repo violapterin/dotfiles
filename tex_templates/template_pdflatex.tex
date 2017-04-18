@@ -16,22 +16,20 @@
 
 % For math typesetting.
 
-% For general math formulae typography.
-\usepackage{amsmath}
-% For several other symbols.
+% For general math formulae typography; a superset of `amsmath`.
+\usepackage{mathtools}
+% For several other math symbols.
 \usepackage{amssymb}
-% For graphics insertion.
+% For graphics insertion; a superset of `graphics`.
 \usepackage{graphicx}
-% For colored text.
-\usepackage{color}
+% For colored text; a superset of `color`.
+\usepackage{xcolor}
 
 % To set fonts used for math.
 % (Do not alter the order of this line, for strange reasons!)
-\usepackage
-[
-   frak=esstix, scr=boondoxo, cal=cm, bb=boondox
-]
-{mathalfa}
+\usepackage[
+         frak=esstix, scr=boondoxo, cal=cm, bb=boondox
+      ]{mathalfa}
 % Available fonts as of each: (* has small cases)
 % `mathfrak`: *`esstix`, *`boondox`, *`pxtx`
 % `mathbb`: `ams`, `pazo`, `fourier`, `esstix`, *`boondox`, `px`, `txof`.
@@ -50,14 +48,12 @@
 % Decreases spacing followng the title
 \setlength{\droptitle}{-2cm}
 % To set page margins
-\usepackage
-[
-    top=2.1cm,
-    bottom=1.9cm,
-    left=1.8cm,
-    right=1.8cm%
-]
-{geometry}
+\usepackage[
+         top=2.1cm,
+         bottom=1.9cm,
+         left=1.8cm,
+         right=1.8cm%
+      ]{geometry}
 
 % Adjustment of spacing of each section; see below.
 \usepackage[compact]{titlesec}
@@ -70,26 +66,29 @@
 \titlespacing{\subsubsection}{0pt}{*0}{*0}
 % To modify the title of a subsection.
 % No new-line before subsequent text
-\titleformat{\subsection}
-[runin]
-{
-   % color, font, shape
-   \color{red}\large\bfseries\itshape
-}
-{}{}{}[]
+\titleformat{\subsection}[runin]{
+         % color, font, shape
+         \color{red}\large\bfseries\itshape
+      }{}{}{}[]
+% Subsection numbering.
+\newcommand{\MySubSec}[1]{
+         \addtocounter{CntSubSec}{1}
+         \subsection*{\arabic{CntSubSec}. #1}
+      }
 
 % For verbatim quote of source code.
 \usepackage{listings}
-% Example:
-% \definecolor{myGreen}{rgb}{0,0.6,0}% custom syntax color
-% \lstset
-% {
-%    language=Matlab,
-%    basicstyle=\small\bfseries\ttfamily,
-%    breaklines=true,
-%    keywordstyle=\color{blue},
-%    commentstyle=\color{myGreen},
-% }
+\definecolor{myMauve}{rgb}{0.58,0,0.82}
+\lstset{
+         numbers=left,
+         frame=single,
+         breaklines=true,
+         basicstyle=\footnotesize\ttfamily\color{black},
+         keywordstyle=\bfseries\color{teal},
+         commentstyle=\itshape\color{gray},
+         identifierstyle=\color{black},
+         stringstyle=\color{blue}
+      }
 
 % To allow a table to break across a page break.
 \usepackage{longtable}
@@ -167,7 +166,7 @@
 \newcommand*{\SF}[1]{ \mathscr{#1} }% "S"cript "F"ont
 \newcommand*{\Tw}[1]{\texttt{\bfseries{#1}}}% "t"ype"w"riter font
 \newcommand*{\Ss}[1]{\textsf{#1}}% "S"ans-"s"erif
-\newcommand*{\Emph}[1]{\text{\usefont{T1}{pbk}{b}{it} \color{blue}{#1}}}% my "empha"sis
+\newcommand*{\Emph}[1]{{\usefont{T1}{pbk}{b}{it} \color{blue}{#1}}}% my "empha"sis
 \newcommand*{\Rm}[1]{\mathrm{#1}}% upright ("R"o"m"an) mode
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
@@ -176,14 +175,16 @@
 
 \newcommand*{\It}{\textit}% Simply abbreviation.
 \newcommand*{\Bf}{\textbf}% Simply abbreviation.
-\newcommand*{\Def}{ \> \text{\raisebox{0.64pt}[0pt][0pt]{:}}\!\! = }% colon and equal
-\renewcommand*\L\label% "L"a"b"el
-\newcommand*\Nt{\notag\\}% "N"o"t"ag
-\newcommand*\Id\indent% "I"n"d"ent
-\newcommand*\Tab{\hspace{5em}}% "Tab", esp. in multi-line formulae
-\newcommand*\Q{\hspace{1.5em}}% "Q"uadrat
+\newcommand*{\Df}{ \> \text{\raisebox{0.64pt}[0pt][0pt]{:}}\!\! = }% colon and equal
+\renewcommand*{\l}{\label}% "L"a"b"el
+\newcommand*{\Nt}{\notag\\}% "N"o"t"ag
+\newcommand*{\Id}{\indent}% "I"n"d"ent
+\newcommand*{\Tab}{\hspace{5em}}% "Tab", esp. in multi-line formulae
+\newcommand*{\Q}{\hspace{1.5em}}% "Q"uadrat
 % Just for generating dummy text.
 \usepackage{lipsum}
+% For hyperlink within the document.
+\usepackage{hyperref}
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
 

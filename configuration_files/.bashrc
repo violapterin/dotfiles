@@ -65,7 +65,7 @@ alias HideFiles="defaults write com.apple.finder AppleShowAllFiles NO"
 
 # `cd` (change directory) shortcuts.
 # Double quotes ensures they are passed as a single entity.
-MY_DOC="${HOME}/Documents"
+MY_DOC="/Users/amino/Documents"
 alias GoToEssays="cd \"${MY_DOC}/essays_vol_8_(since_Jan_2017)\""
 alias GoToAllFairCopies="cd \"${MY_DOC}/all_fair_copies\""
 alias GoToLilyPondWork="cd \"${MY_DOC}/LilyPond_work\""
@@ -105,7 +105,7 @@ alias BrowsePtt2="ssh bbsu@ptt2.cc"
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 # The folder where scripts are saved.
-MY_SCRIPTS="${HOME}/templates_configs_scripts/scripts"
+MY_SCRIPTS="/Users/amino/templates_configs_scripts/scripts"
 
 # To open `foo` in TextEdit with `TextEdit foo`.
 alias EditText="${MY_SCRIPTS}/edit_text.sh"
@@ -122,4 +122,3 @@ alias Ffmpeg="${MY_SCRIPTS}/combine_image_audio_as_video.sh"
 # This line was added by system when installing Perl5.
 # It calls `perlbrew`, which maintains and updates Perl.
 source "/Users/amino/perl5/perlbrew/etc/bashrc"
-

@@ -21,9 +21,9 @@ EXT_BIN=".pdf"
 DIR_REPO="${HOME}/templates_configs_scripts"
 DIR_SCRIPTS="${DIR_REPO}/scripts"
 
-# `full_name_src` and `bare_name_bin` will be defined:
-full_name_src=
-bare_name_bin=
+# `full_src` and `bare_bin` will be defined:
+full_src=
+bare_bin=
 source "${DIR_SCRIPTS}/parse_src_bin_name.sh"
 
 # `lualatex` options:
@@ -34,7 +34,7 @@ source "${DIR_SCRIPTS}/parse_src_bin_name.sh"
 options=(
       "-synctex=1"
       "-interaction=nonstopmode"
-      "-jobname=${bare_name_bin}"
+      "-jobname=${bare_bin}"
       "-file-line-error"
 )
 
@@ -43,5 +43,5 @@ options=(
 # To run the main command.
 # `set -x` echoes what is executed; `set +x` cancels this.
 set -x
-"${COMPILER}" ${options[*]} "${full_name_src}"
+"${COMPILER}" ${options[*]} "${full_src}"
 { set +x; } 2>/dev/null

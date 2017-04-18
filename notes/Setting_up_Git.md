@@ -95,11 +95,13 @@ Click "Use SSH", and you will see something like
 
     git@github.com:aminopterin/templates_configs_notes.git
 
-To set remote url, go back to your terminal emulator. If you decide to use SSH, set
+To set remote url, go back to your terminal emulator. First you have to create an abbreviation of the remote url called `origin`. If you decide to use SSH, use
+
+    $ git remote add origin git@github.com:aminopterin/templates_configs_notes.git
+
+If you have to change url later, use `set-url`.
 
     $ git remote set-url origin git@github.com:aminopterin/templates_configs_notes.git
-
-In other words, the remote url is abbreviated as `origin`.
 
 To list currently existent remote repo(s):
 

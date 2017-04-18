@@ -17,9 +17,9 @@ Or equivalently,
 
     $ git fetch --help
 
-## To Commit and Push
+## Committing and Pushing
 
-### To Compare
+### Comparing
 
 Before committing, it is helpful to see what new work has been done. To show modification not added to the index, that is, differences between working tree and the files as was indexed:
 
@@ -51,7 +51,7 @@ The following does almost the same, except in that it ignores files in a newly c
 
     $ git add .
 
-### To Commit
+### Committing
 
 Before you commit, you may want to see a short summary of what files are changed and deleted, with
 
@@ -71,7 +71,7 @@ Now, an editor opens, showing the commit message in the beginning, where you may
 
 I find it useful to edit here because you don't have to backslash-escape special characters, which may occur in verbatim expressions. You can also add more explanatory lines below, separated from the title with a blank line. The status is shown again as commented lines to recapitulate changes for you.
 
-### To View Commit Log
+### Viewing Commit Log
 
 Afterwards, you can view the commit log with
 
@@ -85,13 +85,17 @@ To make the log more concise and informative,
 
 The names of option are pretty explanatory. Mnemonic: "a dog".
 
-### To Push
+### Pushing
 
 To push all commits from the local repo to the master branch in the remote repo (`origin`) whenever they have not been updated,
 
     $ git push origin master
 
-Say yes, if, in the first time you push, you are asked that whether you should consider the RSA host key for GitHub's IP address as a safe one.
+In the first time you push, you may want to create a "upstream tracking reference" to your remote repo by `-u`, so that, in the future when you push or pull, you do not need options by default.
+
+    $ git push -u origin master
+
+Say yes, if, the first time you push, you are asked that whether you should consider the RSA host key for GitHub's IP address as a safe one.
 
 If you have messed up something, and Git is unable to figure out their ancestral relation and thus refuses to push, you may try with the flag `-f` or `--force`:
 
@@ -99,13 +103,33 @@ If you have messed up something, and Git is unable to figure out their ancestral
 
 This forces every commit in question in the local repo to overwrite its counterpart in the remote repo, and may cause the remote repo to lose data, so think twice before using it.
 
-## Branching and Manipulation
+## Adding tags
 
-### To Clone and Fork
+To add a tag to the latest commit (even when you have modified the working tree after commiting), use
 
-### To Create New Branch
+    $ git tag -a "v1.0" -m "Compile successful"
 
-### To Merge
+Replace the version number and tag message with yours; same for below.
+
+To list simply all tag names,
+
+    $ git tag
+
+To see what (long) commit hash a tag points to, run
+
+    $ git rev-list -1 "v1.0"
+
+A `git push` don't automatically push a tag. You have to
+
+    $ git push origin "v1.0"
+
+## Branches
+
+### Cloning and Forking
+
+### Creating New Branch
+
+### Merging
 
 ### 
 

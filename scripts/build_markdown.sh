@@ -4,8 +4,8 @@
 # Author: Aminopterin (Tzu-Yu Jeng)
 # Date: Jan. 2017
 # Description: To export all `.md` (Markdown) files inside current directory as `.pdf`.
-# Requirement: That `pandoc` and `xelatex` be installed.
 # Usage: `build_markdown.sh <markdown_source>`
+# Requirement: That `pandoc` and `xelatex` be installed.
 # Variable(s) defined in advance: `DIR_TOP`
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -77,7 +77,6 @@ for path_full_src_dm in ${list_global_path_full_src}
 do
    # If `src` is `foo.bar.baz`, `bare_common` is `foo`.
    dir=$(dirname "${path_full_src_dm}")
-   cd "${dir}"
    full_src="$(basename ${path_full_src_dm})"
    bare_common="${full_src%%.*}"
 
@@ -103,7 +102,7 @@ do
    then
       echo "Compiling ${full_bin} from ${full_src} ..."
       set -x
-      "${PATH_FULL_PROGRAM}" "${path_full_src}" "${bare_common}"
+      "${PATH_FULL_PROGRAM}" "${path_full_src}" "${path_full_bin}"
       { set +x; } 2>/dev/null
    fi
 done

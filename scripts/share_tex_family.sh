@@ -60,7 +60,6 @@ fi
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-
 # No argument present.
 # For every project within top directory, find main source, and compile
 for path_full_src_chief_dm in ${list_path_full_src_chief}
@@ -99,10 +98,9 @@ do
       # Compilation of the binary file.
       echo "Compiling ${path_full_bin_dm} from ${path_full_src_chief_dm} ..."
       cd "${dir_dm}"
-      "${PATH_FULL_PROGRAM}" "${BARE_SRC_CHIEF}${EXT_SRC}" "${bare_bin_dm}"
-
+      "${PATH_FULL_PROGRAM}" "${FULL_SRC_CHIEF}" "${bare_bin_dm}"
+      cd "${DIR_TOP}"
       # XXX: prepare `standalone.tex`
       # ${????} "${FULL_SRC_CHIEF}" "${FULL_SRC_ALL}"
-      cd ..
    fi
 done

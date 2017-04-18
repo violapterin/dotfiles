@@ -1,34 +1,21 @@
 # Filename: parse_src_bin_name.sh
 # Author: Aminopterin (Tzu-Yu Jeng)
 # Date: Feb. 2017
-# Description: To parse source and binary names used in LaTeX compilation.
+# 1st argument: Directory and full name of source (with extension).
+# 2nd argument: Directory and full name of binary (with extension).
+# 3rd argument: To hold directory of binary.
+# 4th argument: To hold bare name of binary.
+# Description: To parse source and binary names used in compilation.
 # Requirement: No.
-# Variable(s) defined in advance: `EXT_BIN`
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-# If included in a script, this parses input arguments;
-# when there are two arguments, the 1st is source, the 2nd binary
-# without extension; when there is only one, it is source, and the
-# binary's name is obtained by substituting source's extension.
-
-# The fullname of source will be stored as `full_src`.
-# The basename of binary will be stored as `bare_bin`.
-full_src=
-bare_bin=
-
 # To check number of arguments.
-# If no. of arguments equals (`-eq`) 0:
-if [[ "$#" -eq 0 ]]
+if [[ "$#" -gt 2 ]]
 then
-   echo "No arguments supplied. 1 or 2 expected, 0 present. Stop." > /dev/stderr
+   echo "Incorrect number of argument(s). 4 expected, $# present. Stop." > /dev/stderr
    exit 1
 
-# If no. of arguments is strictly greater than (`-gt`) 2:
-elif [[ "$#" -gt 2 ]]
-then
-   echo "Too many arguments. 1 or 2 expected, $# present. Stop." > /dev/stderr
-   exit 1
 
 # Otherwise, to set source name to be the 1st argument.
 else

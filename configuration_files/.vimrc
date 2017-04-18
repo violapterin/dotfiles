@@ -403,10 +403,12 @@ set fileformats=unix
 " To use whitespaces instead of tabbed space.
 set expandtab
 
-" When auto-indenting (`shiftwidth`), and when showing and interpreting
-" a file (`tabstop`), to set 1 tabbed space as 3 whitespaces.
-set shiftwidth=3
+" To set 1 tabbed space as 3 whitespaces, when auto-indenting
+" (`shiftwidth`), and when showing and interpreting a file (`tabstop`),
+" and when in insert mode (`softtabstop`).
 set tabstop=3
+set softtabstop=3
+set shiftwidth=3
 
 " To break lines instead of split a word when wrapping.
 set linebreak

@@ -3,7 +3,6 @@
 # Filename: build_lualatex.sh
 # Author: Aminopterin (Tzu-Yu Jeng)
 # Date: Jan. 2017
-
 # Description: To compile PDF document of several LaTeX projects using `lualatex`.
 # Requirement: See the called script `run_lualatex.sh`.
 # Variable(s) defined in advance: `DIR_TOP`
