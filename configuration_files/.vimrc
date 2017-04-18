@@ -197,10 +197,10 @@ set hidden
 set backup
 
 " To specify where to backup files (lest there be lots of hidden backup files).
-set backupdir=~/Documents/Vim_swap_files_storeroom
+set backupdir=/Users/amino/Documents/Vim_swap_files_storeroom
 
 " To tell Vim where to put swap files; I set same place, but one need not.
-set dir=~/Documents/Vim_swap_files_storeroom
+set dir=/Users/amino/Documents/Vim_swap_files_storeroom
 
 " To set how many lines of history Vim has to remember.
 set history=700
@@ -286,10 +286,10 @@ set smartcase
 set viminfo^=%
 
 " To save session (like current windows) with `<space>m` (for "make").
-noremap <leader>m :mksession! ~/.my_vim_session.vim<cr>
+noremap <leader>m :mksession! /Users/amino/.my_vim_session.vim<cr>
 
 " To load saved session with `<space>o` (for "open").
-noremap <leader>o :source ~/.my_vim_session.vim<cr>
+noremap <leader>o :source /Users/amino/.my_vim_session.vim<cr>
 
 " Don't update the display while executing macros.
 set lazyredraw

@@ -52,12 +52,3 @@ To enhance code reuse, I have saved the specification of compilers and the build
 ## Notes
 
 Many points I suddenly grasp while preparing all these materials, are too long to be included in this README. I have made each a self-containing note. Many information is not easily found in Google (at least at first glance), and I wish to share with others what I have comprehended by making them public.
-
-## A script for update
-
-The `.bash_profile`, `.bashrc`, `.gitignore`, and `.vimrc` are saved in my home (`~`) as they should be, and I update them when I feel like to. This repo is intended to be a passive backup of them, that is, the updated copies saved in my home are copied them to this repo from time to time, and versions in this repo are not modified. Furthermore, I shall protect files backed up by setting them to be only readable. A short script, , that automates the mentioned action is saved in `update.sh` included in this repo.
-
-On the contrary, I also store the above-mentioned makefiles and shell scripts simply in this repo. Of the second group of files, the versions in this repo is thus always newest. As I said, scripts here are called, and makefiles here are included.
-
-Not to confuse the reader with duplicate makefiles, the notes in the `notes` directory will be compiled to PDF by simply listing them. This is also done in `update.sh`.
-

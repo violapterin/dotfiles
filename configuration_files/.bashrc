@@ -7,9 +7,9 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 # To open Bash profile.
-alias OpenBashrc="mvim -v ~/.bashrc"
+alias OpenBashrc="mvim -v /Users/amino/.bashrc"
 # To source Bash profile.
-alias SourceBashrc="source ~/.bashrc"
+alias SourceBashrc="source /Users/amino/.bashrc"
 
 # Command-line completion resp. using up and down arrow keys.
 bind "\"\e[A\": history-search-backward"
