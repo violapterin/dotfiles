@@ -1,7 +1,7 @@
-# Templates, Configuration files, and Explanatory Notes
+# TEX Templates, Configuration files, Bash Scripts, and Explanatory Notes
 *Mostly Dec. 2016 to Jan. 2017*
 
-This repo backs up templates I commonly use, settings for some programs, scripts I use personally, and several related notes.
+This repo backs up TEX templates, configuration files, Bash scripts I use personally, and several related explanatory notes.
 
 ## My `.vimrc`
 

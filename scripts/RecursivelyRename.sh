@@ -57,3 +57,9 @@ options=(
 
 )
 
+# To rename `foo` with `bar`, with `RecursivelyRename foo bar`,
+# within filenames throughout current directory and all subdirectories.
+# A Perl-based utility `rename` is used; `-S` for "substitute all".
+# (Install with `brew install rename`.)
+   find . -exec rename -S "$@" {} +
+

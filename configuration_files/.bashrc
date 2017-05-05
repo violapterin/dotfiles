@@ -2,44 +2,61 @@
 # Author: Tzu-Yu Jeng
 # Date: mostly late 2016
 # Description: An interactive non-login shell loads this file.
-# Requirement: That it be placed in user's home, and included in `.bash_profile`.
+# Requirement: That it be saved in user's home, and included in `.bash_profile`.
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# Settings, exportation, sourcing
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-# To open Bash profile.
-alias OpenBashrc="mvim -v /Users/amino/.bashrc"
-# To source Bash profile.
-alias SourceBashrc="source /Users/amino/.bashrc"
+# To define environment variables.
+export MY_DRIVE="/Users/amino/Google_drive"
+export REPO_TCS="${MY_DRIVE}/templates_configs_scripts"
+export PATH="${PATH}:${REPO_TCS}/scripts"
 
-# Command-line completion resp. using up and down arrow keys.
-bind "\"\e[A\": history-search-backward"
-bind "\"\e[B\": history-search-forward"
-
-# Initialize the `bash-completion` package.
-# (Install with `brew install bash-completion`.)
-if [ "$(uname)" == "Darwin" ]; then
-  if [ -f $(brew --prefix)/etc/bash_completion ]; then
-    . $(brew --prefix)/etc/bash_completion
-  fi
-fi
+# To open and source `.bashrc`, Bash's setting file.
+export BASHRC="${REPO_TCS}//configuration_files/.bashrc"
+alias OpenBashrc="${VISUAL} ${BASHRC}"
+alias SourceBashrc="source ${BASHRC}"
 
 # To set MacVim as the default editor, such as Git commit logs.
 export VISUAL="mvim -v"
 export EDITOR="${VISUAL}"
 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# To compile LilyPond `.ly` file.
+export LilyPond="/Applications/LilyPond.app/Contents/Resources/bin/lilypond"
 
-# To configure displayed color.
+# Command-line completion resp. using up and down arrow keys.
+bind "\"\e[A\": history-search-backward"
+bind "\"\e[B\": history-search-forward"
+
+# To ignore case in completing commands.
+bind "set completion-ignore-case On"
+
+# Initialize the `bash-completion` package.
+# (Install with `brew install bash-completion`.)
+source /usr/local/etc/bash_completion
+
+# This line was added by system when installing Perl5.
+# It calls `perlbrew`, which maintains and updates Perl.
+source "/Users/amino/perl5/perlbrew/etc/bashrc"
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# Display of color
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 # To prompt current username, time in minutes,
 # and current directory (not full path).
-export PS1="\[\033[0;32m\]\u\[\033[0;34m\][\A]\[\033[0;31m\]@\W\[\033[0;37m\]$ "
+export PS1="\[\033[1;32m\]\u\[\033[1;34m\][\A]\[\033[1;31m\]@\W\[\033[1;37m\]$ \[\033[0;37m\]"
 
 # To enable color in command line interface.
 export CLICOLOR=1
 
 # To specify color settings used by `ls` ("list") display.
 export LSCOLORS="gxBxhxDxfxhxhxhxhxcxcx"
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# File management
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 # `ls` for hidden & short form; `Ls` unhidden & long form;
 # `-G`: to enable colorized output;
@@ -53,72 +70,30 @@ alias Ls="ls -alGFh"
 # Disk usage
 alias Du="du -shc * | gsort -hr"
 
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
-
 # To show hidden files in Mac `Finder.app`.
 alias ShowFiles="defaults write com.apple.finder AppleShowAllFiles YES"
 # To show hidden files in Mac `Finder.app`.
 alias HideFiles="defaults write com.apple.finder AppleShowAllFiles NO"
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
-
-# `cd` (change directory) shortcuts.
-# Double quotes ensures they are passed as a single entity.
-MY_DOC="/Users/amino/Documents"
-alias GoToEssays="cd \"${MY_DOC}/essays_vol_8_(since_Jan_2017)\""
-alias GoToAllFairCopies="cd \"${MY_DOC}/all_fair_copies\""
-alias GoToLilyPondWork="cd \"${MY_DOC}/LilyPond_work\""
-alias GoToLaTexWork="cd \"${MY_DOC}/LaTeX_work\""
-alias GoToPrograms="cd \"${MY_DOC}/programs_of_mine\""
-alias GoToStackExchange="cd \"${MY_DOC}/stack_exchange_posts\""
-alias GoToBooks="cd \"${MY_DOC}/books\""
-
+# Other aliases for applications
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-# Application alias.
-# `&` runs process in background; `$@` expands to all passed parameters.
-
-# To compile LilyPond `.ly` file.
-alias LilyPond="/Applications/LilyPond.app/Contents/Resources/bin/lilypond"
-
-# To rename `foo` with `bar`, with `RecursivelyRename foo bar`,
-# within filenames throughout current directory and all subdirectories.
-# A Perl-based utility `rename` is used; `-S` for "substitute all".
-# (Install with `brew install rename`.)
-function RecursivelyRename ()
-{
-   find . -exec rename -S "$@" {} +
-}
-
+# `cd` (change directory) shortcuts.
+# Double quotes ensures they are passed as a single token.
+alias ToEssays="cd \"${MY_DRIVE}/essays_vol_8_(since_Jan_2017)\""
+alias ToAllFairCopies="cd \"${MY_DRIVE}/all_fair_copies\""
+alias ToLilyPondWork="cd \"${MY_DRIVE}/LilyPond_work\""
+alias ToLaTexWork="cd \"${MY_DRIVE}/LaTeX_work\""
+alias ToPrograms="cd \"${MY_DRIVE}/programs_of_mine\""
+alias ToBooks="cd \"${MY_DRIVE}/books\""
+alias ToRepoTCS="${MY_DRIVE}/templates_configs_scripts"
 
 # To open with MacVim embedded in the terminal.
 alias Vim="mvim -v"
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 # To browse PTT.
 alias BrowsePtt="ssh bbsu@ptt.cc"
 # To browse PTT2.
 alias BrowsePtt2="ssh bbsu@ptt2.cc"
 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
-
-# The folder where scripts are saved.
-MY_SCRIPTS="/Users/amino/templates_configs_scripts/scripts"
-
-# To open `foo` in TextEdit with `TextEdit foo`.
-alias EditText="${MY_SCRIPTS}/edit_text.sh"
-
-# To compile Markdown (possibly with LaTeX embedded) into PDF.
-alias Pandoc="${MY_SCRIPTS}/run_pandoc.sh"
-# To compile LaTeX (without Chinese) into PDF.
-alias Pdflatex="${MY_SCRIPTS}/run_pdflatex.sh"
-# To compile XeLaTeX source (possibly with Chinese) into PDF.
-alias Xelatex="${MY_SCRIPTS}/run_xelatex.sh"
-# To combine a still image and an audio as a video.
-alias Ffmpeg="${MY_SCRIPTS}/combine_image_audio_as_video.sh"
-
-# This line was added by system when installing Perl5.
-# It calls `perlbrew`, which maintains and updates Perl.
-source "/Users/amino/perl5/perlbrew/etc/bashrc"
