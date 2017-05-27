@@ -42,6 +42,7 @@ let mapleader=" "
 " To declare a group that holds auto-commands defined in this vimrc,
 " and delete all auto-commands having been defined at this point.
 augroup group_vimrc
+   " To clear all contents in `group_vimrc`
    autocmd!
 augroup END
 
@@ -156,7 +157,7 @@ endfunction
 "          File, read, and write
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 
-" Do not make Vim compatible with Vi.
+" Prevent Vim to be compatible with Vi.
 set nocompatible
 
 " To save current buffer  with `<space>w` (for "write"),

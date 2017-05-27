@@ -87,7 +87,7 @@ alias ToLilyPondWork="cd \"${MY_DRIVE}/LilyPond_work\""
 alias ToLaTexWork="cd \"${MY_DRIVE}/LaTeX_work\""
 alias ToPrograms="cd \"${MY_DRIVE}/programs_of_mine\""
 alias ToBooks="cd \"${MY_DRIVE}/books\""
-alias ToRepoTCS="${MY_DRIVE}/templates_configs_scripts"
+alias ToRepoTCS="cd \"${MY_DRIVE}/templates_configs_scripts\""
 
 # To open with MacVim embedded in the terminal.
 alias Vim="mvim -v"

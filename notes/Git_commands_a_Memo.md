@@ -17,7 +17,9 @@ Or equivalently,
 
     $ git fetch --help
 
-## Committing and Pushing
+## Saving and uploading: the outward direction
+
+We may visualize git actions as interaction between the working tree, the index, and the local and remote commit history. Thus, `add`, `commit`, and `push`, among others, transfer data from near to far. In this section, we study these “outward” instructions .
 
 ### Comparing
 
@@ -31,9 +33,9 @@ If new work has been added to the index, you can still compare the files as was 
 
 Instead, to compare a specific file in the working tree with the committed version of it in the local repo, say `README.md`,
 
-    $ git diff HEAD README.md
+    $ git diff <commit_pointer> README.md
 
-where `HEAD` is a pointer to the latest commit.
+where `<commit_pointer>` is a pointer to the latest commit.
 
 ### Navigating `diff` result
 
@@ -41,7 +43,7 @@ After any of these, you will see a new page that summarizes modified lines, and 
 
 Navigation commands are identical to `less`, and similar to Vim. Hit `j`, `e` or `^e` to forward one line (where `^` stands for Control key). Hit `k`, `y`, or `^y` to backward one line. Hit `f` or `^f` to forward one window. Hit `b` or `^b` to backward one window. Hit `d` or `^d` to forward one-half window. Hit `u` or `^u` to backward one-half window. Hit `q` or `:q` to quit. 
 
-### Updating the Index
+### Updating the index
 
 If there are new files created or old files deleted, run this to update the index according to the present working tree:
 
@@ -85,6 +87,11 @@ To make the log more concise and informative,
 
 The names of option are pretty explanatory. Mnemonic: "a dog".
 
+### Identifying preceding commits
+
+The pointer to current commit in question is `HEAD`. To retrieved its ancestors, two operators could be used. `HEAD^2` means going up two levels of node, pointing to the youngest of its grandparents of `HEAD`. `HEAD~2` means, within its several parents, counting twice the youngest elder siblings.
+The two operators may be composed, for example `HEAD^3~2`.
+
 ### Pushing
 
 To push all commits from the local repo to the master branch in the remote repo (`origin`) whenever they have not been updated,
@@ -103,7 +110,7 @@ If you have messed up something, and Git is unable to figure out their ancestral
 
 This forces every commit in question in the local repo to overwrite its counterpart in the remote repo, and may cause the remote repo to lose data, so think twice before using it.
 
-## Adding tags
+### Adding tags
 
 To add a tag to the latest commit (even when you have modified the working tree after commiting), use
 
@@ -123,17 +130,67 @@ A `git push` don't automatically push a tag. You have to
 
     $ git push origin "v1.0"
 
-## Branches
+## Updating or regressing the working tree: the inward direction
 
-### Cloning and Forking
+On the other hand, we now learn to transfer data from far to near, by `clone`, `fetch`, `checkout`, and `reset`, among others.
 
-### Creating New Branch
+### Downloading from remote 
 
-### Merging
+`clone`
 
-### 
+`fetch`
 
+### Shifting the head
 
+`checkout`
+
+### Reversing the working tree
+
+One way of reversing the working tree to a previous commit is `reset`, namely
+
+    git reset HEAD^2 --hard
+
+Alternatively, the option `--mixed` (which is the default option) only reverses the index and `HEAD` pointer, and `--soft` only reverses the `HEAD` pointer.
+
+Beside `reset`, `revert` is another way to restore the working tree, but unlike `reset`, it creates a new commit. For example, with
+
+    $ git revert <commit_pointer>
+
+a new commit which is the previous commit being pointed, is now created. Note that the history is not rewritten in this case.
+
+## Managing branches
+
+In addition, we may also modify commit objects and the connection between them, changing the history and relation between branches.
+
+### Creating or forking a new branch
+
+    git branch <name_of_new_branch>
+
+### Merging branches
+
+    git merge <merged_branch>
+
+If there are conflicts, there will be an error message that tells you that. Git essentially overwrites the conflicting part of the file in the working tree. 
+
+    <<<<<<<
+    (The text excerpts according to the chief branch being merged into.)
+    |||||||
+    (The text excerpts according to the common ancestor version.)
+    =======
+    (The text excerpts according to the feature or development branch merging into the chief branch being considered.)
+    >>>>>>>
+
+The user is asked to replace lines between `<<<<<<<` and `>>>>>>>` (inclusive) with what he wants. After all conflicts are resolved, `add` the changes and merge again.
+
+### Rewriting history
+
+The command `rebase` applies respective changes of each commit from the current commit (where `HEAD` is) on the specified branch, by creating corresponding new commits.
+
+    git rebase <branch_being_merged_into>
+
+Alternatively, we may choose one commit of a certain branch only, and apply the change from the branching node up to itself, on the current commit. That is, doing the same as `rebase` only on certain commits, instead of all of them of that branch.
+
+    git cherry-pick <commit_being_picked>
 
 ## More Information
 
