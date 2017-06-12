@@ -8,13 +8,14 @@
 "
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 "
-"    It's mainly based on Amir Salihefendic's `.vimrc` (`github.com/amix/vimrc`).
-" Also influenced by various Stack Overflow and Vim Stack Exchange posts. Excuse
-" me for not attributing each one of them, but my gratitude is genuine.
-"    Legend for keys: `<cr>` for the return key, `<esc>` the escape key, <bs>
-" for the backspace, <space> for the spacebar, and `<c-*>` for `<ctrl>*` 
-" (holding `<ctrl>` while pressing * where * is some key). Though abbreviations
-" exist, I shall use the full name form whenever possble, for ease of reading.
+"    It's mainly based on Amir Salihefendic's `.vimrc`
+" (`github.com/amix/vimrc`), also influenced by various Stack
+" Overflow and Vim Stack Exchange posts; excuse me for not having
+" attributing them. Legend for keys: `<cr>` for the return key,
+" `<esc>` the escape key, <bs> for the backspace, <space> for the
+" spacebar, and `<c-*>` for `<ctrl>*` (holding `<ctrl>` while
+" pressing * where * is some key). Though abbreviations exist, I
+" shall use the full name form whenever possble, for ease of reading.
 "
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 "
@@ -160,9 +161,12 @@ endfunction
 " Prevent Vim to be compatible with Vi.
 set nocompatible
 
-" To save current buffer  with `<space>w` (for "write"),
+" To save current buffer with `<space>w` (for "write"),
 " not if readonly or filename exists.
 nnoremap <leader>w :w<cr>
+
+" To save all buffers with `<space>a` (for "all").
+nnoremap <leader>a :wa<cr>
 
 " To close buffer and quit window with `<space>q` (for "quit"),
 " not if buffer not being saved.
@@ -526,8 +530,6 @@ set mouse=
 "          Summary of custom leader commands
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 
-" Short summary in alphabetical order:
-
 " <space><cr>   To cancel highlight of the last search
 " <space>,      To open `.vimrc` in a new tab
 " <space>.      To source `.vimrc`
@@ -537,6 +539,7 @@ set mouse=
 " <space>]      To select the next buffer
 " <space>0      To select the next tab
 " <space>9      To select the previous tab
+" <space>a      To save all buffers
 " <space>b      To choose among existent buffers by number
 " <space>c      To close the current tab
 " <space>d      To cut from system clipboard (similar for `D`, `dd`)

@@ -71,7 +71,7 @@ You can modify your commit message even after you commit, with
 
 Now, an editor opens, showing the commit message in the beginning, where you may revise it. This file is saved as `.git/COMMIT_EDITMSG`.
 
-I find it useful to edit here because you don't have to backslash-escape special characters, which may occur in verbatim expressions. You can also add more explanatory lines below, separated from the title with a blank line. The status is shown again as commented lines to recapitulate changes for you.
+I find it useful to edit here because you don't have to backslash-escape special characters, which may occur in verbatim expressions. You can also add more explanatory lines below, separated from the title with a blank line. The status is shown again as commented lines to recapitulate their difference for you.
 
 ### Viewing Commit Log
 
@@ -140,9 +140,27 @@ On the other hand, we now learn to transfer data from far to near, by `clone`, `
 
 `fetch`
 
+### Creating or forking a new branch
+
+A *branch* is a duplication of the working tree, so that the new branch based on it keeps being revised and developed afterwards. Thus, modifications happen in parallel, not only along the original branch, but the new one too. If the branch being based on is other people's work on GitHub for example, we also say it (the old branch) is being forked. To create a new branch `<name_of_new_branch>`, basing on the current working tree,
+
+    git branch <name_of_new_branch>
+
 ### Shifting the head
 
-`checkout`
+But `branch` only does not change the head. To check out an existent branch `<another_branch>` already created with `git branch`,
+
+    git checkout <another_branch>
+
+In general, local files will be overwritten, making the working tree match <another_branch>. 
+
+I suppose that, after modifying in the working tree, we had better commit them before checking out another branch, otherwise it is not obvious what will happen. If I make some change in (say) a test branch and, without committing, check out back the master branch, then the working tree will not restore to the state of the latest commit of master branch, and there will be no error message.
+
+To make sure whether the head is pointed to the intended branch, use
+
+    git branch
+
+It will return a list of branches, with the current one highlighted (in my case colored green, and prefixed with a asterisk).
 
 ### Reversing the working tree
 
@@ -161,10 +179,6 @@ a new commit which is the previous commit being pointed, is now created. Note th
 ## Managing branches
 
 In addition, we may also modify commit objects and the connection between them, changing the history and relation between branches.
-
-### Creating or forking a new branch
-
-    git branch <name_of_new_branch>
 
 ### Merging branches
 
