@@ -10,11 +10,11 @@
 
 # To define environment variables.
 export MY_DRIVE="/Users/amino/Google_drive"
-export REPO_TCS="${MY_DRIVE}/templates_configs_scripts"
+export REPO_TCS="${MY_DRIVE}/code_repositories/templates_configs_scripts"
 export PATH="${PATH}:${REPO_TCS}/scripts"
 
 # To open and source `.bashrc`, Bash's setting file.
-export BASHRC="${REPO_TCS}//configuration_files/.bashrc"
+export BASHRC="${REPO_TCS}/configuration_files/.bashrc"
 alias OpenBashrc="${VISUAL} ${BASHRC}"
 alias SourceBashrc="source ${BASHRC}"
 
@@ -85,9 +85,9 @@ alias ToEssays="cd \"${MY_DRIVE}/essays_vol_8_(since_Jan_2017)\""
 alias ToAllFairCopies="cd \"${MY_DRIVE}/all_fair_copies\""
 alias ToLilyPondWork="cd \"${MY_DRIVE}/LilyPond_work\""
 alias ToLaTexWork="cd \"${MY_DRIVE}/LaTeX_work\""
-alias ToPrograms="cd \"${MY_DRIVE}/programs_of_mine\""
+alias ToPrograms="cd \"${MY_DRIVE}/code_repositories\""
 alias ToBooks="cd \"${MY_DRIVE}/books\""
-alias ToRepoTCS="cd \"${MY_DRIVE}/templates_configs_scripts\""
+alias ToRepoTCS="cd \"${MY_DRIVE}/code_repositories/templates_configs_scripts\""
 
 # To open with MacVim embedded in the terminal.
 alias Vim="mvim -v"
