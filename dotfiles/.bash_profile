@@ -1,6 +1,4 @@
-# This is `.bash_profile`, which an interactive login shell loads.
+# A `.bash_profile` is loaded by an interactive login shell when starting.
 
-# Make `.bash_profile` load .bashrc, if it exists.
-FULL_BASHRC="/Users/amino/.bashrc"
-[ -r ${FULL_BASHRC} ] && source ${FULL_BASHRC}
-
+# Make `.bash_profile` load `.bashrc`, if it exists.
+[ -r ~/.bashrc ] && source ~/.bashrc

@@ -4,7 +4,7 @@
 " Date: mostly Oct. 2016 to Jan. 2017
 " Author: Aminopterin (Tzu-Yu Jeng)
 " Description: Settings and custom commands for Vim.
-" Requirement: That this be saved in the home.
+" Requirement: That this be saved in the user's home.
 "
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 "
@@ -38,7 +38,7 @@
 " First, to define a "leader" to be the space bar, after turning off
 " its default behavior (right arrow). The enables lots more combinations.
 nnoremap <space> <nop>
-let mapleader=" "
+let mapleader = " "
 
 " To declare a group that holds auto-commands defined in this vimrc,
 " and delete all auto-commands having been defined at this point.
@@ -58,10 +58,10 @@ augroup END
 
 " To toggle showing text hidden for lack of space (see `<space>\`).
 function! ToggleDisplayLastLine()
-    if (&display=='')
-        let &display='truncate'
+    if (&display == '')
+        let &display = 'truncate'
     else
-        let &display=''
+        let &display = ''
     endif
 endfunction
 
@@ -69,10 +69,10 @@ endfunction
 
 " In NETRW buffer, to toggle hiding files (see `<space>h`).
 function! ToggleDisplayHiddenFiles()
-    if (g:netrw_hide==0)
-        let g:netrw_hide=1
+    if (g:netrw_hide == 0)
+        let g:netrw_hide = 1
     else
-        let g:netrw_hide=0
+        let g:netrw_hide = 0
     endif
 endfunction
 
@@ -80,17 +80,17 @@ endfunction
 
 " To switch among chosen color schemes (see `<space>t`).
 function! ChooseNextColor()
-    if (g:colors_name=='flattened')
+    if (g:colors_name == 'flattened')
         :colorscheme gruvbox
-    elseif (g:colors_name=='gruvbox')
+    elseif (g:colors_name == 'gruvbox')
         :colorscheme tomorrow-eighties
-    elseif (g:colors_name=='tomorrow-eighties')
+    elseif (g:colors_name == 'tomorrow-eighties')
         :colorscheme tomorrow-bright
-    elseif (g:colors_name=='tomorrow-bright')
+    elseif (g:colors_name == 'tomorrow-bright')
         :colorscheme molokai
-    elseif (g:colors_name=='molokai')
+    elseif (g:colors_name == 'molokai')
         :colorscheme default
-    elseif (g:colors_name=='default')
+    elseif (g:colors_name == 'default')
         :colorscheme flattened
     endif
 
@@ -140,18 +140,18 @@ endfunction
 
 " To choose the statusline for either active or inactive windowss.
 function! GetStatusLine(num_active_window)
-    return a:num_active_window==winnr() ? s:active_statusline : s:inactive_statusline
+    return a:num_active_window == winnr() ? s:active_statusline : s:inactive_statusline
 endfunction
 
 " " " " " " " " " " " " " " " "
 
 " To set colors used in status line.
 function! SetColorUsers()
-    highlight User1 guifg=#ffffff  guibg=#660000
-    highlight User2 guifg=#ffffff  guibg=#990033
-    highlight User3 guifg=#ffffff  guibg=#666600
-    highlight User4 guifg=#ffffff  guibg=#336633
-    highlight User5 guifg=#ffffff  guibg=#336699
+    highlight User1 guifg = #ffffff  guibg = #660000
+    highlight User2 guifg = #ffffff  guibg = #990033
+    highlight User3 guifg = #ffffff  guibg = #666600
+    highlight User4 guifg = #ffffff  guibg = #336633
+    highlight User5 guifg = #ffffff  guibg = #336699
 endfunction
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
@@ -201,14 +201,13 @@ set hidden
 " To keep a backup file.
 set backup
 
-" To specify where to backup files (lest there be lots of hidden backup files).
-set backupdir=/Users/amino/Documents/Vim_swap_files_storeroom
-
-" To tell Vim where to put swap files; I set same place, but one need not.
-set dir=/Users/amino/Documents/Vim_swap_files_storeroom
+" To specify where backup files and swap files are saved (here the same).
+let path_dir_swap = "/Users/amino/Documents/Vim_storeroom"
+let &backupdir = path_dir_swap
+let &dir = path_dir_swap
 
 " To set how many lines of history Vim has to remember.
-set history=700
+set history = 700
 
 " To open `~/.vimrc` in a new tab with `<space>,`.
 " (Preferences window of a Mac app is often opened with `<cmd>,`.)
@@ -240,20 +239,20 @@ noremap <leader>D "*D
 noremap <leader>dd "*dd
 
 " To enable backspace to delete indentation, line breaks, pre-existing characters.
-set backspace=eol,start,indent
+set backspace = eol,start,indent
 
 " To add one whitespace only, when joining the lines with `J`.
 set nojoinspaces
 
 " Do not automatically supply comment-symbol (e.g. "//" in C++).
-autocmd group_vimrc FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+autocmd group_vimrc FileType * setlocal formatoptions -= c formatoptions -= r formatoptions -= o
 
 " To wait 3[s] for combination key, and afterwards wait 0.1[s]
 " for key codes after that (both in ms),
 " preventing delay after `O` (opening another line above).
 set timeout
-set timeoutlen=3000
-set ttimeoutlen=100
+set timeoutlen = 3000
+set ttimeoutlen = 100
 
 " To disable `<shift><f5>` (I mapped `<tab>` key as `<f5>` key),
 " because I often accidentally hit it.
@@ -288,13 +287,13 @@ set smartcase
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 
 " To remember the list of all (`^`) opened buffers (`%`) when closing.
-set viminfo^=%
+set viminfo^ = %
 
 " To save session (like current windows) with `<space>m` (for "make").
-noremap <leader>m :mksession! /Users/amino/.my_vim_session.vim<cr>
+noremap <leader>m :mksession! path_swap/.my_vim_session<cr>
 
 " To load saved session with `<space>o` (for "open").
-noremap <leader>o :source /Users/amino/.my_vim_session.vim<cr>
+noremap <leader>o :source path_swap/.my_vim_session<cr>
 
 " Don't update the display while executing macros.
 set lazyredraw
@@ -321,20 +320,20 @@ nnoremap <left> <c-w>h
 nnoremap <right> <c-w>l
 
 " To initialize settings in NETRW buffer (directory browser).
-let g:netrw_bufsettings='nomodifiable nomodified number nobuflisted wrap readonly'
+let g:netrw_bufsettings = 'nomodifiable nomodified number nobuflisted wrap readonly'
 
 " In NETRW buffer, to hide the banner on top of files.
 let g:netrw_banner = 0
 
 " In NETRW buffer, to specify files to be hidden, comma-separated.
-let g:netrw_list_hide=
+let g:netrw_list_hide =
     \ '^\..*/$,' . '^\..*$,' .
     \ '^.*\.swp$,' . '^.*\.o$,' . '^.*\.pyc$' .
     \ '^.*\.pdf$,' . '^.*\.doc$,' . '^.*\.docx$' .
     \ '^.*\.png$,' . '^.*\.jpg$,' . '^.*\.jpeg$'
 
 " In NETRW buffer, to hide files specified above.
-let g:netrw_hide=1
+let g:netrw_hide = 1
 
 " In NETRW buffer, to toggle hiding files with `<space>h` (for "hide").
 noremap <silent> <leader>h :call ToggleDisplayHiddenFiles()<cr>
@@ -365,7 +364,7 @@ nnoremap <leader>9 gT
 nnoremap <leader>0 gt
 
 " In a tab, to display filename only, instead of full path to it.
-set guitablabel=%t
+set guitablabel = %t
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 "          Display of text
@@ -378,7 +377,7 @@ syntax enable
 set termguicolors
 
 " To use dark background.
-set background=dark
+set background = dark
 
 " To choose Romain Lafourcade's "flattened" (`romainl/flattened`)
 " color scheme, based on Ethan Schoonover's "solarized" scheme
@@ -397,13 +396,13 @@ autocmd group_vimrc VimEnter,WinEnter,BufWinEnter * setlocal cursorline
 autocmd group_vimrc WinLeave * setlocal nocursorline
 
 " To make comments shown in terminal, italic; GUI MacVim already does.
-highlight Comment cterm=italic
+highlight Comment cterm = italic
 
 " To set utf8 as standard encoding.
-set encoding=utf8
+set encoding = utf8
 
 " To try Unix-styled end-of-line only (see relevant note in this repo).
-set fileformats=unix
+set fileformats = unix
 
 " To use whitespaces instead of tabbed space.
 set expandtab
@@ -411,9 +410,9 @@ set expandtab
 " To set 1 tabbed space as 3 whitespaces, when auto-indenting
 " (`shiftwidth`), and when showing and interpreting a file (`tabstop`),
 " and when in insert mode (`softtabstop`).
-set tabstop=3
-set softtabstop=3
-set shiftwidth=3
+set tabstop = 3
+set softtabstop = 3
+set shiftwidth = 3
 
 " To break lines instead of split a word when wrapping.
 set linebreak
@@ -425,10 +424,10 @@ nnoremap <leader>l :setlocal nolinebreak!<cr>
 set wrap
 
 " Never to automatically wrap text by setting to 0, however long it is.
-set textwidth=0
+set textwidth = 0
 
 " Not to display last line, if incomplete.
-set display=
+set display = 
 
 " But toggle between displaying, as much as possible, the next line
 " not able to be fully shown, or not so, with `<space>\`.
@@ -436,7 +435,7 @@ set display=
 noremap <silent> <leader>\ :call ToggleDisplayLastLine()<cr>
 
 " To mark newline, tabbed space, and unfinished or continued lineas.
-set listchars=eol:~,tab:>\ ,extends:+,precedes:-
+set listchars = eol:~,tab:>\ ,extends:+,precedes:-
 set list
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
@@ -450,16 +449,16 @@ nnoremap <bs> :
 nnoremap <cr> :!
 
 " To set height of the command bar to be 2 lines.
-set cmdheight=2
+set cmdheight = 2
 
 " To turn on the wild menu of auto command line completion with pressing Tab.
 set wildmenu
 
 " To ignore files with some extensions when completing with tab.
-:set wildignore=*.swp,*.o,*.pyc,*.pdf,*.doc,*.docx,*.png,*.jpg,*.jpeg
+:set wildignore = *.swp,*.o,*.pyc,*.pdf,*.doc,*.docx,*.png,*.jpg,*.jpeg
 
 " To always show the status line, with height being 2 lines.
-set laststatus=2
+set laststatus = 2
 
 " To format the status line. They are resp.:
 " `%F` full path to this file, `%m` modified flag,
@@ -471,9 +470,9 @@ set laststatus=2
 " They are defined in the lines after `colorscheme`.
 
 " First to define that for the only active windows.
-let s:active_statusline='%1* %F %*%2*%m%r%h%*%3* B:%n %*%4* L:%l/%L %*%5* C:%c%V %*'
+let s:active_statusline = '%1* %F %*%2*%m%r%h%*%3* B:%n %*%4* L:%l/%L %*%5* C:%c%V %*'
 " Next to define those for other inactive windowss.
-let s:inactive_statusline=' %F %m%r%h B:%n  L:%l/%L  C:%c%V '
+let s:inactive_statusline = ' %F %m%r%h B:%n  L:%l/%L  C:%c%V '
 
 " Set the statusline whenever the active windows changes.
 autocmd group_vimrc VimEnter,WinEnter,BufWinEnter * call RefreshStatusLine()
@@ -482,10 +481,10 @@ autocmd group_vimrc VimEnter,WinEnter,BufWinEnter * call RefreshStatusLine()
 noremap <leader>s :setlocal spell!<cr>
 
 " To set dictionary for completion, called with `<ctrl>x<ctrl>k` in insert mode.
-set dictionary=/usr/share/dict/words
+set dictionary = /usr/share/dict/words
 
 " To set source codes syntax completion, called with `<ctrl>x<ctrl>o` in insert mode.
-set omnifunc=syntaxcomplete#Complete
+set omnifunc = syntaxcomplete#Complete
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 "          Navigation and cursor
@@ -499,7 +498,7 @@ noremap gj j
 noremap gk k
 
 " For these navigation actions, to continue navigation acrossing newline.
-set whichwrap+=<,>,h,l
+set whichwrap += <,>,h,l
 
 " To scroll a page with no repeated lines, instead of two lines in both
 " before and after; leaving cursor in the middle.
@@ -521,10 +520,10 @@ autocmd group_vimrc BufReadPost *
     \ endif
 
 " To turn off the blinking cursor in normal (`n`) mode (relevant in MacVim).
-set guicursor=n:blinkon0
+set guicursor = n:blinkon0
 
 " To disallow "mouse" (i.e. trackpad or whatever) to change cursor location.
-set mouse=
+set mouse =
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 "          Summary of custom leader commands
