@@ -9,7 +9,7 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 # To define environment variables.
-export MY_DRIVE="/Users/amino/Google_drive"
+export MY_DRIVE="/Users/amino/sync"
 export REPO_TCS="${MY_DRIVE}/code_repositories/templates_configs_scripts"
 export PATH="${PATH}:${REPO_TCS}/scripts"
 

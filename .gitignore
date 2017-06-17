@@ -1,6 +1,8 @@
 *.doc
 *.docx
 *.png
+*.jpg
+*.jpeg
 *.pdf
 *.aux
 *.log

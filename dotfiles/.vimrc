@@ -222,7 +222,7 @@ nnoremap <leader>. :source $MYVIMRC<cr>
 "          Edit, search, and replace
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 
-" To define `<shift>y` for "copying to end of line" for consistency (compare `D`).
+" To copy until end of line, defined for consistency (compare `D`).
 nmap Y y$
 
 " To put (paste) from the system clipboard with `<space>p` and so on.
