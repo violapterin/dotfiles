@@ -15,7 +15,11 @@
 " `<esc>` the escape key, <bs> for the backspace, <space> for the
 " spacebar, and `<c-*>` for `<ctrl>*` (holding `<ctrl>` while
 " pressing * where * is some key). Though abbreviations exist, I
-" shall use the full name form whenever possble, for ease of reading.
+" shall use the full name whenever possble, for ease of reading.
+"    By the way, note that `=` must be preceded by a space (` `):
+"        set history=700 " Okay
+"        set history =700 " Okay (used here)
+"        set history = 700 " Error
 "
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 "
@@ -38,7 +42,7 @@
 " First, to define a "leader" to be the space bar, after turning off
 " its default behavior (right arrow). The enables lots more combinations.
 nnoremap <space> <nop>
-let mapleader = " "
+let mapleader =" "
 
 " To declare a group that holds auto-commands defined in this vimrc,
 " and delete all auto-commands having been defined at this point.
@@ -58,10 +62,10 @@ augroup END
 
 " To toggle showing text hidden for lack of space (see `<space>\`).
 function! ToggleDisplayLastLine()
-    if (&display == '')
-        let &display = 'truncate'
+    if (&display =='')
+        let &display ='truncate'
     else
-        let &display = ''
+        let &display =''
     endif
 endfunction
 
@@ -69,10 +73,10 @@ endfunction
 
 " In NETRW buffer, to toggle hiding files (see `<space>h`).
 function! ToggleDisplayHiddenFiles()
-    if (g:netrw_hide == 0)
-        let g:netrw_hide = 1
+    if (g:netrw_hide ==0)
+        let g:netrw_hide =1
     else
-        let g:netrw_hide = 0
+        let g:netrw_hide =0
     endif
 endfunction
 
@@ -80,17 +84,17 @@ endfunction
 
 " To switch among chosen color schemes (see `<space>t`).
 function! ChooseNextColor()
-    if (g:colors_name == 'flattened')
+    if (g:colors_name =='flattened')
         :colorscheme gruvbox
-    elseif (g:colors_name == 'gruvbox')
+    elseif (g:colors_name =='gruvbox')
         :colorscheme tomorrow-eighties
-    elseif (g:colors_name == 'tomorrow-eighties')
+    elseif (g:colors_name =='tomorrow-eighties')
         :colorscheme tomorrow-bright
-    elseif (g:colors_name == 'tomorrow-bright')
+    elseif (g:colors_name =='tomorrow-bright')
         :colorscheme molokai
-    elseif (g:colors_name == 'molokai')
+    elseif (g:colors_name =='molokai')
         :colorscheme default
-    elseif (g:colors_name == 'default')
+    elseif (g:colors_name =='default')
         :colorscheme flattened
     endif
 
@@ -111,18 +115,18 @@ function! ListBuffersFilenameOnly()
     " Replacement syntax is same as `:s`; `g` for global action.
     " The `®` and `©` are introduced temporarily for delimitation.
     " First to isolate filenames and line numbers.
-    let s:list = substitute( s:list, '"\([^\n]*\)"\s*line \(\d\+\)', 'line ®\2®: ©\1©', 'g' )
+    let s:list =substitute( s:list, '"\([^\n]*\)"\s*line \(\d\+\)', 'line ®\2®: ©\1©', 'g' )
 
     " To keep only basename of file and strip `©`.
-    let s:list = substitute( s:list, '©\([^©]*\)/\([^©/]\+\)©', '\2', 'g' )
-    let s:list = substitute( s:list, '©\([^©]\+\)©', '\1', 'g' )
+    let s:list =substitute( s:list, '©\([^©]*\)/\([^©/]\+\)©', '\2', 'g' )
+    let s:list =substitute( s:list, '©\([^©]\+\)©', '\1', 'g' )
 
     " To pad whitespace to align and strip `®`.
-    let s:list = substitute( s:list, '®\(\d\{1}\)®:', '\1:     ', 'g' )
-    let s:list = substitute( s:list, '®\(\d\{2}\)®:', '\1:    ', 'g' )
-    let s:list = substitute( s:list, '®\(\d\{3}\)®:', '\1:   ', 'g' )
-    let s:list = substitute( s:list, '®\(\d\{4}\)®:', '\1:  ', 'g' )
-    let s:list = substitute( s:list, '®\(\d\{5}\)®:', '\1: ', 'g' )
+    let s:list =substitute( s:list, '®\(\d\{1}\)®:', '\1:     ', 'g' )
+    let s:list =substitute( s:list, '®\(\d\{2}\)®:', '\1:    ', 'g' )
+    let s:list =substitute( s:list, '®\(\d\{3}\)®:', '\1:   ', 'g' )
+    let s:list =substitute( s:list, '®\(\d\{4}\)®:', '\1:  ', 'g' )
+    let s:list =substitute( s:list, '®\(\d\{5}\)®:', '\1: ', 'g' )
 
     echo s:list
 endfunction
@@ -140,18 +144,18 @@ endfunction
 
 " To choose the statusline for either active or inactive windowss.
 function! GetStatusLine(num_active_window)
-    return a:num_active_window == winnr() ? s:active_statusline : s:inactive_statusline
+    return a:num_active_window ==winnr() ? s:active_statusline : s:inactive_statusline
 endfunction
 
 " " " " " " " " " " " " " " " "
 
 " To set colors used in status line.
 function! SetColorUsers()
-    highlight User1 guifg = #ffffff  guibg = #660000
-    highlight User2 guifg = #ffffff  guibg = #990033
-    highlight User3 guifg = #ffffff  guibg = #666600
-    highlight User4 guifg = #ffffff  guibg = #336633
-    highlight User5 guifg = #ffffff  guibg = #336699
+    highlight User1 guifg =#ffffff  guibg =#660000
+    highlight User2 guifg =#ffffff  guibg =#990033
+    highlight User3 guifg =#ffffff  guibg =#666600
+    highlight User4 guifg =#ffffff  guibg =#336633
+    highlight User5 guifg =#ffffff  guibg =#336699
 endfunction
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
@@ -174,7 +178,7 @@ nnoremap <leader>q :q<cr>
 
 " To absolutely forbid modifying a file opened as read-only with `:vie[w]`.
 " (Default is first to warn, and then allow edit.)
-autocmd group_vimrc BufRead * let &l:modifiable = !&readonly
+autocmd group_vimrc BufRead * let &l:modifiable =!&readonly
 
 " To check file changes and prompt to reload, every moment Vim's
 " window is focussed again. If no change in Vim, buffer is reloaded.
@@ -202,12 +206,12 @@ set hidden
 set backup
 
 " To specify where backup files and swap files are saved (here the same).
-let path_dir_swap = "/Users/amino/Documents/Vim_storeroom"
-let &backupdir = path_dir_swap
-let &dir = path_dir_swap
+let path_dir_swap ="/Users/amino/Documents/Vim_storeroom"
+let &backupdir =path_dir_swap
+let &dir =path_dir_swap
 
 " To set how many lines of history Vim has to remember.
-set history = 700
+set history =700
 
 " To open `~/.vimrc` in a new tab with `<space>,`.
 " (Preferences window of a Mac app is often opened with `<cmd>,`.)
@@ -222,37 +226,38 @@ nnoremap <leader>. :source $MYVIMRC<cr>
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 
 " To copy until end of line, defined for consistency (compare `D`).
-nmap Y y$
+nnoremap Y y$
 
 " To put (paste) from the system clipboard with `<space>p` and so on.
 nnoremap <leader>p "*p
 nnoremap <leader>P "*P
 
 " To yank (copy) from the system clipboard with `<space>y` and so on.
-noremap <leader>y "*y
-noremap <leader>Y "*Y
-noremap <leader>yy "*yy
+nmap <leader>y "*y
+vnoremap <leader>y "*y
+nnoremap <leader>Y "*y$
+nnoremap <leader>yy "*yy
 
 " To delete (cut) from the system clipboard with `<space>d` and so on.
-noremap <leader>d "*d
-noremap <leader>D "*D
-noremap <leader>dd "*dd
+nnoremap <leader>d "*d
+nnoremap <leader>D "*D
+nnoremap <leader>dd "*dd
 
 " To enable backspace to delete indentation, line breaks, pre-existing characters.
-set backspace = eol,start,indent
+set backspace=eol,start,indent
 
 " To add one whitespace only, when joining the lines with `J`.
 set nojoinspaces
 
 " Do not automatically supply comment-symbol (e.g. "//" in C++).
-autocmd group_vimrc FileType * setlocal formatoptions -= c formatoptions -= r formatoptions -= o
+autocmd group_vimrc FileType * setlocal formatoptions -=c formatoptions -=r formatoptions -=o
 
 " To wait 3[s] for combination key, and afterwards wait 0.1[s]
 " for key codes after that (both in ms),
 " preventing delay after `O` (opening another line above).
 set timeout
-set timeoutlen = 3000
-set ttimeoutlen = 100
+set timeoutlen =3000
+set ttimeoutlen =100
 
 " To disable `<shift><f5>` (I mapped `<tab>` key as `<f5>` key),
 " because I often accidentally hit it.
@@ -273,7 +278,7 @@ set hlsearch
 nnoremap <leader>l :setlocal nohlsearch!<cr>
 
 " To temporarily clean highlight of what's being searched with `<space><cr>`.
-noremap <leader><cr> :nohlsearch<cr>
+nnoremap <leader><cr> :nohlsearch<cr>
 
 " To ignore case when searching as default.
 set ignorecase
@@ -286,14 +291,14 @@ set smartcase
 "          View, windows, and NETRW
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 
-" To remember the list of all (`^`) opened buffers (`%`) when closing.
-set viminfo^ = %
-
 " To save session (like current windows) with `<space>m` (for "make").
-noremap <leader>m :mksession! path_swap/.my_vim_session<cr>
+"nnoremap <leader>m :mksession! path_dir_swap . "/.my_vim_session"<cr>
+"let path_full_session =path_dir_swap . ".my_vim_session"
+execute "nnoremap <leader>m :mksession! " . path_dir_swap . "/.my_vim_session<cr>"
 
 " To load saved session with `<space>o` (for "open").
-noremap <leader>o :source path_swap/.my_vim_session<cr>
+execute "nnoremap <leader>o :source " . path_dir_swap . "/.my_vim_session<cr>"
+"nnoremap <leader>o :source path_full_session<cr>
 
 " Don't update the display while executing macros.
 set lazyredraw
@@ -308,10 +313,10 @@ set number
 set showmode
 
 " Suppress usual function of arrow, since I shall overload them.
-noremap <up> <nop>
-noremap <down> <nop>
-noremap <left> <nop>
-noremap <right> <nop>
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
 
 " To focus on windows with arrow keys of according direction.
 nnoremap <up> <c-w>k
@@ -320,10 +325,10 @@ nnoremap <left> <c-w>h
 nnoremap <right> <c-w>l
 
 " To initialize settings in NETRW buffer (directory browser).
-let g:netrw_bufsettings = 'nomodifiable nomodified number nobuflisted wrap readonly'
+let g:netrw_bufsettings ='nomodifiable nomodified number nobuflisted wrap readonly'
 
 " In NETRW buffer, to hide the banner on top of files.
-let g:netrw_banner = 0
+let g:netrw_banner =0
 
 " In NETRW buffer, to specify files to be hidden, comma-separated.
 let g:netrw_list_hide =
@@ -333,10 +338,10 @@ let g:netrw_list_hide =
     \ '^.*\.png$,' . '^.*\.jpg$,' . '^.*\.jpeg$'
 
 " In NETRW buffer, to hide files specified above.
-let g:netrw_hide = 1
+let g:netrw_hide =1
 
 " In NETRW buffer, to toggle hiding files with `<space>h` (for "hide").
-noremap <silent> <leader>h :call ToggleDisplayHiddenFiles()<cr>
+nnoremap <silent> <leader>h :call ToggleDisplayHiddenFiles()<cr>
 
 " To select the previous buffer with `<space>[`.
 " To select the next buffer with `<space>]`.
@@ -364,7 +369,7 @@ nnoremap <leader>9 gT
 nnoremap <leader>0 gt
 
 " In a tab, to display filename only, instead of full path to it.
-set guitablabel = %t
+set guitablabel=%t
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 "          Display of text
@@ -377,7 +382,7 @@ syntax enable
 set termguicolors
 
 " To use dark background.
-set background = dark
+set background =dark
 
 " To choose Romain Lafourcade's "flattened" (`romainl/flattened`)
 " color scheme, based on Ethan Schoonover's "solarized" scheme
@@ -396,13 +401,13 @@ autocmd group_vimrc VimEnter,WinEnter,BufWinEnter * setlocal cursorline
 autocmd group_vimrc WinLeave * setlocal nocursorline
 
 " To make comments shown in terminal, italic; GUI MacVim already does.
-highlight Comment cterm = italic
+highlight Comment cterm =italic
 
 " To set utf8 as standard encoding.
-set encoding = utf8
+set encoding =utf8
 
 " To try Unix-styled end-of-line only (see relevant note in this repo).
-set fileformats = unix
+set fileformats =unix
 
 " To use whitespaces instead of tabbed space.
 set expandtab
@@ -410,9 +415,9 @@ set expandtab
 " To set 1 tabbed space as 3 whitespaces, when auto-indenting
 " (`shiftwidth`), and when showing and interpreting a file (`tabstop`),
 " and when in insert mode (`softtabstop`).
-set tabstop = 3
-set softtabstop = 3
-set shiftwidth = 3
+set tabstop =3
+set softtabstop =3
+set shiftwidth =3
 
 " To break lines instead of split a word when wrapping.
 set linebreak
@@ -424,18 +429,18 @@ nnoremap <leader>l :setlocal nolinebreak!<cr>
 set wrap
 
 " Never to automatically wrap text by setting to 0, however long it is.
-set textwidth = 0
+set textwidth =0
 
 " Not to display last line, if incomplete.
-set display = 
+set display =
 
 " But toggle between displaying, as much as possible, the next line
 " not able to be fully shown, or not so, with `<space>\`.
 " (Think of `\` that indicates line continuation.)
-noremap <silent> <leader>\ :call ToggleDisplayLastLine()<cr>
+nnoremap <silent> <leader>\ :call ToggleDisplayLastLine()<cr>
 
 " To mark newline, tabbed space, and unfinished or continued lineas.
-set listchars = eol:~,tab:>\ ,extends:+,precedes:-
+set listchars =eol:~,tab:>\ ,extends:+,precedes:-
 set list
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
@@ -449,16 +454,16 @@ nnoremap <bs> :
 nnoremap <cr> :!
 
 " To set height of the command bar to be 2 lines.
-set cmdheight = 2
+set cmdheight =2
 
 " To turn on the wild menu of auto command line completion with pressing Tab.
 set wildmenu
 
 " To ignore files with some extensions when completing with tab.
-:set wildignore = *.swp,*.o,*.pyc,*.pdf,*.doc,*.docx,*.png,*.jpg,*.jpeg
+:set wildignore =*.swp,*.o,*.pyc,*.pdf,*.doc,*.docx,*.png,*.jpg,*.jpeg
 
 " To always show the status line, with height being 2 lines.
-set laststatus = 2
+set laststatus =2
 
 " To format the status line. They are resp.:
 " `%F` full path to this file, `%m` modified flag,
@@ -470,21 +475,21 @@ set laststatus = 2
 " They are defined in the lines after `colorscheme`.
 
 " First to define that for the only active windows.
-let s:active_statusline = '%1* %F %*%2*%m%r%h%*%3* B:%n %*%4* L:%l/%L %*%5* C:%c%V %*'
+let s:active_statusline ='%1* %F %*%2*%m%r%h%*%3* B:%n %*%4* L:%l/%L %*%5* C:%c%V %*'
 " Next to define those for other inactive windowss.
-let s:inactive_statusline = ' %F %m%r%h B:%n  L:%l/%L  C:%c%V '
+let s:inactive_statusline =' %F %m%r%h B:%n  L:%l/%L  C:%c%V '
 
 " Set the statusline whenever the active windows changes.
 autocmd group_vimrc VimEnter,WinEnter,BufWinEnter * call RefreshStatusLine()
 
 " To toggle spell checking on and off with`<space>s` (for "spell").
-noremap <leader>s :setlocal spell!<cr>
+nnoremap <leader>s :setlocal spell!<cr>
 
 " To set dictionary for completion, called with `<ctrl>x<ctrl>k` in insert mode.
-set dictionary = /usr/share/dict/words
+set dictionary =/usr/share/dict/words
 
 " To set source codes syntax completion, called with `<ctrl>x<ctrl>o` in insert mode.
-set omnifunc = syntaxcomplete#Complete
+set omnifunc =syntaxcomplete#Complete
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 "          Navigation and cursor
@@ -492,13 +497,13 @@ set omnifunc = syntaxcomplete#Complete
 
 " Since line-wrapping is set, to navigate in terms of display lines
 " with `j` and `k`, and of physical lines with `gj` and `gk`, swapping them.
-noremap j gj
-noremap k gk
-noremap gj j
-noremap gk k
+nnoremap j gj
+nnoremap k gk
+nnoremap gj j
+nnoremap gk k
 
 " For these navigation actions, to continue navigation acrossing newline.
-set whichwrap += <,>,h,l
+set whichwrap +=<,>,h,l
 
 " To scroll a page with no repeated lines, instead of two lines in both
 " before and after; leaving cursor in the middle.
@@ -515,12 +520,12 @@ nnoremap <silent> <leader>j /[、，；。！？：“”‘’「」『』—]<
 
 " To return to last edit position upon opening files.
 autocmd group_vimrc BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \ if line("'\"") > 0 && line("'\"") <=line("$") |
     \   exe "normal! g`\"" |
     \ endif
 
 " To turn off the blinking cursor in normal (`n`) mode (relevant in MacVim).
-set guicursor = n:blinkon0
+set guicursor =n:blinkon0
 
 " To disallow "mouse" (i.e. trackpad or whatever) to change cursor location.
 set mouse =
