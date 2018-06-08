@@ -12,11 +12,11 @@ export PATH="${PATH}:${DOC}/code_repos/scripts/bash"
 export PYTHONPATH="${PYTHONPATH}:${DOC}/code_repos/scripts/python"
 
 # To set MacVim as the default editor, such as Git commit logs.
-export VISUAL="mvim -v"
+export VISUAL="nvim"
 export EDITOR="${VISUAL}"
 
 # To compile LilyPond `.ly` file.
-export LilyPond="/Applications/LilyPond.app/Contents/Resources/bin/lilypond"
+# export LilyPond="/Applications/LilyPond.app/Contents/Resources/bin/lilypond"
 
 # Command-line completion resp. using up and down arrow keys.
 bind "\"\e[A\": history-search-backward"
@@ -25,9 +25,8 @@ bind "\"\e[B\": history-search-forward"
 # To ignore case in completing commands.
 bind "set completion-ignore-case On"
 
-# Initialize the `bash-completion` package.
-# (Install with `brew install bash-completion`.)
-source /usr/local/etc/bash_completion
+# To initialize the `bash-completion` package.
+source /usr/share/bash-completion/bash_completion
 
 # # # # # # # # Display of color # # # # # # # # 
 

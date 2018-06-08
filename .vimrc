@@ -387,7 +387,7 @@ set background =dark
 " To choose Romain Lafourcade's "flattened" (`romainl/flattened`)
 " color scheme, based on Ethan Schoonover's "solarized" scheme
 " (`altercation/vim-colors-solarized`); see my note in this repo.
-colorscheme flattened
+" colorscheme flattened
 
 " Colors of the status line, for the only active windows only.
 " They must come after `colorscheme` file is read.
