@@ -87,18 +87,12 @@ function! ChooseNextColor()
     if (g:colors_name =='flattened')
         :colorscheme gruvbox
     elseif (g:colors_name =='gruvbox')
-        :colorscheme tomorrow-eighties
-    elseif (g:colors_name =='tomorrow-eighties')
-        :colorscheme tomorrow-bright
-    elseif (g:colors_name =='tomorrow-bright')
         :colorscheme molokai
     elseif (g:colors_name =='molokai')
-        :colorscheme default
-    elseif (g:colors_name =='default')
         :colorscheme flattened
     endif
 
-    highlight Comment cterm=italic
+    "highlight Comment cterm=italic
 
     call SetColorUsers()
 endfunction
@@ -166,7 +160,7 @@ endfunction
 set nocompatible
 
 " To save current buffer with `<space>w` (for "write"),
-" not if readonly or filename exists.
+" unless readonly or filename exists.
 nnoremap <leader>w :w<cr>
 
 " To save all buffers with `<space>a` (for "all").
@@ -206,12 +200,15 @@ set hidden
 set backup
 
 " To specify where backup files and swap files are saved (here the same).
-let path_dir_swap ="/Users/amino/Documents/Vim_storeroom"
+let path_dir_swap ="/home/aminopterin/Vim_storeroom"
 let &backupdir =path_dir_swap
 let &dir =path_dir_swap
 
 " To set how many lines of history Vim has to remember.
 set history =700
+
+" To open recently edited files.
+nnoremap <leader>/ :browse oldfiles<cr>
 
 " To open `~/.vimrc` in a new tab with `<space>,`.
 " (Preferences window of a Mac app is often opened with `<cmd>,`.)
@@ -351,7 +348,7 @@ nnoremap <leader>] :bnext<cr>
 " To open a new buffer with `<space>=` (think of `+`).
 " To delete current buffer with `<space>-` (meaning removal).
 nnoremap <leader>= :enew<cr>
-nnoremap <leader>- :bprevious<cr>:bdelete #<cr>
+nnoremap <leader>- :bprevious<cr>:bdelete! #<cr>
 
 " To switch, with `<space>b` (for "buffer"), among existing
 " buffers by typing its number shown on the screen.
@@ -386,8 +383,8 @@ set background =dark
 
 " To choose Romain Lafourcade's "flattened" (`romainl/flattened`)
 " color scheme, based on Ethan Schoonover's "solarized" scheme
-" (`altercation/vim-colors-solarized`); see my note in this repo.
-" colorscheme flattened
+" (`altercation/vim-colors-solarized`); see my computer notes.
+colorscheme flattened
 
 " Colors of the status line, for the only active windows only.
 " They must come after `colorscheme` file is read.
@@ -537,6 +534,7 @@ set mouse =
 " <space><cr>   To cancel highlight of the last search
 " <space>,      To open `.vimrc` in a new tab
 " <space>.      To source `.vimrc`
+" <space>/      To browse oldfiles
 " <space>-      To delete the current buffer
 " <space>=      To open a new buffer
 " <space>[      To select the previous buffer
