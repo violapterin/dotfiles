@@ -10,7 +10,7 @@
 # # # # # # # # Settings, exportation, sourcing # # # # # # # # 
 
 # To define environment variables.
-export DOC="/Users/amino/Dropbox"
+export DOC="/home/aminopterin/Dropbox"
 export PATH="${PATH}:${DOC}/code_repos/scripts/bash"
 export PYTHONPATH="${PYTHONPATH}:${DOC}/code_repos/scripts/python"
 
@@ -37,11 +37,9 @@ source /usr/share/bash-completion/bash_completion
 # and current directory (not full path).
 export PS1="\[\033[1;32m\]\u\[\033[1;34m\][\A]\[\033[1;31m\]@\W\[\033[1;37m\]$ \[\033[0;37m\]"
 
-# To enable color in command line interface.
-export CLICOLOR=1
-
 # To specify color settings used by `ls` ("list") display.
-export LSCOLORS="gxBxhxDxfxhxhxhxhxcxcx"
+LSCOLORS='di=1:fi=0:ln=31:pi=5:so=5:bd=5:cd=5:or=31:mi=0:ex=35:*.rpm=90'
+export LSCOLORS
 
 # # # # # # # # File management # # # # # # # #
 
@@ -53,9 +51,9 @@ alias cd="cd -P"
 # `-F`: to display a slash;
 # `-h`: to use human readable format, e.g. KB, MB, GB,...;
 # `-l`: to use long format, including permissions and date modified;
-# `-a`: to display hidden files, say `.DS_Store`
-alias ls="ls -GFh"
-alias Ls="ls -alGFh"
+# `-a`: to display hidden files, say `.gitignore`
+alias ls="ls -GFh --color"
+alias Ls="ls -alGFh --color"
 
 # Disk usage
 alias Du="du -shc * | gsort -hr"
@@ -76,5 +74,6 @@ alias BrowsePtt="ssh bbsu@ptt.cc"
 # To browse PTT2.
 alias BrowsePtt2="ssh bbsu@ptt2.cc"
 
+# To edit with neovim.
 alias V="nvim"
 
