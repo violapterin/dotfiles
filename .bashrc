@@ -77,3 +77,15 @@ alias BrowsePtt2="ssh bbsu@ptt2.cc"
 # To edit with neovim.
 alias V="nvim"
 
+# NTU VPN. Assume Pulse Secure CLI client is installed.
+#alias NTUVPN="bash -c \"pulsesvc -h sslvpn2.ntu.edu.tw -u r05942142 -realm \\\"NTU EMail Account\\\" -Url https://sslvpn2.ntu.edu.tw/\" &"
+
+
+NTUVPN()
+{
+   echo "Password:"
+   read pw
+   pulsesvc -h "sslvpn2.ntu.edu.tw" -u "r05942142" -p "${pw}" -r "NTU EMail Account" -U "https://sslvpn2.ntu.edu.tw/" &
+}
+
+
