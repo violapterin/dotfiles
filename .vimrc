@@ -187,11 +187,13 @@ set autoread
 " To enable filetype detection, filetype-specific settings.
 filetype on
 
+" To disable several kinds of auto indentation.
+set noautoindent
+set nocindent
+set nosmartindent
+
 " To enable automatic loading of plugins upon recognizing filetype.
 filetype plugin on
-
-" To enable indent in the manner suitable for the filetype.
-filetype indent on
 
 " To allow unwritten buffers to be hidden (not in view).
 set hidden
