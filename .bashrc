@@ -1,12 +1,10 @@
 # `~/.bashrc` is loaded by an interactive non-login bash shell.
 
-# Do nothing if not running interactively.
+# To do nothing if not running interactively.
 [[ $- != *i* ]] && return
 
-# Load `.profile`, if it exists.
+# To load `.profile`, if it exists.
 [ -r ~/.profile ] && source ~/.profile
-
-# # # # # # # # Settings, exportation, sourcing # # # # # # # # 
 
 # Command-line completion resp. using up and down arrow keys.
 bind "\"\e[A\": history-search-backward"
@@ -18,12 +16,9 @@ bind "set completion-ignore-case On"
 # To initialize the `bash-completion` package.
 source /usr/share/bash-completion/bash_completion
 
-# # # # # # # # File management # # # # # # # #
-
-# When changing directory, always expand a symlink.
+# `-P`: to always expand a symlink.
 alias cd="cd -P"
 
-# `ls` for hidden & short form; `Ls` unhidden & long form;
 # `-G`: to enable colorized output;
 # `-F`: to display a slash;
 # `-h`: to use human readable format, e.g. KB, MB, GB,...;
@@ -33,34 +28,21 @@ alias ls="ls -GFh --color"
 alias Ls="ls -alGFh --color"
 
 # Disk usage
-alias Du="du -shc * | gsort -hr"
+alias Du="du -shc * | sort -hr"
 
-# # # # # # # # Other aliases for applications # # # # # # # #
-
-# `cd` (change directory) shortcuts.
-# Double quotes ensures they are passed as a single token.
-alias CdEssays="cd \"${CLOUD}/Chinese_writing/Chinese_essays/part_8_since_Jan_2017\""
-alias CdArchive="cd \"${CLOUD}/Chinese_writing/authentic_archive\""
-alias CdMusicWork="cd \"${CLOUD}/music_composition\""
-alias CdScienceWork="cd \"${CLOUD}/science_work\""
-alias CdRepos="cd \"${CLOUD}/code_repos\""
-alias CdBooks="cd \"${CLOUD}/books\""
+# Double quotes ensures them to be passed properly.
+alias Cd_music="cd \"${CLOUD}/music_composition\""
+alias Cd_science="cd \"${CLOUD}/science_work\""
+alias Cd_prog="cd \"${CLOUD}/computer_programs\""
+alias Cd_books="cd \"${CLOUD}/library/books\""
+alias Cd_papers="cd \"${CLOUD}/library/books\""
+alias Cd_desktop="cd \"${HOME}/Desktop\""
 
 # To browse PTT.
-alias BrowsePtt="ssh bbsu@ptt.cc"
+alias Browse_PTT="ssh bbsu@ptt.cc"
 # To browse PTT2.
-alias BrowsePtt2="ssh bbsu@ptt2.cc"
+alias Browse_Ptt2="ssh bbsu@ptt2.cc"
 
 # To edit with neovim.
 alias V="nvim"
-
-# NTU VPN. Assume Pulse Secure CLI client is installed.
-NTUVPN()
-{
-   local pw
-   printf "Password: "
-   read pw
-   pulsesvc -h "sslvpn2.ntu.edu.tw" -u "r05942142" -p "${pw}" -r "NTU EMail Account" -U "https://sslvpn2.ntu.edu.tw/" &
-}
-
 

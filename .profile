@@ -1,27 +1,37 @@
 # `~/.profile` is loaded by every interactive login shell when starting.
 
 # To define environment variables.
-CLOUD="/home/aminopterin/Dropbox"
-export CLOUD
-PATH="${PATH}:${CLOUD}/code_repos/scripts/bash"
+PATH="${PATH}:${PROG}/scripts/bash"
 export PATH
-PYTHONPATH="${CLOUD}/code_repos/scripts/python"
+PYTHONPATH="${PROG}/scripts/python"
 export PYTHONPATH
-OSFONTDIR="/usr/share/fonts"
-export OSFONTDIR
 
-# To set NeoVim as the default editor, such as Git commit logs.
+DESKTOP="${HOME}/Desktop"
+export DESKTOP
+CLOUD="${HOME}/Dropbox"
+export CLOUD
+PROG="${CLOUD}/computer_programs"
+export PROG
+BOOKS="${CLOUD}/library/books"
+export BOOKS
+DOCUMENTS="${CLOUD}/library/documents"
+export DOCUMENTS
+
+# To set the default editor.
 VISUAL="nvim"
 export VISUAL
 EDITOR="${VISUAL}"
 export EDITOR
+
+OSFONTDIR="/usr/share/fonts"
+export OSFONTDIR
 
 # To prompt current username, time in minutes,
 # and current directory (not full path).
 PS1="\[\033[1;32m\]\u\[\033[1;34m\][\A]\[\033[1;31m\]@\W\[\033[1;37m\]$ \[\033[0;37m\]"
 export PS1
 
-# To specify color settings used by `ls` ("list") display.
+# To specify color settings used by `ls`.
 LSCOLORS="di=1:fi=0:ln=31:pi=5:so=5:bd=5:cd=5:or=31:mi=0:ex=35:*.rpm=90"
 export LSCOLORS
 
