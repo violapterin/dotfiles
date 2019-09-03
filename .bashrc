@@ -30,13 +30,15 @@ alias Ls="ls -alGFh --color"
 # Disk usage
 alias Du="du -shc * | sort -hr"
 
+# Show battery percentage
+alias Bat="upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E \"time|percentage\""
+
 # Double quotes ensures them to be passed properly.
-alias Cd_music="cd \"${CLOUD}/music_composition\""
-alias Cd_science="cd \"${CLOUD}/science_work\""
-alias Cd_prog="cd \"${CLOUD}/computer_programs\""
-alias Cd_books="cd \"${CLOUD}/library/books\""
-alias Cd_papers="cd \"${CLOUD}/library/books\""
 alias Cd_desktop="cd \"${HOME}/Desktop\""
+alias Cd_music="cd \"${CLOUD}/music\""
+alias Cd_repo="cd \"${CLOUD}/repositories/\""
+alias Cd_books="cd \"${CLOUD}/library/books\""
+alias Cd_papers="cd \"${CLOUD}/library/papers\""
 
 # To browse PTT.
 alias Browse_PTT="ssh bbsu@ptt.cc"

@@ -1,17 +1,18 @@
 # `~/.profile` is loaded by every interactive login shell when starting.
 
 # To define environment variables.
-PATH="${PATH}:${PROG}/scripts/bash"
+PATH="${PATH}:${PROG}/scripts/bash" # original bash scripts
+PATH="${PATH}:$(ruby -e 'puts Gem.user_dir')/bin" # required by Ruby Gem
 export PATH
-PYTHONPATH="${PROG}/scripts/python"
+PYTHONPATH="${PROG}/scripts/python" # original python scripts
 export PYTHONPATH
 
 DESKTOP="${HOME}/Desktop"
 export DESKTOP
 CLOUD="${HOME}/Dropbox"
 export CLOUD
-PROG="${CLOUD}/computer_programs"
-export PROG
+REPO="${CLOUD}/computer_programs/active"
+export REPO
 BOOKS="${CLOUD}/library/books"
 export BOOKS
 DOCUMENTS="${CLOUD}/library/documents"

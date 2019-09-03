@@ -1,29 +1,18 @@
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 "
-" Filename: .vimrc
-" Date: mostly Oct. 2016 to Jan. 2017
-" Author: Aminopterin (Tzu-Yu Jeng)
-" Description: Settings and custom commands for Vim.
-" Requirement: That this be saved in the user's home.
-"
-" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
-"
-"    It's mainly based on Amir Salihefendic's `.vimrc`
-" (`github.com/amix/vimrc`), also influenced by various Stack
-" Overflow and Vim Stack Exchange posts; excuse me for not having
-" attributing them. Legend for keys: `<cr>` for the return key,
-" `<esc>` the escape key, <bs> for the backspace, <space> for the
-" spacebar, and `<c-*>` for `<ctrl>*` (holding `<ctrl>` while
-" pressing * where * is some key). Though abbreviations exist, I
-" shall use the full name whenever possble, for ease of reading.
-"    By the way, note that `=` must be preceded by a space (` `):
+"    Mainly based on Amir Salihefendic's `.vimrc` (`github.com/amix/vimrc`), 
+"    I also want to thank various Stack Overflow and Vim Stack Exchange posts.
+"    `<cr>` for the return key,
+"    `<esc>` the escape key,
+"    `<bs>` for the backspace,
+"    `<space>` for the spacebar,
+"    `<c-*>` for `<ctrl>*`.
+"    Also note that `=` must be preceded by a space (` `):
 "        set history=700 " Okay
 "        set history =700 " Okay (used here)
 "        set history = 700 " Error
 "
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
-"
-"    From now on, I'll classify settings in the manner of a GUI toolbar.
 "
 "    *  Preparation
 "    *  Helper functions' implementation
@@ -71,7 +60,7 @@ endfunction
 
 " " " " " " " " " " " " " " " "
 
-" In NETRW buffer, to toggle hiding files (see `<space>h`).
+" In NETRW buffer, to toggle hiding files (see `<space>H`).
 function! ToggleDisplayHiddenFiles()
     if (g:netrw_hide ==0)
         let g:netrw_hide =1
@@ -82,7 +71,7 @@ endfunction
 
 " " " " " " " " " " " " " " " "
 
-" To switch among chosen color schemes (see `<space>t`).
+" To switch among chosen color schemes (see `<space>T`).
 function! ChooseNextColor()
     if (g:colors_name =='flattened')
         :colorscheme gruvbox
@@ -91,8 +80,6 @@ function! ChooseNextColor()
     elseif (g:colors_name =='molokai')
         :colorscheme flattened
     endif
-
-    "highlight Comment cterm=italic
 
     call SetColorUsers()
 endfunction
@@ -159,16 +146,21 @@ endfunction
 " Prevent Vim to be compatible with Vi.
 set nocompatible
 
-" To save current buffer with `<space>w` (for "write"),
+" To save current buffer with `<space>W` (for "write"),
 " unless readonly or filename exists.
-nnoremap <leader>w :w<cr>
+nnoremap <leader>W :w<cr>
 
-" To save all buffers with `<space>a` (for "all").
-nnoremap <leader>a :wa<cr>
+" To save all buffers with `<space>w` (for "write").
+nnoremap <leader>w :wall<cr>
 
-" To close buffer and quit window with `<space>q` (for "quit"),
-" not if buffer not being saved.
-nnoremap <leader>q :q<cr>
+" To close all windows and close Vim with `<space>h` (for "hide").
+nnoremap <leader>h :hide<cr>
+
+" To close all windows and close Vim with `<space>q` (for "quit").
+nnoremap <leader>q :qall<cr>
+
+" To delete arglist
+nnoremap <leader>A :%argd<cr>
 
 " To absolutely forbid modifying a file opened as read-only with `:vie[w]`.
 " (Default is first to warn, and then allow edit.)
@@ -202,7 +194,7 @@ set hidden
 set backup
 
 " To specify where backup files and swap files are saved (here the same).
-let path_dir_swap ="/home/aminopterin/Vim_storeroom"
+let path_dir_swap ="/var/tmp/Vim_storeroom"
 let &backupdir =path_dir_swap
 let &dir =path_dir_swap
 
@@ -212,9 +204,8 @@ set history =700
 " To open recently edited files.
 nnoremap <leader>/ :browse oldfiles<cr>
 
-" To open `~/.vimrc` in a new tab with `<space>,`.
-" (Preferences window of a Mac app is often opened with `<cmd>,`.)
-nnoremap <leader>, :tabe $MYVIMRC<cr>
+" To open `~/.vimrc` with `<space>,`.
+nnoremap <leader>, :e $MYVIMRC<cr>
 
 " To source (apply) `~/.vimrc` with `<space>.`
 " (`.` is a Bash alias for source.)
@@ -228,19 +219,19 @@ nnoremap <leader>. :source $MYVIMRC<cr>
 nnoremap Y y$
 
 " To put (paste) from the system clipboard with `<space>p` and so on.
-nnoremap <leader>p "*p
-nnoremap <leader>P "*P
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
 
 " To yank (copy) from the system clipboard with `<space>y` and so on.
-nmap <leader>y "*y
-vnoremap <leader>y "*y
-nnoremap <leader>Y "*y$
-nnoremap <leader>yy "*yy
+nmap <leader>y "+y
+vnoremap <leader>y "+y
+nnoremap <leader>Y "+y$
+nnoremap <leader>yy "+yy
 
 " To delete (cut) from the system clipboard with `<space>d` and so on.
-nnoremap <leader>d "*d
-nnoremap <leader>D "*D
-nnoremap <leader>dd "*dd
+nnoremap <leader>d "+d
+nnoremap <leader>D "+D
+nnoremap <leader>dd "+dd
 
 " To enable backspace to delete indentation, line breaks, pre-existing characters.
 set backspace=eol,start,indent
@@ -311,6 +302,9 @@ set number
 " To show the present mode.
 set showmode
 
+" To split vertically.
+nnoremap <leader>v :vsp<cr>
+
 " Suppress usual function of arrow, since I shall overload them.
 nnoremap <up> <nop>
 nnoremap <down> <nop>
@@ -339,8 +333,8 @@ let g:netrw_list_hide =
 " In NETRW buffer, to hide files specified above.
 let g:netrw_hide =1
 
-" In NETRW buffer, to toggle hiding files with `<space>h` (for "hide").
-nnoremap <silent> <leader>h :call ToggleDisplayHiddenFiles()<cr>
+" In NETRW buffer, to toggle hiding files with `<space>H` (for "hide").
+nnoremap <silent> <leader>H :call ToggleDisplayHiddenFiles()<cr>
 
 " To select the previous buffer with `<space>[`.
 " To select the next buffer with `<space>]`.
@@ -357,9 +351,9 @@ nnoremap <leader>- :bprevious<cr>:bdelete! #<cr>
 " A custom function displays filename only, suppressing its full path.
 nnoremap <leader>b :call ListBuffersFilenameOnly()<cr>:buffer 
 
-" To open a new tab with `<space>n` showing current file (for "new").
+" To open a new tab with `<space>t` showing current file (for "tab").
 " To close the current tab with `<space>c` (for "close").
-nnoremap <leader>n :tabedit %<cr>
+nnoremap <leader>t :tabedit %<cr>
 nnoremap <leader>c :tabclose<cr>
 
 " To select the previous tab with `<space>9` (think of `(`).
@@ -392,8 +386,8 @@ colorscheme flattened
 " They must come after `colorscheme` file is read.
 call SetColorUsers()
 
-" To switch among my favorite color schemes with `<space>t` (for "theme").
-nnoremap <leader>t :call ChooseNextColor()<cr>
+" To switch among my favorite color schemes with `<space>T` (for "theme").
+nnoremap <leader>T :call ChooseNextColor()<cr>
 
 " To highlight the line where cursor is, but only in current buffer.
 autocmd group_vimrc VimEnter,WinEnter,BufWinEnter * setlocal cursorline
@@ -514,8 +508,8 @@ nnoremap <c-d> <c-d>M
 nnoremap <c-u> <c-u>M
 
 " To jump to previous / next fullwidth CJK punctuation mark (in normal mode).
-nnoremap <silent> <leader>k ?[、，；。！？：“”‘’「」『』—]<cr>:noh<cr>
-nnoremap <silent> <leader>j /[、，；。！？：“”‘’「」『』—]<cr>:noh<cr>
+nnoremap <silent> <leader>J /[、，；。！？：“”‘’「」『』—]<cr>:noh<cr>
+nnoremap <silent> <leader>K ?[、，；。！？：“”‘’「」『』—]<cr>:noh<cr>
 
 " To return to last edit position upon opening files.
 autocmd group_vimrc BufReadPost *
@@ -528,6 +522,12 @@ set guicursor =n:blinkon0
 
 " To disallow "mouse" (i.e. trackpad or whatever) to change cursor location.
 set mouse =
+
+"""" Test
+
+"nnoremap <leader>Z :echo "Hi"<cr>
+
+
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 "          Summary of custom leader commands
@@ -543,21 +543,24 @@ set mouse =
 " <space>]      To select the next buffer
 " <space>0      To select the next tab
 " <space>9      To select the previous tab
-" <space>a      To save all buffers
+" <space>A      To delete arglist
 " <space>b      To choose among existent buffers by number
 " <space>c      To close the current tab
 " <space>d      To cut from system clipboard (similar for `D`, `dd`)
 " <space>e      To reload all opened buffers
-" <space>h      To toggle whether to hide files in NETRW
-" <space>j      To jump to the next fullwidth punctuation
-" <space>k      To jump to the previous fullwidth punctuation
+" <space>h      To close the current window
+" <space>H      To toggle whether to hide files in NETRW
+" <space>J      To jump to the next fullwidth punctuation
+" <space>K      To jump to the previous fullwidth punctuation
 " <space>l      To toggle whether to highlight search
 " <space>m      To save the current session
-" <space>n      To open a new tab with a new buffer
 " <space>o      To load the saved session
 " <space>p      To paste from system clipboard (similar for `P`)
-" <space>q      To quit the current window
+" <space>q      To quit all windows, and quit Vim
 " <space>s      To toggle spell checking or not
-" <space>t      To choose among themes I favored
-" <space>w      To save the current buffer
+" <space>t      To open a new tab with a new buffer
+" <space>T      To choose among selected themes
+" <space>v      To split vertically
+" <space>W      To save the current buffer
+" <space>w      To save all buffers
 " <space>y      To copy from system clipboard (similar for `Y`, `yy`)
