@@ -36,9 +36,9 @@ alias Bat="upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E \"ti
 # Double quotes ensures them to be passed properly.
 alias Cd_desktop="cd \"${HOME}/Desktop\""
 alias Cd_music="cd \"${CLOUD}/music\""
-alias Cd_repo="cd \"${CLOUD}/repositories/\""
-alias Cd_books="cd \"${CLOUD}/library/books\""
-alias Cd_papers="cd \"${CLOUD}/library/papers\""
+alias Cd_repo="cd \"${REPOS}\""
+alias Cd_books="cd \"${BOOKS}\""
+alias Cd_papers="cd \"${PAPERS}\""
 
 # To browse PTT.
 alias Browse_PTT="ssh bbsu@ptt.cc"
@@ -47,4 +47,7 @@ alias Browse_Ptt2="ssh bbsu@ptt2.cc"
 
 # To edit with neovim.
 alias V="nvim"
+
+# To clear output.
+alias C="clear"
 

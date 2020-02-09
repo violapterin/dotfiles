@@ -11,12 +11,12 @@ DESKTOP="${HOME}/Desktop"
 export DESKTOP
 CLOUD="${HOME}/Dropbox"
 export CLOUD
-REPO="${CLOUD}/computer_programs/active"
-export REPO
+REPOS="${CLOUD}/repositories"
+export REPOS
 BOOKS="${CLOUD}/library/books"
 export BOOKS
-DOCUMENTS="${CLOUD}/library/documents"
-export DOCUMENTS
+PAPERS="${CLOUD}/library/papers"
+export PAPERS
 
 # To set the default editor.
 VISUAL="nvim"

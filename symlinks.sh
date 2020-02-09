@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-here="${REPO}/dotfiles"
-#here="/home/violapterin/Dropbox/repositories/code/dotfiles"
+#here="${REPOS}/code/dotfiles"
+here="/home/violapterin/Dropbox/repositories/code/dotfiles"
 
 # system
 ln -sf "${here}/.profile" "${HOME}/.profile"
