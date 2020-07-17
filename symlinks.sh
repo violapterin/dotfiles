@@ -10,7 +10,7 @@ ln -sf "${here}/.bashrc" "${HOME}/.bashrc"
 ln -sf "${here}/.xinitrc" "${HOME}/.xinitrc"
 
 # NeoVim
-ln -sf "${here}/colors" "${HOME}/.config/nvim/colors"
+ln -sf "${here}/colors" "${HOME}/.config/nvim/"
 ln -sf "${here}/.vimrc" "${HOME}/.config/nvim/init.vim"
 
 # others configurations
