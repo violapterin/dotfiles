@@ -15,26 +15,3 @@ export PS1
 LSCOLORS="di=1:fi=0:ln=31:pi=5:so=5:bd=5:cd=5:or=31:mi=0:ex=35:*.rpm=90"
 export LSCOLORS
 
-# # # # # # deprecated # # # # # #
-
-# PATH="${PATH}:${PROG}/scripts/bash" # original bash scripts
-# PATH="${PATH}:$(ruby -e 'puts Gem.user_dir')/bin" # required by Ruby Gem
-# export PATH
-# PYTHONPATH="${PROG}/scripts/python" # original python scripts
-# export PYTHONPATH
-
-# DESKTOP="${HOME}/Desktop"
-# export DESKTOP
-# CLOUD="${HOME}/Dropbox"
-# export CLOUD
-# REPOS="${CLOUD}/repositories"
-# export REPOS
-# BOOKS="${CLOUD}/library/books"
-# export BOOKS
-# PAPERS="${CLOUD}/library/papers"
-# export PAPERS
-
-# OSFONTDIR="/usr/share/fonts"
-# export OSFONTDIR
-
-
