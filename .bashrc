@@ -23,31 +23,33 @@ alias cd="cd -P"
 # `-F`: to display a slash;
 # `-h`: to use human readable format, e.g. KB, MB, GB,...;
 # `-l`: to use long format, including permissions and date modified;
-# `-a`: to display hidden files, say `.gitignore`
+# `-a`: to display hidden files, say `.gitignore`.
 alias ls="ls -GFh --color"
 alias Ls="ls -alGFh --color"
 
-# Disk usage
+# Print disk usage.
 alias Du="du -shc * | sort -hr"
-
-# Show battery percentage
-alias Bat="upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E \"time|percentage\""
-
-# Double quotes ensures them to be passed properly.
-alias Cd_desktop="cd \"${HOME}/Desktop\""
-alias Cd_music="cd \"${CLOUD}/music\""
-alias Cd_repo="cd \"${REPOS}\""
-alias Cd_books="cd \"${BOOKS}\""
-alias Cd_papers="cd \"${PAPERS}\""
-
-# To browse PTT.
-alias Browse_PTT="ssh bbsu@ptt.cc"
-# To browse PTT2.
-alias Browse_Ptt2="ssh bbsu@ptt2.cc"
 
 # To edit with neovim.
 alias V="nvim"
 
 # To clear output.
 alias C="clear"
+
+# # # # # # deprecated # # # # # # 
+
+# # Show battery percentage
+# alias Bat="upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E \"time|percentage\""
+
+# # Double quotes ensures them to be passed properly.
+# alias Cd_desktop="cd \"${HOME}/Desktop\""
+# alias Cd_music="cd \"${CLOUD}/music\""
+# alias Cd_repo="cd \"${REPOS}\""
+# alias Cd_books="cd \"${BOOKS}\""
+# alias Cd_papers="cd \"${PAPERS}\""
+
+# # To browse PTT.
+# alias Browse_PTT="ssh bbsu@ptt.cc"
+# # To browse PTT2.
+# alias Browse_Ptt2="ssh bbsu@ptt2.cc"
 
