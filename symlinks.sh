@@ -14,6 +14,5 @@ ln -sf "${here}/colors" "${HOME}/.config/nvim/"
 ln -sf "${here}/.vimrc" "${HOME}/.config/nvim/init.vim"
 
 # others configurations
-ln -sf "${here}/.gitconfig" "${HOME}/.gitconfig"
 ln -sf "${here}/.tmux.conf" "${HOME}/.tmux.conf"
 
