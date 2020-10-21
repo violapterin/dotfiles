@@ -421,7 +421,7 @@ nnoremap <leader>l :setlocal nolinebreak!<cr>
 " To wrap lines in displaying.
 set wrap
 
-" Never to automatically wrap text by setting to 0, however long it is.
+" Never to wrap text, however long it is.
 set textwidth =0
 
 " Not to display last line, if incomplete.

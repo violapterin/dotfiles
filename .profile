@@ -15,5 +15,12 @@ export PS1
 LSCOLORS="di=1:fi=0:ln=31:pi=5:so=5:bd=5:cd=5:or=31:mi=0:ex=35:*.rpm=90"
 export LSCOLORS
 
-
-export PATH="$HOME/.cargo/bin:$PATH"
+# for Ruby
+export GEM_HOME="${HOME}/gems"
+export PATH="${HOME}/gems/bin:${PATH}"
+# for Rust
+export PATH="${HOME}/.cargo/bin:${PATH}"
+# for ConTeXt
+export OSFONTDIR="${HOME}/.fonts:/usr/share/fonts"
+export TEXROOT="/usr/local/context/tex"
+export PATH="/usr/local/context/tex/texmf-linux-64/bin:/usr/local/context/bin:${PATH}"
