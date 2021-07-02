@@ -15,12 +15,14 @@ export PS1
 LSCOLORS="di=1:fi=0:ln=31:pi=5:so=5:bd=5:cd=5:or=31:mi=0:ex=35:*.rpm=90"
 export LSCOLORS
 
-# for Ruby
-export GEM_HOME="${HOME}/gems"
-export PATH="${HOME}/gems/bin:${PATH}"
-# for Rust
-export PATH="${HOME}/.cargo/bin:${PATH}"
-# for ConTeXt
-export OSFONTDIR="${HOME}/.fonts:/usr/share/fonts"
-export TEXROOT="/usr/local/context/tex"
-export PATH="/usr/local/context/tex/texmf-linux-64/bin:/usr/local/context/bin:${PATH}"
+export GEM_HOME="${HOME}/gems" # for Ruby
+export OSFONTDIR="${HOME}/.fonts:/usr/share/fonts" # for ConTeXt
+export TEXROOT="/usr/local/context/tex" # for ConTeXt
+
+export PATH="${HOME}/.local/bin:${PATH}"
+export PATH="${HOME}/usr/local/context/bin:${PATH}" # for ConTeXt
+export PATH="${HOME}/usr/local/context/tex/texmf-linux-64/bin:${PATH}" # for ConTeXt
+export PATH="${HOME}/gems/bin:${PATH}" # for Ruby
+export PATH="${HOME}/.cargo/bin:${PATH}" # for Rust
+export PATH="${HOME}/.elan/bin:${PATH}" # for Lean
+

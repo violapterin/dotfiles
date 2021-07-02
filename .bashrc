@@ -36,3 +36,6 @@ alias V="nvim"
 # To clear output.
 alias C="clear"
 
+
+# Created by `pipx` on 2021-07-02 18:00:06
+export PATH="$PATH:/home/violapterin/.local/bin"
